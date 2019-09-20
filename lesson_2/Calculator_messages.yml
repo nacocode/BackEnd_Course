@@ -1,0 +1,53 @@
+en:
+  language_selection: "Please choose and enter the language you would like to be performed.\n 
+  'en' for English and 'jp' for Japanese."
+  error_invalid_lang: "Hmm...that doesn't look like a valid language."
+  language_selection: "Please choose the language you would like to be performed.\n
+  'en' for English and 'jp' for Japanese."
+  welcome: "Welcome to Calculator! Enter your name:"
+  hi: "Hi"
+  valid_name: "Make sure to enter a valid name."
+  first_number: "What's the first number?"
+  error_valid_number: "Hmm...that doesn't look like a valid number."
+  second_number: "What's the second number?"
+  error_zero: "You can't divide by zero."
+  operator_prompt: "What operation whould you like to perform?\n
+    1) add\n
+    2) subtract\n
+    3) multiply\n
+    4) devide"
+  adding: "adding"
+  subtracting: "subtracting"
+  multiplying: "multiplying"
+  deviding: "deviding"
+  error_operator: "Must choose 1, 2, 3 or 4"
+  error_division_zero: "Error: Can not devided by zero."
+  calculating: " the two numbers..."
+  result: "The result is"
+  infinity: "infinity"
+  try_again: "Do you want to perform another calculation?\n 'yes' or 'y' to calculate again, 'no' or 'n' to exit"
+  good_bye: "Thank you for using the calculator. Good bye"
+
+jp:
+  welcome: "計算機へようこそ！ 名前を入力してください。"
+  hi: "こんにちは"
+  valid_name: "有効な名前を入力してください。"
+  first_number: "１つめの数字を入力してください。"
+  error_valid_number: "入力内容が有効な数字ではないようです。。。"
+  second_number: "２つ目の数字を入力してください。"
+  operator_prompt: "どの計算をしますか？\n
+    1) 足し算\n
+    2) 引き算\n
+    3) 掛け算\n
+    4) 割り算"
+  adding: "足し算"
+  subsracting: "引き算"
+  multiplying: "掛け算"
+  deviding: "割り算"
+  error_operator: "必ず1〜４の中から選んでください。"
+  error_division_zero: "０で割ることはできません。"
+  calculating: "を実行中。。。"
+  result: "結果は"
+  infinity: "インフィニティー = 無限です。"
+  try_again: "もう一度計算しますか？\n 計算する場合はyesまたはｙを、終了する場合はnoまたはnを入力してください。"
+  good_bye: "ご利用いただきありがとうございました。さようなら"
