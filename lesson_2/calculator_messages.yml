@@ -15,17 +15,18 @@ en:
     1) add\n
     2) subtract\n
     3) multiply\n
-    4) devide"
+    4) divide"
   adding: "adding"
   subtracting: "subtracting"
   multiplying: "multiplying"
   deviding: "deviding"
   error_operator: "Must choose 1, 2, 3 or 4"
-  error_division_zero: "Error: Can not devided by zero."
+  error_division_zero: "Error: Can not divided by zero."
   calculating: " the two numbers..."
   result: "The result is"
   infinity: "infinity"
-  try_again: "Do you want to perform another calculation?\n 'yes' or 'y' to calculate again, 'no' or 'n' to exit"
+  try_again: "Do you want to perform another calculation?\n Enter 'yes' to calculate again, 'no' to exit."
+  invaild_input: "Invalid input."
   good_bye: "Thank you for using the calculator. Good bye"
 
 jp:
@@ -49,5 +50,6 @@ jp:
   calculating: "を実行中。。。"
   result: "結果は"
   infinity: "インフィニティー = 無限です。"
-  try_again: "もう一度計算しますか？\n 計算する場合はyesまたはｙを、終了する場合はnoまたはnを入力してください。"
+  try_again: "もう一度計算しますか？\n 計算する場合はyesを、終了する場合はnoを入力してください。"
+  invaild_input: "入力内容が有効ではありません。"
   good_bye: "ご利用いただきありがとうございました。さようなら"
