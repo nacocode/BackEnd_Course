@@ -26,13 +26,13 @@ en:
   result: "The result is"
   infinity: "infinity"
   try_again: "Do you want to perform another calculation?\n Enter 'yes' to calculate again, 'no' to exit."
-  error_invaild_input: "Error:Make sure to enter a valid input."
+  error_invaild_input: "Error:Make sure to enter a valid input.."
   good_bye: "Thank you for using the calculator. Good bye"
 
 jp:
   welcome: "計算機へようこそ！ 名前を入力してください。"
   hi: "こんにちは"
-  valid_name: "有効な名前を入力してください。"
+  error_empty_input: "内容をご確認のうえもう一度入力してください。空白は無効です。"
   first_number: "１つめの数字を入力してください。"
   error_valid_number: "入力内容が有効な数字ではないようです。。。"
   second_number: "２つ目の数字を入力してください。"
@@ -42,7 +42,7 @@ jp:
     3) 掛け算\n
     4) 割り算"
   adding: "足し算"
-  subsracting: "引き算"
+  subtracting: "引き算"
   multiplying: "掛け算"
   deviding: "割り算"
   error_operator: "必ず1〜４の中から選んでください。"
@@ -51,5 +51,5 @@ jp:
   result: "結果は"
   infinity: "インフィニティー = 無限です。"
   try_again: "もう一度計算しますか？\n 計算する場合はyesを、終了する場合はnoを入力してください。"
-  invaild_input: "入力内容が有効ではありません。"
+  error_invaild_input: "エラー:内容をお確かめのうえもう一度入力してください。"
   good_bye: "ご利用いただきありがとうございました。さようなら"
