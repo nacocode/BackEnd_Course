@@ -22,7 +22,7 @@ def valid_number?(input)
   integer?(input) || float?(input)
 end
 
-def devision(number1, number2)
+def division(number1, number2)
   if number2 == "0"
     # prompt(messages("error_division_zero", LANGUAGE))
     messages("infinity", LANGUAGE)
@@ -74,7 +74,7 @@ name = ""
 loop do
   name = Kernel.gets().chomp()
   if name.empty?
-    prompt(messages("valid_name", LANGUAGE))
+    prompt(messages("error_empty_input", LANGUAGE))
   else
     break
   end
@@ -128,15 +128,26 @@ loop do # main loop
   when "3"
     result = number1.to_f * number2.to_f
   when "4"
-    result = devision(number1, number2)
+    result = division(number1, number2)
   end
 
-  prompt(messages("result", LANGUAGE) + " #{result}.")
+  prompt(messages("result", LANGUAGE) + " #{result}")
 
-  prompt(messages("try_again", LANGUAGE))
-  answer = Kernel.gets().chomp().downcase
-  clear_screen if answer == "yes"
-  break if answer == "no"
+  try_again_answer = ""
+  loop do
+    prompt(messages("try_again", LANGUAGE))
+    try_again_answer = Kernel.gets().chomp().downcase
+    if try_again_answer.empty?
+      prompt(messages("error_empty_input", LANGUAGE))
+    elsif try_again_answer != ("yes" && "no")
+      prompt(messages("error_invaild_input", LANGUAGE))
+    else
+      break
+    end
+  end
+
+  clear_screen if try_again_answer == "yes"
+  break if try_again_answer == "no"
 end
 
 prompt(messages("good_bye", LANGUAGE) + " #{name}!")
