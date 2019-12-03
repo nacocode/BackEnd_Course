@@ -139,7 +139,7 @@ loop do # main loop
     try_again_answer = Kernel.gets().chomp().downcase
     if try_again_answer.empty?
       prompt(messages("error_empty_input", LANGUAGE))
-    elsif try_again_answer != ("yes" && "no")
+    elsif try_again_answer != "yes" && try_again_answer != "no"
       prompt(messages("error_invaild_input", LANGUAGE))
     else
       break
