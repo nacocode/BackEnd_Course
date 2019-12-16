@@ -33,16 +33,16 @@ def division(number1, number2)
 end
 
 def operation_message(op)
-  case op
-  when "1"
-    word = messages("adding", LANGUAGE)
-  when "2"
-    word = messages("subtracting", LANGUAGE)
-  when "3"
-    word = messages("multiplying", LANGUAGE)
-  when "4"
-    word = messages("deviding", LANGUAGE)
-  end
+  word =  case op
+          when "1"
+            messages("adding", LANGUAGE)
+          when "2"
+            messages("subtracting", LANGUAGE)
+          when "3"
+            messages("multiplying", LANGUAGE)
+          when "4"
+            messages("deviding", LANGUAGE)
+          end
   word
 end
 
