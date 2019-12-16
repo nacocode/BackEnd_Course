@@ -22,6 +22,18 @@ def valid_number?(input)
   integer?(input) || float?(input)
 end
 
+def get_number(msg, language)
+  loop do
+    prompt(messages(msg, language))
+    number = Kernel.gets().chomp()
+    if valid_number?(number)
+      return number
+    else
+      prompt(messages("error_valid_number", LANGUAGE))
+    end
+  end
+end
+
 def division(number1, number2)
   if number2 == "0"
     # prompt(messages("error_division_zero", LANGUAGE))
@@ -84,31 +96,14 @@ prompt(messages("hi", LANGUAGE) + " #{name}!")
 
 loop do # main loop
   number1 = ""
-  loop do
-    prompt(messages("first_number", LANGUAGE))
-    number1 = Kernel.gets().chomp()
-    if valid_number?(number1)
-      break
-    else
-      prompt(messages("error_valid_number", LANGUAGE))
-    end
-  end
-
   number2 = ""
-  loop do
-    prompt(messages("second_number", LANGUAGE))
-    number2 = Kernel.gets().chomp()
-    valid_number?(number2)
-    if valid_number?(number2)
-      break
-    else
-      prompt(messages("error_valid_number", LANGUAGE))
-    end
-  end
+  operator = ""
+
+  number1 = get_number("first_number", LANGUAGE)
+  number2 = get_number("second_number", LANGUAGE)
 
   prompt(messages("operator_prompt", LANGUAGE))
 
-  operator = ""
   loop do
     operator = Kernel.gets().chomp()
     if %w(1 2 3 4).include?(operator)
