@@ -95,8 +95,6 @@ end
 prompt(messages("hi", LANGUAGE) + " #{name}!")
 
 loop do # main loop
-  number1 = ""
-  number2 = ""
   operator = ""
 
   number1 = get_number("first_number", LANGUAGE)
