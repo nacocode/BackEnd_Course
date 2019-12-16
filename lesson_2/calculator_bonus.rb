@@ -34,6 +34,18 @@ def get_number(msg, language)
   end
 end
 
+def get_operator(language)
+  loop do
+    prompt(messages("operator_prompt", LANGUAGE))
+    operator = Kernel.gets().chomp()
+    if %w(1 2 3 4).include?(operator)
+      return operator
+    else
+      prompt(messages("error_operator", LANGUAGE))
+    end
+  end
+end
+
 def division(number1, number2)
   if number2 == "0"
     # prompt(messages("error_division_zero", LANGUAGE))
@@ -95,22 +107,11 @@ end
 prompt(messages("hi", LANGUAGE) + " #{name}!")
 
 loop do # main loop
-  operator = ""
 
   number1 = get_number("first_number", LANGUAGE)
   number2 = get_number("second_number", LANGUAGE)
-
-  prompt(messages("operator_prompt", LANGUAGE))
-
-  loop do
-    operator = Kernel.gets().chomp()
-    if %w(1 2 3 4).include?(operator)
-      break
-    else
-      prompt(messages("error_operator", LANGUAGE))
-    end
-  end
-
+  operator = get_operator(LANGUAGE)
+  
   prompt("#{operation_message(operator)}#{messages('calculating', LANGUAGE)}")
 
   case operator
