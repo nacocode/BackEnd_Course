@@ -34,7 +34,7 @@ def get_number(msg, language)
   end
 end
 
-def get_operator(language)
+def get_operator(*)
   loop do
     prompt(messages("operator_prompt", LANGUAGE))
     operator = Kernel.gets().chomp()
@@ -79,7 +79,7 @@ def clear_screen
   system('clear') || system('cls')
 end
 
-#-------------------------------------------------
+#--------------------start-------------------------
 
 language = ""
 loop do
@@ -107,23 +107,22 @@ end
 prompt(messages("hi", LANGUAGE) + " #{name}!")
 
 loop do # main loop
-
   number1 = get_number("first_number", LANGUAGE)
   number2 = get_number("second_number", LANGUAGE)
   operator = get_operator(LANGUAGE)
-  
+
   prompt("#{operation_message(operator)}#{messages('calculating', LANGUAGE)}")
 
-  case operator
-  when "1"
-    result = number1.to_f + number2.to_f
-  when "2"
-    result = number1.to_f - number2.to_f
-  when "3"
-    result = number1.to_f * number2.to_f
-  when "4"
-    result = division(number1, number2)
-  end
+  result =  case operator
+            when "1"
+              number1.to_f + number2.to_f
+            when "2"
+              number1.to_f - number2.to_f
+            when "3"
+              number1.to_f * number2.to_f
+            when "4"
+              division(number1, number2)
+            end
 
   prompt(messages("result", LANGUAGE) + " #{result}")
 
