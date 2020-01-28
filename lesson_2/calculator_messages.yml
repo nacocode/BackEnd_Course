@@ -25,7 +25,7 @@ en:
   calculating: " the two numbers..."
   result: "The result is"
   infinity: "infinity"
-  try_again: "Do you want to perform another calculation?\n Enter 'yes' to calculate again, 'no' to exit."
+  continue: "Do you want to perform another calculation?\n Enter 'yes' to calculate again, 'no' to exit."
   error_invaild_input: "Error:Make sure to enter a valid input.."
   good_bye: "Thank you for using the calculator. Good bye"
 
@@ -50,6 +50,6 @@ jp:
   calculating: "を実行中。。。"
   result: "結果は"
   infinity: "インフィニティー = 無限です。"
-  try_again: "もう一度計算しますか？\n 計算する場合はyesを、終了する場合はnoを入力してください。"
+  continue: "もう一度計算しますか？\n 計算する場合はyesを、終了する場合はnoを入力してください。"
   error_invaild_input: "エラー:内容をお確かめのうえもう一度入力してください。"
   good_bye: "ご利用いただきありがとうございました。さようなら"

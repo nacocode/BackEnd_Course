@@ -22,6 +22,26 @@ def valid_number?(input)
   integer?(input) || float?(input)
 end
 
+def language_setting(language)
+  loop do
+    prompt(messages("language_selection"))
+    language = Kernel.gets().chomp().downcase
+    return language if language == "en" || language == "jp"
+    prompt(messages("error_invalid_lang"))
+  end
+end
+
+def get_name(name, language)
+  loop do
+    name = Kernel.gets().chomp()
+    if name.empty?
+      prompt(messages("error_empty_input", language))
+    else
+      return name
+    end
+  end
+end
+
 def get_number(msg, language)
   loop do
     prompt(messages(msg, language))
@@ -29,19 +49,19 @@ def get_number(msg, language)
     if valid_number?(number)
       return number
     else
-      prompt(messages("error_valid_number", LANGUAGE))
+      prompt(messages("error_valid_number", language))
     end
   end
 end
 
-def get_operator(*)
+def get_operator(operator, language)
   loop do
-    prompt(messages("operator_prompt", LANGUAGE))
+    prompt(messages("operator_prompt", language))
     operator = Kernel.gets().chomp()
     if %w(1 2 3 4).include?(operator)
       return operator
     else
-      prompt(messages("error_operator", LANGUAGE))
+      prompt(messages("error_operator", language))
     end
   end
 end
@@ -49,7 +69,7 @@ end
 def division(number1, number2)
   if number2 == "0"
     # prompt(messages("error_division_zero", LANGUAGE))
-    messages("infinity", LANGUAGE)
+    messages("infinity", language)
     # "infinity"
   else
     number1.to_f / number2.to_f
@@ -70,6 +90,20 @@ def operation_message(op)
   word
 end
 
+def get_op_answer(answer, language)
+  loop do
+    prompt(messages("continue", language))
+    answer = Kernel.gets().chomp().downcase
+    if answer.empty?
+      prompt(messages("error_empty_input", language))
+    elsif answer != "yes" && answer != "no"
+      prompt(messages("error_invaild_input", language))
+    else
+      return answer
+    end
+  end
+end
+
 =begin
 we can assign the result to word in case of when
 we want to add some code after the case statement.
@@ -82,34 +116,21 @@ end
 #--------------------start-------------------------
 
 language = ""
-loop do
-  prompt(messages("language_selection"))
-  language = Kernel.gets().chomp().downcase
-
-  break if language == "en" || language == "jp"
-  prompt(messages("error_invalid_lang"))
-end
-
-LANGUAGE = language
+LANGUAGE = language_setting(language)
 
 prompt(messages("welcome", LANGUAGE))
 
 name = ""
-loop do
-  name = Kernel.gets().chomp()
-  if name.empty?
-    prompt(messages("error_empty_input", LANGUAGE))
-  else
-    break
-  end
-end
+name = get_name(name, LANGUAGE)
 
 prompt(messages("hi", LANGUAGE) + " #{name}!")
 
-loop do # main loop
+#----------------main loop---------------------------------
+
+loop do
   number1 = get_number("first_number", LANGUAGE)
   number2 = get_number("second_number", LANGUAGE)
-  operator = get_operator(LANGUAGE)
+  operator = get_operator(operator, LANGUAGE)
 
   prompt("#{operation_message(operator)}#{messages('calculating', LANGUAGE)}")
 
@@ -126,21 +147,11 @@ loop do # main loop
 
   prompt(messages("result", LANGUAGE) + " #{result}")
 
-  try_again_answer = ""
-  loop do
-    prompt(messages("try_again", LANGUAGE))
-    try_again_answer = Kernel.gets().chomp().downcase
-    if try_again_answer.empty?
-      prompt(messages("error_empty_input", LANGUAGE))
-    elsif try_again_answer != "yes" && try_again_answer != "no"
-      prompt(messages("error_invaild_input", LANGUAGE))
-    else
-      break
-    end
-  end
+  answer = ""
+  answer = get_op_answer(answer, LANGUAGE)
 
-  clear_screen if try_again_answer == "yes"
-  break if try_again_answer == "no"
+  clear_screen if answer == "yes"
+  break if answer == "no"
 end
 
 prompt(messages("good_bye", LANGUAGE) + " #{name}!")
