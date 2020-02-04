@@ -133,7 +133,6 @@ LANGUAGE = language_setting(language)
 
 prompt(messages("welcome", LANGUAGE))
 
-name = ""
 name = get_name(name, LANGUAGE)
 
 prompt(messages("hi", LANGUAGE) + " #{name}!")
@@ -152,8 +151,6 @@ loop do
   result = calculation(operator, number1, number2, LANGUAGE)
 
   prompt(messages("result", LANGUAGE) + " #{result}")
-
-  answer = ""
 
   answer = get_op_answer(answer, LANGUAGE)
 
