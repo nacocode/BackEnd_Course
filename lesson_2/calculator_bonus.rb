@@ -66,9 +66,9 @@ def get_operator(operator, language)
   end
 end
 
-def division(number1, number2)
+def division(number1, number2, language)
   if number2 == "0"
-    # prompt(messages("error_division_zero", LANGUAGE))
+    prompt(messages("error_division_zero", language))
     messages("infinity", language)
     # "infinity"
   else
@@ -76,18 +76,31 @@ def division(number1, number2)
   end
 end
 
-def operation_message(op)
+def op_to_msg(op, language)
   word =  case op
           when "1"
-            messages("adding", LANGUAGE)
+            messages("adding", language)
           when "2"
-            messages("subtracting", LANGUAGE)
+            messages("subtracting", language)
           when "3"
-            messages("multiplying", LANGUAGE)
+            messages("multiplying", language)
           when "4"
-            messages("deviding", LANGUAGE)
+            messages("deviding", language)
           end
   word
+end
+
+def calculation(operator, number1, number2, language)
+  case operator
+  when "1"
+    number1.to_f + number2.to_f
+  when "2"
+    number1.to_f - number2.to_f
+  when "3"
+    number1.to_f * number2.to_f
+  when "4"
+    division(number1, number2, language)
+  end
 end
 
 def get_op_answer(answer, language)
@@ -129,28 +142,23 @@ prompt(messages("hi", LANGUAGE) + " #{name}!")
 
 loop do
   number1 = get_number("first_number", LANGUAGE)
+
   number2 = get_number("second_number", LANGUAGE)
+
   operator = get_operator(operator, LANGUAGE)
 
-  prompt("#{operation_message(operator)}#{messages('calculating', LANGUAGE)}")
+  prompt("#{op_to_msg(operator, LANGUAGE)}#{messages('calculating', LANGUAGE)}")
 
-  result =  case operator
-            when "1"
-              number1.to_f + number2.to_f
-            when "2"
-              number1.to_f - number2.to_f
-            when "3"
-              number1.to_f * number2.to_f
-            when "4"
-              division(number1, number2)
-            end
+  result = calculation(operator, number1, number2, LANGUAGE)
 
   prompt(messages("result", LANGUAGE) + " #{result}")
 
   answer = ""
+
   answer = get_op_answer(answer, LANGUAGE)
 
   clear_screen if answer == "yes"
+
   break if answer == "no"
 end
 
