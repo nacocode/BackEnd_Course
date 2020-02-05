@@ -15,7 +15,7 @@ def integer?(input)
 end
 
 def float?(input)
-  input.to_f.to_s == input
+  input.to_f.to_s == input || input.include?(".")
 end
 
 def valid_number?(input)
