@@ -79,11 +79,11 @@ end
 def op_to_msg(op, language)
   word =  case op
           when "1"
-            messages("adding", language)
+            return messages("adding", language)
           when "2"
-            messages("subtracting", language)
+            return messages("subtracting", language)
           when "3"
-            messages("multiplying", language)
+            return messages("multiplying", language)
           when "4"
             messages("deviding", language)
           end
