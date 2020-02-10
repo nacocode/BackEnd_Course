@@ -77,17 +77,16 @@ def division(number1, number2, language)
 end
 
 def op_to_msg(op, language)
-  word =  case op
-          when "1"
-            return messages("adding", language)
-          when "2"
-            return messages("subtracting", language)
-          when "3"
-            return messages("multiplying", language)
-          when "4"
-            messages("deviding", language)
-          end
-  word
+  case op
+  when "1"
+    messages("adding", language)
+  when "2"
+    messages("subtracting", language)
+  when "3"
+    messages("multiplying", language)
+  when "4"
+    messages("deviding", language)
+  end
 end
 
 def calculation(operator, number1, number2, language)
