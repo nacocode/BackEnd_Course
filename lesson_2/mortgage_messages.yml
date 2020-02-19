@@ -1,0 +1,6 @@
+welcome: "Welome to the mortgage calculator!"
+retrieve_amount: "What is the Mortgage Amount?"
+error_blank_input: "Error:Make sure to enter a valid input. A blank space is not allowed."
+greater_than_zero: "Please enter a mortgage amount that is greater than 0"
+error_invalid_input: "Error: invalid input."
+retrieve_interest: What is the Annual Percentage Rate/interest(Exsample:Enter 5 for 5%, 2.5 for 2.5%))?"

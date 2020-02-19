@@ -1,3 +1,10 @@
+require "yaml"
+MESSAGES = YAML.load_file("mortgage_messages.yml")
+
+def messages(message)
+  MESSAGES[message]
+end
+
 def prompt(message)
   puts "=> #{message}"
 end
@@ -14,18 +21,18 @@ def valid_number(input)
   integer?(input) || float?(input)
 end
 
-def retrieve_amount(number)
+def retrieve_number(msg)
   loop do
-    prompt("what is the Mortgage Amount?")
-    amount = gets.chomp
-    if amount.empty?
-      prompt("Error:Make sure to enter a valid number. A blank space is not allowed.")
-    elsif amount.to_f < 0 || amount == "0"
-      prompt("Please enter a mortgage amount that is greater than 0")
-    elsif valid_number(amount)
-      return amount
+    prompt(messages(msg))
+    number = gets.chomp
+    if number.empty?
+      prompt(messages("error_blank_input"))
+    elsif number.to_f < 0 || number == "0"
+      prompt(messages("greater_than_zero"))
+    elsif valid_number(number)
+      return number
     else
-      prompt("Error: Invalid input.")
+      prompt(messages("error_invalid_input"))
     end
   end
 end
@@ -33,11 +40,7 @@ end
 prompt("Welome to the mortgage calculator!")
 prompt("-----------------------------------")
 
+amount = retrieve_number("retrieve_amount")
+interest = retrieve_number("retrieve_interest")
 
-amount = retrieve_amount(amount)
-prompt("#{amount}")
-
-=begin
-  prompt("What is the Annual Percentage Rate (APR)?")
-  prompt("What is the loan duration?")
-=end
+# prompt("What is the loan duration?")
