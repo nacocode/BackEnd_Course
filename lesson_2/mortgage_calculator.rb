@@ -40,7 +40,7 @@ end
 prompt("Welome to the mortgage calculator!")
 prompt("-----------------------------------")
 
-amount = retrieve_number("retrieve_amount")
-interest = retrieve_number("retrieve_interest")
+amount = retrieve_number("retrieve_loan_amount")
+interest = retrieve_number("retrieve_interest_rate")
 
 # prompt("What is the loan duration?")
