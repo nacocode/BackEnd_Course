@@ -44,7 +44,7 @@ end
 def continue?(answer)
   loop do
     prompt(messages("continue"))
-    answer = Kernel.gets().chomp().downcase
+    answer = gets().chomp().downcase
     if answer.empty?
       prompt(messages("error_blank_input"))
     elsif answer != "yes" && answer != "no"
@@ -59,7 +59,7 @@ def clear_screen
   system("clear") || system("cls")
 end
 
-#---Main---------------------------------------------------------
+#----------------Main-----------------------------
 prompt("Welome to the Mortgage Calculator!")
 prompt("-----------------------------------")
 
@@ -77,6 +77,7 @@ loop do
   prompt("Duration in month : #{duration_in_months} months")
   prompt("Monthly interest rate : #{monthly_interest_rate.round(3)}%")
 =end
+
   monthly_payment = mortgage_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**-duration_in_months))
 
   prompt("Your monthly payment is $#{monthly_payment.round(2)}")
