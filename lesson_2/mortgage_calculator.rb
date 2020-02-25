@@ -70,15 +70,9 @@ loop do
   duration_in_months = year_to_month(duration)
   monthly_interest_rate = ((annual_interest_rate / 100) / 12)
 
-=begin
-  prompt("Mortgage amount : $#{mortgage_amount}")
-  prompt("Interest : #{annual_interest_rate / 100}%")
-  prompt("Duration : #{duration} years")
-  prompt("Duration in month : #{duration_in_months} months")
-  prompt("Monthly interest rate : #{monthly_interest_rate.round(3)}%")
-=end
-
-  monthly_payment = mortgage_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**-duration_in_months))
+  monthly_payment = mortgage_amount *
+                    (monthly_interest_rate / (1 - (1 +
+                    monthly_interest_rate)**-duration_in_months))
 
   prompt("Your monthly payment is $#{monthly_payment.round(2)}")
 
