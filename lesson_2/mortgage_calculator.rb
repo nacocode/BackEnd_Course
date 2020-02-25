@@ -25,11 +25,12 @@ def retrieve_number(msg)
   loop do
     prompt(messages(msg))
     number = gets.chomp
-    if number.empty?
+    case number
+    when number.empty?
       prompt(messages("error_blank_input"))
-    elsif number.to_f < 0 || number == "0"
+    when number.to_f < 0 || number == "0"
       prompt(messages("greater_than_zero"))
-    elsif valid_number(number)
+    when valid_number(number)
       return number.to_f
     else
       prompt(messages("error_invalid_input"))
