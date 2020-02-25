@@ -67,18 +67,19 @@ loop do
   mortgage_amount = retrieve_number("retrieve_mortgage_amount")
   annual_interest_rate = retrieve_number("retrieve_interest_rate")
   duration = retrieve_number("retrieve_loan_duration")
-  month_duration = year_to_month(duration)
-  monthly_interest_rate = (annual_interest_rate.to_f / 12)
+  duration_in_months = year_to_month(duration)
+  monthly_interest_rate = ((annual_interest_rate / 100) / 12)
 
-  prompt("Mortgage amount is $#{mortgage_amount}")
-  prompt("interest is #{annual_interest_rate}%")
-  prompt("duration is #{duration} years")
-  prompt("month duration is #{month_duration} months")
-  prompt("monthly interest rate is #{monthly_interest_rate.round(2)}%")
+=begin
+  prompt("Mortgage amount : $#{mortgage_amount}")
+  prompt("Interest : #{annual_interest_rate / 100}%")
+  prompt("Duration : #{duration} years")
+  prompt("Duration in month : #{duration_in_months} months")
+  prompt("Monthly interest rate : #{monthly_interest_rate.round(3)}%")
+=end
+  monthly_payment = mortgage_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**-duration_in_months))
 
-  monthly_payment = mortgage_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**(-month_duration)))
-
-  prompt("monthly payment is $#{monthly_payment.round(2)}")
+  prompt("Your monthly payment is $#{monthly_payment.round(2)}")
 
   continue_answer = continue?(continue_answer)
 
