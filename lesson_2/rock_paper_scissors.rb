@@ -5,15 +5,15 @@ def prompt(message)
 end
 
 def display_results(player_choice, computer_choice)
-  if (player_choice == "rock" && computer_choice == "scissors") ||
-     (player_choice == "paper" && computer_choice == "rock") ||
-     (player_choice == "scissors" && computer_choice == "paper")
+  if    (player_choice == "rock" && computer_choice == "scissors") ||
+        (player_choice == "paper" && computer_choice == "rock") ||
+        (player_choice == "scissors" && computer_choice == "paper")
     prompt("You won!")
   elsif (player_choice == "rock" && computer_choice == "paper") ||
-     (player_choice == "paper" && computer_choice == "scissors") ||
-     (player_choice == "scissors" && computer_choice == "rock")
-    prompt("Computor won!") 
-  else 
+        (player_choice == "paper" && computer_choice == "scissors") ||
+        (player_choice == "scissors" && computer_choice == "rock")
+    prompt("Computor won!")
+  else
     prompt("It's a tie!")
   end
 end
@@ -25,7 +25,7 @@ end
 loop do
   player_choice = ""
   loop do
-    prompt("Choose one : #{VALID_CHOICES.join(", ")}")
+    prompt("Choose one : #{VALID_CHOICES.join(', ')}")
     player_choice = gets.chomp
 
     if VALID_CHOICES.include?(player_choice)
