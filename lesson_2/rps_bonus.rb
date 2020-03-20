@@ -1,13 +1,24 @@
-VALID_CHOICES = ["rock", "paper", "scissors", "spock", "lizard"]
+# r == rock, p == paper, ss == scissors, sp == spock, l == lizard
+
+VALID_CHOICES = ["r", "p", "ss", "sp", "l"]
 
 def prompt(message)
   puts "=> #{message}"
 end
 
 def win?(first, second)
-  (first == "rock" && second == "scissors") ||
-    (first == "paper" && second == "rock") ||
-    (first == "scissors" && second == "paper")
+  # win_conditions = {
+  #  "ss" => ["p", "l"],
+  #  "p" => ["r", "sp"],
+  #  "r" => ["l", "ss"],
+  #  "l" => ["sp", "p"],
+  #  "sp" => ["ss", "r"]
+  # }
+  (first == "ss" && second == ("p" || "l")) ||
+    (first == "p" && second == ("r" || "sp")) ||
+    (first == "r" && second == ("l" || "ss")) ||
+    (first == "l" && second == ("sp" || "p")) ||
+    (first == "sp" && second == ("ss" || "r"))
 end
 
 def display_results(player_choice, computer_choice)
@@ -20,8 +31,8 @@ def display_results(player_choice, computer_choice)
   end
 end
 
-def player_choice_word(player_choice)
-  case player_choice
+def choice_to_word(choice)
+  case choice
   when "r"
     "rock"
   when "p"
@@ -44,9 +55,8 @@ loop do
 
   loop do
     prompt("Let's play a rock paper scissors spock lizard!\n
-    Choose one : #{VALID_CHOICES.join(', ')}\n
-    (type : 'r' for 'rock', 'p' for 'paper','ss' for 'scissors',\n
-    'sp' for 'spock', 'l' for 'lizard')")
+    Choose one >> type : 'r' for 'rock', 'p' for 'paper',\n
+    'ss' for 'scissors','sp' for 'spock', 'l' for 'lizard')")
 
     player_choice = gets.downcase.chomp
 
@@ -59,9 +69,10 @@ loop do
 
   computer_choice = VALID_CHOICES.sample
 
-  prompt("You chose : #{player_choice_word(player_choice)}
-   Computer chose : #{computer_choice}")
-  #  display_results(player_choice, computer_choice)
+  prompt("You chose : #{choice_to_word(player_choice)}
+   Computer chose : #{choice_to_word(computer_choice)}")
+
+  display_results(player_choice, computer_choice)
 
   prompt("Do you want to play again?(yes or no)")
   answer = gets.chomp.downcase
