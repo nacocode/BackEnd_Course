@@ -6,28 +6,25 @@ def prompt(message)
   puts "=> #{message}"
 end
 
-def win?(first, second)
-  # win_conditions = {
-  #  "ss" => ["p", "l"],
-  #  "p" => ["r", "sp"],
-  #  "r" => ["l", "ss"],
-  #  "l" => ["sp", "p"],
-  #  "sp" => ["ss", "r"]
-  # }
-  (first == "ss" && second == ("p" || "l")) ||
-    (first == "p" && second == ("r" || "sp")) ||
-    (first == "r" && second == ("l" || "ss")) ||
-    (first == "l" && second == ("sp" || "p")) ||
-    (first == "sp" && second == ("ss" || "r"))
+def player_wins?(player_choice, computer_choice)
+  win_conditions = {
+    "ss" => ["p", "l"],
+    "p" => ["r", "sp"],
+    "r" => ["l", "ss"],
+    "l" => ["sp", "p"],
+    "sp" => ["ss", "r"]
+  }
+  (win_conditions[player_choice][0] == computer_choice) ||
+    (win_conditions[player_choice][1] == computer_choice)
 end
 
 def display_results(player_choice, computer_choice)
-  if win?(player_choice, computer_choice)
-    prompt("You won!")
-  elsif win?(computer_choice, player_choice)
-    prompt("Computor won!")
-  else
+  if player_choice == computer_choice
     prompt("It's a tie!")
+  elsif player_wins?(player_choice, computer_choice)
+    prompt("You won!")
+  else
+    prompt("Computer won!")
   end
 end
 
