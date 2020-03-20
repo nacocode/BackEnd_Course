@@ -14,8 +14,7 @@ def player_wins?(player_choice, computer_choice)
     "l" => ["sp", "p"],
     "sp" => ["ss", "r"]
   }
-  (win_conditions[player_choice][0] == computer_choice) ||
-    (win_conditions[player_choice][1] == computer_choice)
+  win_conditions[player_choice].include?(computer_choice)
 end
 
 def display_results(player_choice, computer_choice)
