@@ -66,6 +66,10 @@ def clear_screen
   system("clear") || system("cls")
 end
 
+def good_bye
+  prompt("Thank you for playing. Good bye!")
+end
+
 loop do
   player_choice = ""
 
@@ -96,4 +100,4 @@ loop do
   break if continue_answer == "no"
 end
 
-prompt("Thank you for playing. Good bye!")
+good_bye
