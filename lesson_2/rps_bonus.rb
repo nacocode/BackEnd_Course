@@ -50,6 +50,18 @@ def choice_to_word(choice)
   end
 end
 
+def continue?(continue_answer)
+  loop do
+    prompt("Do you want to play again?(yes or no)")
+    continue_answer = gets.chomp.downcase
+    if continue_answer == "yes" || continue_answer == "no"
+      return continue_answer
+    else
+      prompt("Error: Invalid input. Try again.")
+    end
+  end
+end
+
 def clear_screen
   system("clear") || system("cls")
 end
@@ -79,10 +91,9 @@ loop do
 
   display_results(player_choice, computer_choice)
 
-  prompt("Do you want to play again?(yes or no)")
-  answer = gets.chomp.downcase
-  clear_screen if answer == "yes"
-  break if answer == "no"
+  continue_answer = continue?(continue_answer)
+  clear_screen if continue_answer == "yes"
+  break if continue_answer == "no"
 end
 
 prompt("Thank you for playing. Good bye!")
