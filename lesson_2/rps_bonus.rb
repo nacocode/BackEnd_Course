@@ -1,6 +1,8 @@
-# r == rock, p == paper, ss == scissors, sp == spock, l == lizard
-
-VALID_CHOICES = ["r", "p", "ss", "sp", "l"]
+VALID_CHOICES = [{ "r" => "rock" },
+                 { "p" => "paper" },
+                 { "ss" => "scissors" },
+                 { "l" => "lizard" },
+                 { "sp" => "spock" }]
 
 def prompt(message)
   puts "=> #{message}"
@@ -8,11 +10,11 @@ end
 
 def player_wins?(player_choice, computer_choice)
   win_conditions = {
-    "ss" => ["p", "l"],
-    "p" => ["r", "sp"],
-    "r" => ["l", "ss"],
-    "l" => ["sp", "p"],
-    "sp" => ["ss", "r"]
+    "scissors" => ["paper", "lizard"],
+    "paper" => ["r", "spock"],
+    "rock" => ["lizard", "scissors"],
+    "lizard" => ["spock", "paper"],
+    "spock" => ["scissors", "rock"]
   }
   win_conditions[player_choice].include?(computer_choice)
 end
@@ -51,22 +53,25 @@ loop do
 
   loop do
     prompt("Let's play a rock paper scissors spock lizard!\n
-    Choose one >> type : 'r' for 'rock', 'p' for 'paper',\n
-    'ss' for 'scissors','sp' for 'spock', 'l' for 'lizard')")
+    Choose one >> type : 'rock' or 'r' for 'rock', as well as\n
+    'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'")
 
     player_choice = gets.downcase.chomp
 
-    if %w(r p ss sp l).include?(player_choice)
+    if %w(rock paper scissors lizard spock).include?(player_choice)
+      break
+    elsif %w(r p ss l sp).include?(player_choice)
+      player_choice = choice_to_word(player_choice)
       break
     else
       prompt("That's not a valid choice")
     end
   end
 
-  computer_choice = VALID_CHOICES.sample
+  computer_choice = VALID_CHOICES.sample.values.join
 
-  prompt("You chose : #{choice_to_word(player_choice)}
-   Computer chose : #{choice_to_word(computer_choice)}")
+  prompt("You chose : #{player_choice}
+   Computer chose : #{computer_choice}")
 
   display_results(player_choice, computer_choice)
 
