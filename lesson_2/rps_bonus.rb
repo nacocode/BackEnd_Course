@@ -11,7 +11,7 @@ end
 def player_wins?(player_choice, computer_choice)
   win_conditions = {
     "scissors" => ["paper", "lizard"],
-    "paper" => ["r", "spock"],
+    "paper" => ["rock", "spock"],
     "rock" => ["lizard", "scissors"],
     "lizard" => ["spock", "paper"],
     "spock" => ["scissors", "rock"]
