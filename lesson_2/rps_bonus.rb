@@ -11,7 +11,7 @@ end
 def greeting
   prompt("Let's play a rock paper scissors spock lizard!\n
   Choose one >> type : 'rock' or 'r' for 'rock', as well as\n
-  'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'")
+  'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'.")
 end
 
 def player_wins?(player_choice, computer_choice)
@@ -84,7 +84,7 @@ loop do
       player_choice = choice_to_word(player_choice)
       break
     else
-      prompt("That's not a valid choice")
+      prompt("That's not a valid choice.")
     end
   end
 
@@ -96,6 +96,7 @@ loop do
   display_results(player_choice, computer_choice)
 
   continue_answer = continue?(continue_answer)
+
   clear_screen if continue_answer == "yes"
   break if continue_answer == "no"
 end
