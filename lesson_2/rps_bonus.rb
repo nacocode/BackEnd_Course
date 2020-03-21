@@ -8,6 +8,12 @@ def prompt(message)
   puts "=> #{message}"
 end
 
+def greeting
+  prompt("Let's play a rock paper scissors spock lizard!\n
+  Choose one >> type : 'rock' or 'r' for 'rock', as well as\n
+  'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'")
+end
+
 def player_wins?(player_choice, computer_choice)
   win_conditions = {
     "scissors" => ["paper", "lizard"],
@@ -52,9 +58,7 @@ loop do
   player_choice = ""
 
   loop do
-    prompt("Let's play a rock paper scissors spock lizard!\n
-    Choose one >> type : 'rock' or 'r' for 'rock', as well as\n
-    'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'")
+    greeting
 
     player_choice = gets.downcase.chomp
 
