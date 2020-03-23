@@ -37,12 +37,12 @@ end
 score = {
   "player" => 0,
   "computer" => 0,
-  "tie" => 0
+  "tie game" => 0
 }
 
 def keep_score(score, player_choice, computer_choice)
   if player_choice == computer_choice
-    score["tie"] += 1
+    score["tie game"] += 1
     prompt("It's a tie!")
   elsif player_wins?(player_choice, computer_choice)
     score["player"] += 1
@@ -52,9 +52,8 @@ def keep_score(score, player_choice, computer_choice)
     prompt("Computer won!")
   end
 
-  prompt("Player's score : #{score['player']}
-   Computer's score: #{score['computer']}
-   Tie games: #{score['tie']}")
+  prompt("<Scores>")
+  score.each { |key, value| puts "#{key}: #{value}" }
 end
 
 def choice_to_word(choice)
@@ -118,6 +117,7 @@ loop do
   # display_results(player_choice, computer_choice)
   keep_score(score, player_choice, computer_choice)
 
+  # puts score.value?(5)
   continue_answer = continue?(continue_answer)
 
   clear_screen if continue_answer == "yes"
