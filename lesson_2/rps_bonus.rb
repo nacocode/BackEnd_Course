@@ -25,14 +25,36 @@ def player_wins?(player_choice, computer_choice)
   win_conditions[player_choice].include?(computer_choice)
 end
 
-def display_results(player_choice, computer_choice)
+# def display_results(player_choice, computer_choice)
+#   if player_choice == computer_choice
+#     prompt("It's a tie!")
+#   elsif player_wins?(player_choice, computer_choice)
+#     prompt("You won!")
+#   else
+#     prompt("Computer won!")
+#   end
+# end
+score = {
+  "player" => 0,
+  "computer" => 0,
+  "tie" => 0
+}
+
+def keep_score(score, player_choice, computer_choice)
   if player_choice == computer_choice
+    score["tie"] += 1
     prompt("It's a tie!")
   elsif player_wins?(player_choice, computer_choice)
+    score["player"] += 1
     prompt("You won!")
   else
+    score["computer"] += 1
     prompt("Computer won!")
   end
+
+  prompt("Player's score : #{score['player']}
+   Computer's score: #{score['computer']}
+   Tie games: #{score['tie']}")
 end
 
 def choice_to_word(choice)
@@ -93,7 +115,8 @@ loop do
   prompt("You chose : #{player_choice}
    Computer chose : #{computer_choice}")
 
-  display_results(player_choice, computer_choice)
+  # display_results(player_choice, computer_choice)
+  keep_score(score, player_choice, computer_choice)
 
   continue_answer = continue?(continue_answer)
 
