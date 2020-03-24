@@ -25,15 +25,15 @@ def player_wins?(player_choice, computer_choice)
   win_conditions[player_choice].include?(computer_choice)
 end
 
-# def display_results(player_choice, computer_choice)
-#   if player_choice == computer_choice
-#     prompt("It's a tie!")
-#   elsif player_wins?(player_choice, computer_choice)
-#     prompt("You won!")
-#   else
-#     prompt("Computer won!")
-#   end
-# end
+def display_results(player_choice, computer_choice)
+  if player_choice == computer_choice
+    prompt("It's a tie!")
+  elsif player_wins?(player_choice, computer_choice)
+    prompt("You won!")
+  else
+    prompt("Computer won!")
+  end
+end
 
 score = {
   "player" => 0,
@@ -41,14 +41,10 @@ score = {
 }
 
 def keep_score(score, player_choice, computer_choice)
-  if player_choice == computer_choice
-    prompt("It's a tie!")
-  elsif player_wins?(player_choice, computer_choice)
+  if player_wins?(player_choice, computer_choice)
     score["player"] += 1
-    prompt("You won!")
-  else
+  elsif player_wins?(computer_choice, player_choice)
     score["computer"] += 1
-    prompt("Computer won!")
   end
 
   prompt("<Scores>")
@@ -72,7 +68,7 @@ end
 
 def grand_winner(score)
   if score.key(5) == "player"
-    prompt("You won 5 times! Conglatulation! You are the Grand Winner!!!")
+    prompt("You won 5 times! Congratulations! You are the Grand Winner!!!")
   elsif score.key(5) == "computer"
     prompt("Computer won 5 times. Game over.")
   end
@@ -122,7 +118,8 @@ loop do
     prompt("You chose : #{player_choice}
     Computer chose : #{computer_choice}")
 
-    # display_results(player_choice, computer_choice)
+    display_results(player_choice, computer_choice)
+
     keep_score(score, player_choice, computer_choice)
 
     grand_winner(score)
