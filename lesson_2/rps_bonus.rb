@@ -34,15 +34,14 @@ end
 #     prompt("Computer won!")
 #   end
 # end
+
 score = {
   "player" => 0,
-  "computer" => 0,
-  "tie game" => 0
+  "computer" => 0
 }
 
 def keep_score(score, player_choice, computer_choice)
   if player_choice == computer_choice
-    score["tie game"] += 1
     prompt("It's a tie!")
   elsif player_wins?(player_choice, computer_choice)
     score["player"] += 1
@@ -71,6 +70,14 @@ def choice_to_word(choice)
   end
 end
 
+def grand_winner(score)
+  if score.key(5) == "player"
+    prompt("You won 5 times! Conglatulation! You are the Grand Winner!!!")
+  elsif score.key(5) == "computer"
+    prompt("Computer won 5 times. Game over.")
+  end
+end
+
 def continue?(continue_answer)
   loop do
     prompt("Do you want to play again?(yes or no)")
@@ -95,29 +102,36 @@ loop do
   player_choice = ""
 
   loop do
-    greeting
+    loop do
+      greeting
 
-    player_choice = gets.downcase.chomp
+      player_choice = gets.downcase.chomp
 
-    if %w(rock paper scissors lizard spock).include?(player_choice)
-      break
-    elsif %w(r p ss l sp).include?(player_choice)
-      player_choice = choice_to_word(player_choice)
-      break
-    else
-      prompt("That's not a valid choice.")
+      if %w(rock paper scissors lizard spock).include?(player_choice)
+        break
+      elsif %w(r p ss l sp).include?(player_choice)
+        player_choice = choice_to_word(player_choice)
+        break
+      else
+        prompt("That's not a valid choice.")
+      end
     end
+
+    computer_choice = VALID_CHOICES.sample.values.join
+
+    prompt("You chose : #{player_choice}
+    Computer chose : #{computer_choice}")
+
+    # display_results(player_choice, computer_choice)
+    keep_score(score, player_choice, computer_choice)
+
+    grand_winner(score)
+    break if score.value?(5)
   end
 
-  computer_choice = VALID_CHOICES.sample.values.join
+  score["player"] = 0
+  score["computer"] = 0
 
-  prompt("You chose : #{player_choice}
-   Computer chose : #{computer_choice}")
-
-  # display_results(player_choice, computer_choice)
-  keep_score(score, player_choice, computer_choice)
-
-  # puts score.value?(5)
   continue_answer = continue?(continue_answer)
 
   clear_screen if continue_answer == "yes"
