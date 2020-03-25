@@ -10,8 +10,13 @@ end
 
 def greeting
   prompt("Let's play a rock paper scissors spock lizard!\n
-  Choose one >> type : 'rock' or 'r' for 'rock', as well as\n
-  'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'.")
+    When either you or computer wins five wins, the match is over\n
+    and the winning player becomes the Grand Winner. Ready?")
+end
+
+def input_description
+  prompt("Choose one >> type : 'rock' or 'r' for 'rock', as well as\n
+    'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'.")
 end
 
 def player_wins?(player_choice, computer_choice)
@@ -94,12 +99,15 @@ def good_bye
   prompt("Thank you for playing. Good bye!")
 end
 
+# _______________main___________________
+greeting
+
 loop do
   player_choice = ""
 
   loop do
     loop do
-      greeting
+      input_description
 
       player_choice = gets.downcase.chomp
 
