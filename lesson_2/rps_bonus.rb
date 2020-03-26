@@ -131,6 +131,7 @@ loop do
     keep_score(score, player_choice, computer_choice)
 
     break if score.value?(5)
+    clear_screen
   end
 
   grand_winner(score)
@@ -138,8 +139,8 @@ loop do
   continue_answer = continue?(continue_answer)
 
   break if continue_answer == "no"
-
   clear_screen if continue_answer == "yes"
+
   score["player"] = 0
   score["computer"] = 0
 end
