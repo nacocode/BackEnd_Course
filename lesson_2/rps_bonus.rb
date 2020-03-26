@@ -131,7 +131,6 @@ loop do
     keep_score(score, player_choice, computer_choice)
 
     break if score.value?(5)
-    clear_screen
   end
 
   grand_winner(score)
