@@ -103,9 +103,9 @@ end
 greeting
 
 loop do
-  player_choice = ""
-
   loop do
+    player_choice = ""
+
     loop do
       input_description
 
@@ -130,17 +130,18 @@ loop do
 
     keep_score(score, player_choice, computer_choice)
 
-    grand_winner(score)
     break if score.value?(5)
   end
 
-  score["player"] = 0
-  score["computer"] = 0
+  grand_winner(score)
 
   continue_answer = continue?(continue_answer)
 
-  clear_screen if continue_answer == "yes"
   break if continue_answer == "no"
+
+  clear_screen if continue_answer == "yes"
+  score["player"] = 0
+  score["computer"] = 0
 end
 
 good_bye
