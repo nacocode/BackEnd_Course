@@ -19,6 +19,38 @@ def input_description
     'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'.")
 end
 
+def choice_to_word(choice)
+  case choice
+  when "r"
+    "rock"
+  when "p"
+    "paper"
+  when "ss"
+    "scissors"
+  when "sp"
+    "spock"
+  when "l"
+    "lizard"
+  end
+end
+
+def validate_player_choice(player_choice)
+  loop do
+    input_description
+
+    player_choice = gets.downcase.chomp
+
+    if %w(rock paper scissors lizard spock).include?(player_choice)
+      return player_choice
+    elsif %w(r p ss l sp).include?(player_choice)
+      player_choice = choice_to_word(player_choice)
+      return player_choice
+    else
+      prompt("That's not a valid choice.")
+    end
+  end
+end
+
 def player_wins?(player_choice, computer_choice)
   win_conditions = {
     "scissors" => ["paper", "lizard"],
@@ -56,21 +88,6 @@ def keep_score(score, player_choice, computer_choice)
   score.each { |key, value| puts "#{key}: #{value}" }
 end
 
-def choice_to_word(choice)
-  case choice
-  when "r"
-    "rock"
-  when "p"
-    "paper"
-  when "ss"
-    "scissors"
-  when "sp"
-    "spock"
-  when "l"
-    "lizard"
-  end
-end
-
 def grand_winner(score)
   if score.key(5) == "player"
     prompt("You won 5 times! Congratulations! You are the Grand Winner!!!")
@@ -104,22 +121,7 @@ greeting
 
 loop do
   loop do
-    player_choice = ""
-
-    loop do
-      input_description
-
-      player_choice = gets.downcase.chomp
-
-      if %w(rock paper scissors lizard spock).include?(player_choice)
-        break
-      elsif %w(r p ss l sp).include?(player_choice)
-        player_choice = choice_to_word(player_choice)
-        break
-      else
-        prompt("That's not a valid choice.")
-      end
-    end
+    player_choice = validate_player_choice(player_choice)
 
     computer_choice = VALID_CHOICES.sample.values.join
 
