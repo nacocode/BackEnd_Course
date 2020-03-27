@@ -10,7 +10,7 @@ end
 
 def greeting
   prompt("Let's play a rock paper scissors spock lizard!\n
-    When either you or computer wins five wins, the match is over\n
+    When either you or computer wins five times, the match is over\n
     and the winning player becomes the Grand Winner. Ready?")
 end
 
