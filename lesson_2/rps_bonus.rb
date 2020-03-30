@@ -98,9 +98,10 @@ end
 
 def continue?(continue_answer)
   loop do
-    prompt("Do you want to play again?(yes or no)")
+    prompt("Do you want to play again?\n
+   Type: 'yes' or 'no' (or 'y' or 'n')")
     continue_answer = gets.chomp.downcase
-    if continue_answer == "yes" || continue_answer == "no"
+    if %w(yes y no n).include?(continue_answer)
       return continue_answer
     else
       prompt("Error: Invalid input. Try again.")
@@ -126,7 +127,7 @@ loop do
     computer_choice = VALID_CHOICES.sample.values.join
 
     prompt("You chose : #{player_choice}
-    Computer chose : #{computer_choice}")
+   Computer chose : #{computer_choice}")
 
     display_results(player_choice, computer_choice)
 
@@ -139,8 +140,8 @@ loop do
 
   continue_answer = continue?(continue_answer)
 
-  break if continue_answer == "no"
-  clear_screen if continue_answer == "yes"
+  break if continue_answer == "no" || continue_answer == "n"
+  clear_screen if continue_answer == "yes" || continue_answer == "y"
 
   score["player"] = 0
   score["computer"] = 0
