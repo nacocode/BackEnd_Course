@@ -10,13 +10,19 @@ end
 
 def greeting
   prompt("Let's play a rock paper scissors spock lizard!\n
-    When either you or computer wins five times, the match is over\n
-    and the winning player becomes the Grand Winner. Ready?")
+    When either you or computer wins five times, the match is over
+    and the winning player becomes the Grand Winner. Ready?
+    ")
 end
 
 def input_description
-  prompt("Choose one >> type : 'rock' or 'r' for 'rock', as well as\n
-    'p' for 'paper','ss' for 'scissors','sp' for 'spock', 'l' for 'lizard'.")
+  prompt("Choose one >> type :\n
+    'rock' or 'r' for 'rock'
+    'paper' or 'p' for 'paper'
+    'scissors' or 'ss' for 'scissors'
+    'spock' or 'sp' for 'spock'
+    'lizard' or 'l' for 'lizard'
+    ")
 end
 
 def choice_to_word(choice)
