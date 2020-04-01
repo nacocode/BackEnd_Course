@@ -1,8 +1,8 @@
-VALID_CHOICES = [{ "r" => "rock" },
-                 { "p" => "paper" },
-                 { "ss" => "scissors" },
-                 { "l" => "lizard" },
-                 { "sp" => "spock" }]
+VALID_CHOICES = { "r" => "rock",
+                  "p" => "paper",
+                  "ss" => "scissors",
+                  "l" => "lizard",
+                  "sp" => "spock" }
 
 def prompt(message)
   puts "=> #{message}"
@@ -25,31 +25,16 @@ def input_description
     ")
 end
 
-def choice_to_word(choice)
-  case choice
-  when "r"
-    "rock"
-  when "p"
-    "paper"
-  when "ss"
-    "scissors"
-  when "sp"
-    "spock"
-  when "l"
-    "lizard"
-  end
-end
-
 def validate_player_choice(player_choice)
   loop do
     input_description
 
     player_choice = gets.downcase.chomp
 
-    if %w(rock paper scissors lizard spock).include?(player_choice)
+    if VALID_CHOICES.keys.include?(player_choice)
+      player_choice = VALID_CHOICES[player_choice]
       return player_choice
-    elsif %w(r p ss l sp).include?(player_choice)
-      player_choice = choice_to_word(player_choice)
+    elsif VALID_CHOICES.values.include?(player_choice)
       return player_choice
     else
       prompt("That's not a valid choice.")
@@ -130,7 +115,7 @@ loop do
   loop do
     player_choice = validate_player_choice(player_choice)
 
-    computer_choice = VALID_CHOICES.sample.values.join
+    computer_choice = VALID_CHOICES.values.sample
 
     prompt("You chose : #{player_choice}
    Computer chose : #{computer_choice}")
