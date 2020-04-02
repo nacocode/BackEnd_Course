@@ -76,7 +76,7 @@ def keep_score(score, player_choice, computer_choice)
   end
 
   prompt("<Scores>")
-  score.each { |key, value| puts "#{key}: #{value}" }
+  score.each { |key, value| puts "   #{key}: #{value}" }
 end
 
 def grand_winner(score)
