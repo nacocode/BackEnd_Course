@@ -42,7 +42,7 @@ def validate_player_choice(player_choice)
   end
 end
 
-def player_wins?(player_choice, computer_choice)
+def win?(first, second)
   win_conditions = {
     "scissors" => ["paper", "lizard"],
     "paper" => ["rock", "spock"],
@@ -50,13 +50,13 @@ def player_wins?(player_choice, computer_choice)
     "lizard" => ["spock", "paper"],
     "spock" => ["scissors", "rock"]
   }
-  win_conditions[player_choice].include?(computer_choice)
+  win_conditions[first].include?(second)
 end
 
 def display_results(player_choice, computer_choice)
   if player_choice == computer_choice
     prompt("It's a tie!")
-  elsif player_wins?(player_choice, computer_choice)
+  elsif win?(player_choice, computer_choice)
     prompt("You won!")
   else
     prompt("Computer won!")
@@ -69,9 +69,9 @@ score = {
 }
 
 def keep_score(score, player_choice, computer_choice)
-  if player_wins?(player_choice, computer_choice)
+  if win?(player_choice, computer_choice)
     score["player"] += 1
-  elsif player_wins?(computer_choice, player_choice)
+  elsif win?(computer_choice, player_choice)
     score["computer"] += 1
   end
 
