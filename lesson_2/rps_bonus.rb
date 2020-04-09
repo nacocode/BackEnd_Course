@@ -4,12 +4,6 @@ CHOICES = { "rock" => "r",
             "lizard" => "l",
             "spock" => "sp" }
 
-WIN_CONDITIONS = { "scissors" => ["paper", "lizard"],
-                   "paper" => ["rock", "spock"],
-                   "rock" => ["lizard", "scissors"],
-                   "lizard" => ["spock", "paper"],
-                   "spock" => ["scissors", "rock"] }
-
 def prompt(message)
   puts "=> #{message}"
 end
@@ -48,7 +42,13 @@ def validate_player_choice(player_choice)
 end
 
 def win?(first, second)
-  WIN_CONDITIONS[first].include?(second)
+  win_condition = { "scissors" => ["paper", "lizard"],
+                    "paper" => ["rock", "spock"],
+                    "rock" => ["lizard", "scissors"],
+                    "lizard" => ["spock", "paper"],
+                    "spock" => ["scissors", "rock"] }
+
+  win_condition[first].include?(second)
 end
 
 def display_results(player_choice, computer_choice)
