@@ -1,8 +1,14 @@
-VALID_CHOICES = { "r" => "rock",
-                  "p" => "paper",
-                  "ss" => "scissors",
-                  "l" => "lizard",
-                  "sp" => "spock" }
+CHOICES = { "rock" => "r",
+            "paper" => "p",
+            "scissors" => "ss",
+            "lizard" => "l",
+            "spock" => "sp" }
+
+WIN_CONDITIONS = { "scissors" => ["paper", "lizard"],
+                   "paper" => ["rock", "spock"],
+                   "rock" => ["lizard", "scissors"],
+                   "lizard" => ["spock", "paper"],
+                   "spock" => ["scissors", "rock"] }
 
 def prompt(message)
   puts "=> #{message}"
@@ -15,7 +21,7 @@ def greeting
     ")
 end
 
-def input_description
+def player_choice_description
   prompt("Choose one >> type :\n
     'rock' or 'r' for 'rock'
     'paper' or 'p' for 'paper'
@@ -27,14 +33,13 @@ end
 
 def validate_player_choice(player_choice)
   loop do
-    input_description
-
+    player_choice_description
     player_choice = gets.downcase.chomp
 
-    if VALID_CHOICES.keys.include?(player_choice)
-      player_choice = VALID_CHOICES[player_choice]
+    if CHOICES.keys.include?(player_choice)
       return player_choice
-    elsif VALID_CHOICES.values.include?(player_choice)
+    elsif CHOICES.values.include?(player_choice)
+      player_choice = CHOICES.key(player_choice)
       return player_choice
     else
       prompt("That's not a valid choice.")
@@ -43,14 +48,7 @@ def validate_player_choice(player_choice)
 end
 
 def win?(first, second)
-  win_conditions = {
-    "scissors" => ["paper", "lizard"],
-    "paper" => ["rock", "spock"],
-    "rock" => ["lizard", "scissors"],
-    "lizard" => ["spock", "paper"],
-    "spock" => ["scissors", "rock"]
-  }
-  win_conditions[first].include?(second)
+  WIN_CONDITIONS[first].include?(second)
 end
 
 def display_results(player_choice, computer_choice)
@@ -115,7 +113,7 @@ loop do
   loop do
     player_choice = validate_player_choice(player_choice)
 
-    computer_choice = VALID_CHOICES.values.sample
+    computer_choice = CHOICES.keys.sample
 
     prompt("You chose : #{player_choice}
    Computer chose : #{computer_choice}")
