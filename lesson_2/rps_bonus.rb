@@ -21,7 +21,7 @@ def greeting
     ")
 end
 
-def player_choice_description
+def input_description
   prompt("Choose one >> type :\n
     'rock' or 'r' for 'rock'
     'paper' or 'p' for 'paper'
@@ -33,7 +33,8 @@ end
 
 def validate_player_choice(player_choice)
   loop do
-    player_choice_description
+    input_description
+
     player_choice = gets.downcase.chomp
 
     if CHOICES.keys.include?(player_choice)
