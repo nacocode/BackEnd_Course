@@ -1,0 +1,24 @@
+# PROBLEM:
+
+# Given a string, write a method `palindrome_substrings` which returns
+# all the substrings from a given string which are palindromes.
+# Consider palindrome words case sensitive.
+
+-----------------------------------------------------------------------------------
+# Test cases:
+
+# palindrome_substrings("supercalifragilisticexpialidocious") == ["ili"]
+# palindrome_substrings("abcddcbA") == ["bcddcb", "cddc", "dd"]
+# palindrome_substrings("palindrome") == []
+# palindrome_substrings("") == []
+------------------------------------------------------------------------------------
+
+# input : string
+
+# output : an array of strings
+#          (that cotains all the substrings which are palindromes from the given string.)
+
+# rules : Return only substrings which are palindromes.
+          case sensitive. (ex. "mom" is palindrome but "Mom".)
+          return empty array even if nothing.
+          when given empty string, return empty array.
