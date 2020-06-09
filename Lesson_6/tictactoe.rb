@@ -56,7 +56,8 @@ end
 def player_places_piece!(brd)
   square = ""
   loop do
-    prompt "Choose a position to place a piece: (#{joinor(empty_squares(brd))}):"
+    prompt "Choose a position to place a piece:
+    (#{joinor(empty_squares(brd))})"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
     prompt "Sorry, That's not a valid choice."
@@ -99,24 +100,55 @@ def detect_winner(brd)
   nil
 end
 
+def keep_score(score, winner)
+  if winner == "player"
+    score["player"] += 1
+  elsif winner == "computer"
+    score["computer"] += 1
+  end
+
+  prompt "[Scores]"
+  score.each { |k, v| puts "#{k} : #{v}" }
+end
+
+def grand_winner?(score)
+  if score.key(5) == "player"
+    prompt "You won 5 times! Congratulations! You are the Grand Winner!!!"
+  elsif score.key(5) == "computer"
+    "Computer won 5 times. Game over."
+  end
+end
+
+# Starting a game
+
 loop do
-  board = initialize_board
+  score = { "player" => 0, "computer" => 0 }
 
   loop do
+    board = initialize_board
+
+    loop do
+      display_board(board)
+      player_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+      computer_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+    end
+
     display_board(board)
-    player_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
-    computer_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
+    winner = detect_winner(board)
+
+    if someone_won?(board)
+      prompt "#{winner} won!"
+    else
+      prompt "It's a tie!"
+    end
+
+    keep_score(score, winner)
+    break if score.value?(5)
   end
 
-  display_board(board)
-
-  if someone_won?(board)
-    prompt "#{detect_winner(board)} won!"
-  else
-    prompt "It's a tie!"
-  end
+  grand_winner?(score)
 
   prompt "Play again? (y or n)"
   answer = gets.chomp
