@@ -53,6 +53,12 @@ def joinor(arr, delimiter = ', ', word = 'or')
   end
 end
 
+def greeting
+  prompt "Welcome to the TIC TAC TOE!\n
+  First player who wins 5 times become the Grand winner!\n
+  Let's get started!"
+end
+
 def player_places_piece!(brd)
   square = ""
   loop do
@@ -122,6 +128,7 @@ def grand_winner?(score)
 end
 
 # Starting a game
+greeting
 
 loop do
   score = { "player" => 0, "computer" => 0 }
