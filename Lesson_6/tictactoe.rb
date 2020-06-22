@@ -100,15 +100,17 @@ def detect_winner(brd)
   nil
 end
 
+def display_score(score)
+  prompt "[SCORE]"
+  score.each { |k, v| puts "#{k} : #{v}" }
+end
+
 def keep_score(score, winner)
   if winner == "player"
     score["player"] += 1
   elsif winner == "computer"
     score["computer"] += 1
   end
-
-  prompt "[Scores]"
-  score.each { |k, v| puts "#{k} : #{v}" }
 end
 
 def grand_winner?(score)
@@ -136,6 +138,7 @@ loop do
     end
 
     display_board(board)
+
     winner = detect_winner(board)
 
     if someone_won?(board)
@@ -145,6 +148,7 @@ loop do
     end
 
     keep_score(score, winner)
+    display_score(score)
     break if score.value?(5)
   end
 
