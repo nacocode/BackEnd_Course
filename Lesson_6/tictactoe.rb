@@ -14,8 +14,8 @@ end
 
 # rubocop: disable Metrics/AbcSize
 def display_board(brd)
-  system "clear"
-  puts "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
+  puts "                                                            "
+  prompt "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}"
@@ -142,11 +142,13 @@ loop do
       break if someone_won?(board) || board_full?(board)
       computer_places_piece!(board)
       break if someone_won?(board) || board_full?(board)
+      system "clear"
     end
 
     display_board(board)
 
     winner = detect_winner(board)
+    system "clear"
 
     if someone_won?(board)
       prompt "#{winner} won!"
