@@ -82,16 +82,16 @@ end
 def computer_places_piece!(brd)
   square = nil
 
-  # defense first
+  # offense first
   WINNING_LINES.each do |line|
-    square = find_at_risk_squere(line, brd, PLAYER_MARKER)
+    square = find_at_risk_squere(line, brd, COMPUTER_MARKER)
     break if square
   end
 
-  # offense
+  # defense first
   if !square
     WINNING_LINES.each do |line|
-      square = find_at_risk_squere(line, brd, COMPUTER_MARKER)
+      square = find_at_risk_squere(line, brd, PLAYER_MARKER)
       break if square
     end
   end
