@@ -74,28 +74,30 @@ end
 def find_at_risk_squere(line, brd, maker)
   if brd.values_at(*line).count(maker) == 2
     brd.select { |k, v| line.include?(k) && v == INITIAL_MARKER }.keys.first
-  else
-    nil
   end
 end
 
-def computer_places_piece!(brd)
+def get_mark_at_risk_square(brd, maker)
   square = nil
-  # offense first
+
   WINNING_LINES.each do |line|
-    square = find_at_risk_squere(line, brd, COMPUTER_MARKER)
+    square = find_at_risk_squere(line, brd, maker)
     break if square
   end
 
-  # defense first
+  square
+end
+
+def computer_places_piece!(brd)
+  # offense first
+  square = get_mark_at_risk_square(brd, COMPUTER_MARKER)
+
+  # defense
   if !square
-    WINNING_LINES.each do |line|
-      square = find_at_risk_squere(line, brd, PLAYER_MARKER)
-      break if square
-    end
+    square = get_mark_at_risk_square(brd, PLAYER_MARKER)
   end
 
-  #  pick square #5 if it's available
+  # pick square #5 if it's available
   square = 5 if brd[5] == INITIAL_MARKER
 
   # just pick a square ramdomly
