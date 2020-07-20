@@ -81,7 +81,6 @@ end
 
 def computer_places_piece!(brd)
   square = nil
-
   # offense first
   WINNING_LINES.each do |line|
     square = find_at_risk_squere(line, brd, COMPUTER_MARKER)
@@ -95,6 +94,9 @@ def computer_places_piece!(brd)
       break if square
     end
   end
+
+  #  pick square #5 if it's available
+  square = 5 if brd[5] == INITIAL_MARKER
 
   # just pick a square ramdomly
   if !square
