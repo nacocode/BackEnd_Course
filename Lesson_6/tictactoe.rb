@@ -71,8 +71,8 @@ def player_places_piece!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-def find_at_risk_squere(line, brd)
-  if brd.values_at(*line).count(PLAYER_MARKER) == 2
+def find_at_risk_squere(line, brd, maker)
+  if brd.values_at(*line).count(maker) == 2
     brd.select { |k, v| line.include?(k) && v == INITIAL_MARKER }.keys.first
   else
     nil
@@ -81,11 +81,22 @@ end
 
 def computer_places_piece!(brd)
   square = nil
+
+  # defense first
   WINNING_LINES.each do |line|
-    square = find_at_risk_squere(line, brd)
+    square = find_at_risk_squere(line, brd, PLAYER_MARKER)
     break if square
   end
 
+  # offense
+  if !square
+    WINNING_LINES.each do |line|
+      square = find_at_risk_squere(line, brd, COMPUTER_MARKER)
+      break if square
+    end
+  end
+
+  # just pick a square ramdomly
   if !square
     square = empty_squares(brd).sample
   end
