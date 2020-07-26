@@ -7,6 +7,7 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
 INITIAL_MARKER = " "
 PLAYER_MARKER = "X"
 COMPUTER_MARKER = "O"
+FIRST_PLAYER = "choose" # Valid options:"player", "computer", or "choose".
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -57,6 +58,22 @@ def greeting
   prompt "Welcome to the TIC TAC TOE!\n
   First player who wins 5 times become the Grand winner!\n
   Let's get started!"
+end
+
+def choose_first_player
+  prompt "Who goes first?"
+  prompt "Enter 'p' for player or 'c' for computer."
+  loop do
+    letter = gets.chomp.downcase
+    if letter == "p"
+      return "player"
+    elsif letter == "c"
+      return "computer"
+    end
+
+    break if letter == "p" || letter == "c"
+    prompt "Invalid input. Enter 'p' for player or 'c' for computer."
+  end
 end
 
 def player_places_piece!(brd)
@@ -161,6 +178,7 @@ end
 
 # Starting a game
 greeting
+choose_first_player
 
 loop do
   score = { "player" => 0, "computer" => 0 }
