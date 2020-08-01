@@ -187,6 +187,7 @@ end
 
 # Starting a game
 greeting
+choose_first_player
 
 loop do
   score = { "player" => 0, "computer" => 0 }
