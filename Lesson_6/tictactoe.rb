@@ -7,7 +7,7 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
 INITIAL_MARKER = " "
 PLAYER_MARKER = "X"
 COMPUTER_MARKER = "O"
-FIRST_PLAYER = "choose" # Valid options:"player", "computer", or "choose".
+WHO_GOES_FIRST = "choose" # Valid options:"player", "computer", or "choose".
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -70,9 +70,18 @@ def choose_first_player
     elsif letter == "c"
       return "computer"
     end
-
     break if letter == "p" || letter == "c"
     prompt "Invalid input. Enter 'p' for player or 'c' for computer."
+  end
+end
+
+def first_player
+  if WHO_GOES_FIRST == "choose"
+    choose_first_player
+  elsif WHO_GOES_FIRST == "player"
+    "player"
+  else
+    "computer"
   end
 end
 
@@ -178,13 +187,13 @@ end
 
 # Starting a game
 greeting
-choose_first_player
 
 loop do
   score = { "player" => 0, "computer" => 0 }
 
   loop do
     board = initialize_board
+    p first_player
 
     loop do
       display_board(board)
