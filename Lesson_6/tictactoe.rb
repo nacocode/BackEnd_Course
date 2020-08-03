@@ -85,6 +85,14 @@ def first_player
   end
 end
 
+def place_piece!(brd, current_player)
+  if current_player == "player"
+    player_places_piece!(brd)
+  else
+    computer_places_piece!(brd)
+  end
+end
+
 def player_places_piece!(brd)
   square = ""
   loop do
@@ -132,6 +140,10 @@ def computer_places_piece!(brd)
   end
 
   brd[square] = COMPUTER_MARKER
+end
+
+def switch_player(current_player)
+  current_player == "player" ? "computer" : "player"
 end
 
 def board_full?(brd)
@@ -193,15 +205,13 @@ loop do
 
   loop do
     board = initialize_board
-    p first_player
+    current_player = first_player
 
     loop do
       display_board(board)
-      player_places_piece!(board)
+      place_piece!(board, current_player)
       break if someone_won?(board) || board_full?(board)
-      computer_places_piece!(board)
-      break if someone_won?(board) || board_full?(board)
-      system "clear"
+      current_player = switch_player(current_player)
     end
 
     display_board(board)
