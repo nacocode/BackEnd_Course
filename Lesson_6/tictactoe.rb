@@ -158,20 +158,11 @@ end
 
 def detect_winner(brd)
   WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 3
+    if brd.values_at(*line).count(PLAYER_MARKER) == 3
       return "player"
-    elsif brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 3
+    elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
       return "computer"
     end
-    # if brd[line[0]] == PLAYER_MARKER &&
-    #    brd[line[1]] == PLAYER_MARKER &&
-    #    brd[line[2]] == PLAYER_MARKER
-    #   return "player"
-    # elsif brd[line[0]] == COMPUTER_MARKER &&
-    #       brd[line[1]] == COMPUTER_MARKER &&
-    #       brd[line[2]] == COMPUTER_MARKER
-    #   return "Computer"
-    # end
   end
   nil
 end
@@ -193,7 +184,7 @@ def grand_winner?(score)
   if score.key(5) == "player"
     prompt "You won 5 times! Congratulations! You are the Grand Winner!!!"
   elsif score.key(5) == "computer"
-    "Computer won 5 times. Game over."
+    prompt "Computer won 5 times. Game over."
   end
 end
 
@@ -235,6 +226,7 @@ loop do
   prompt "Play again? (y or n)"
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
+  system "clear"
 end
 
 prompt "Thanks for playing Tic Tac Toe! Good bye!"
