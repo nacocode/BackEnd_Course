@@ -15,7 +15,7 @@ end
 
 # rubocop: disable Metrics/AbcSize
 def display_board(brd)
-  puts "                                                            "
+  system "clear"
   prompt "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
