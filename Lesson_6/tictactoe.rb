@@ -142,7 +142,7 @@ def computer_places_piece!(brd)
   brd[square] = COMPUTER_MARKER
 end
 
-def switch_player(current_player)
+def alternate_player(current_player)
   current_player == "player" ? "computer" : "player"
 end
 
@@ -201,8 +201,8 @@ loop do
     loop do
       display_board(board)
       place_piece!(board, current_player)
+      current_player = alternate_player(current_player)
       break if someone_won?(board) || board_full?(board)
-      current_player = switch_player(current_player)
     end
 
     display_board(board)
