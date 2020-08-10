@@ -13,9 +13,13 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
+def display_score(score)
+  system "clear"
+  prompt "[SCORE] >>> Player:#{score['player']}  Computer:#{score['computer']}"
+end
+
 # rubocop: disable Metrics/AbcSize
 def display_board(brd)
-  system "clear"
   prompt "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
@@ -169,11 +173,6 @@ def detect_winner(brd)
   nil
 end
 
-def display_score(score)
-  prompt "[SCORE]"
-  score.each { |k, v| puts "#{k} : #{v}" }
-end
-
 def keep_score(score, winner)
   if winner == "player"
     score["player"] += 1
@@ -201,6 +200,7 @@ loop do
     current_player = first_player
 
     loop do
+      display_score(score)
       display_board(board)
       place_piece!(board, current_player)
       current_player = alternate_player(current_player)
