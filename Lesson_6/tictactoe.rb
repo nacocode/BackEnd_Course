@@ -55,9 +55,11 @@ def joinor(arr, delimiter = ', ', word = 'or')
 end
 
 def greeting
-  prompt "Welcome to the TIC TAC TOE!\n
+  prompt "——————————————————————————————————————————————————————\n
+  Welcome to the TIC TAC TOE!\n
   First player who wins 5 times become the Grand winner!\n
-  Let's get started!"
+  Let's get started!\n
+  ———————————————————————————————————————————————————————"
 end
 
 def choose_first_player
