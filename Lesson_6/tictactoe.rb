@@ -210,7 +210,6 @@ loop do
     display_board(board)
 
     winner = detect_winner(board)
-    system "clear"
 
     if someone_won?(board)
       prompt "#{winner} won!"
@@ -219,7 +218,6 @@ loop do
     end
 
     keep_score(score, winner)
-    display_score(score)
     break if score.value?(5)
   end
 
