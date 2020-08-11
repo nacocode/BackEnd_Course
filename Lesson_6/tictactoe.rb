@@ -181,6 +181,19 @@ def keep_score(score, winner)
   end
 end
 
+def play_again?
+  loop do
+    prompt "Play again? Enter 'y' for yes or 'n' for no"
+    answer = gets.chomp.downcase
+    if answer == "y" || answer == "n"
+      return answer
+      break
+    else
+      prompt "Input error: Enter 'y' for yes or 'n' for no"
+    end
+  end
+end
+
 def grand_winner?(score)
   if score.key(5) == "player"
     prompt "You won 5 times! Congratulations! You are the Grand Winner!!!"
@@ -207,6 +220,7 @@ loop do
       break if someone_won?(board) || board_full?(board)
     end
 
+    display_score(score)
     display_board(board)
 
     winner = detect_winner(board)
@@ -223,9 +237,7 @@ loop do
 
   grand_winner?(score)
 
-  prompt "Play again? (y or n)"
-  answer = gets.chomp
-  break unless answer.downcase.start_with?('y')
+  break unless play_again?.start_with?('y')
   system "clear"
 end
 
