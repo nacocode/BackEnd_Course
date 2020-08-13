@@ -13,6 +13,10 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
+def error_msg
+  prompt "That's not a valid input."
+end
+
 def display_score(score)
   system "clear"
   prompt "[SCORE] >>> Player:#{score['player']}  Computer:#{score['computer']}"
@@ -77,7 +81,8 @@ def choose_first_player
       return "computer"
     end
     break if letter == "p" || letter == "c"
-    prompt "Invalid input. Enter 'p' for player or 'c' for computer."
+    error_msg
+    prompt "Enter 'p' for player or 'c' for computer."
   end
 end
 
@@ -106,7 +111,7 @@ def player_places_piece!(brd)
     (#{joinor(empty_squares(brd))})"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
-    prompt "Sorry, That's not a valid choice."
+    error_msg
   end
   brd[square] = PLAYER_MARKER
 end
@@ -183,13 +188,13 @@ end
 
 def play_again?
   loop do
-    prompt "Play again? Enter 'y' for yes or 'n' for no"
+    prompt "Play again? (Enter 'y' for yes or 'n' for no.)"
     answer = gets.chomp.downcase
     if answer == "y" || answer == "n"
       return answer
       break
     else
-      prompt "Input error: Enter 'y' for yes or 'n' for no"
+      error_msg
     end
   end
 end
