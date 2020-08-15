@@ -231,7 +231,7 @@ loop do
     winner = detect_winner(board)
 
     if someone_won?(board)
-      prompt "#{winner} won!"
+      prompt "#{winner} won this round!"
     else
       prompt "It's a tie!"
     end
