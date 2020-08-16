@@ -19,7 +19,7 @@ end
 
 def display_score(score)
   system "clear"
-  prompt "[SCORE] >>> Player:#{score['player']}  Computer:#{score['computer']}"
+  prompt "SCORE【 PLAYER | #{score['player']} - #{score['computer']} | COMPUTER 】"
 end
 
 # rubocop: disable Metrics/AbcSize
