@@ -96,6 +96,10 @@ def first_player
   end
 end
 
+def integer?(input)
+  input.to_i.to_s == input
+end
+
 def place_piece!(brd, current_player)
   if current_player == "player"
     player_places_piece!(brd)
@@ -109,10 +113,11 @@ def player_places_piece!(brd)
   loop do
     prompt "Choose a position to place a piece:
     (#{joinor(empty_squares(brd))})"
-    square = gets.chomp.to_i
-    break if empty_squares(brd).include?(square)
+    square = gets.chomp
+    break if integer?(square) && empty_squares(brd).include?(square.to_i)
     error_msg
   end
+  square = square.to_i
   brd[square] = PLAYER_MARKER
 end
 
