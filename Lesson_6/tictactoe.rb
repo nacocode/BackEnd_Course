@@ -225,7 +225,7 @@ greeting
 
 loop do
   score = { "player" => 0, "computer" => 0 }
-  
+
   loop do
     ready?
     board = initialize_board
