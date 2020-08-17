@@ -70,6 +70,14 @@ def greeting
   ———————————————————————————————————————————————————————"
 end
 
+def ready?
+  prompt "Hit the Enter key to play the game!"
+  enter = gets
+  if enter.include?("\n")
+    system "clear"
+  end
+end
+
 def choose_first_player
   prompt "Who goes first?"
   prompt "Enter 'p' for player or 'c' for computer."
@@ -217,8 +225,9 @@ greeting
 
 loop do
   score = { "player" => 0, "computer" => 0 }
-
+  
   loop do
+    ready?
     board = initialize_board
     current_player = first_player
 
