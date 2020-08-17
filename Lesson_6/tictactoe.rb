@@ -18,12 +18,13 @@ def error_msg
 end
 
 def display_score(score)
-  system "clear"
-  prompt "SCORE【 PLAYER | #{score['player']} - #{score['computer']} | COMPUTER 】"
+  puts "    ★ SCORE★
+PLAYER(X) | #{score['player']} - #{score['computer']} | COMPUTER(O)"
 end
 
 # rubocop: disable Metrics/AbcSize
 def display_board(brd)
+  system "clear"
   prompt "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
@@ -232,14 +233,13 @@ loop do
     current_player = first_player
 
     loop do
-      display_score(score)
       display_board(board)
+      display_score(score)
       place_piece!(board, current_player)
       current_player = alternate_player(current_player)
       break if someone_won?(board) || board_full?(board)
     end
 
-    display_score(score)
     display_board(board)
 
     winner = detect_winner(board)
@@ -251,6 +251,7 @@ loop do
     end
 
     keep_score(score, winner)
+    display_score(score)
     break if score.value?(5)
   end
 
