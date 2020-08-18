@@ -71,12 +71,10 @@ def greeting
   ———————————————————————————————————————————————————————"
 end
 
-def ready?
+def hit_enter_and_clear
   prompt "Hit the Enter key to play the game!"
-  enter = gets
-  if enter.include?("\n")
-    system "clear"
-  end
+  gets
+  system "clear"
 end
 
 def choose_first_player
@@ -228,7 +226,7 @@ loop do
   score = { "player" => 0, "computer" => 0 }
 
   loop do
-    ready?
+    hit_enter_and_clear
     board = initialize_board
     current_player = first_player
 
