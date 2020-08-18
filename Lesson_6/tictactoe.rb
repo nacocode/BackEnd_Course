@@ -71,7 +71,7 @@ def greeting
   ———————————————————————————————————————————————————————"
 end
 
-def hit_enter_and_clear
+def hit_enter_and_clear_screen
   prompt "Hit the Enter key to play the game!"
   gets
   system "clear"
@@ -226,7 +226,7 @@ loop do
   score = { "player" => 0, "computer" => 0 }
 
   loop do
-    hit_enter_and_clear
+    hit_enter_and_clear_screen
     board = initialize_board
     current_player = first_player
 
