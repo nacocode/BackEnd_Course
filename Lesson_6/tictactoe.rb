@@ -204,7 +204,6 @@ def play_again?
     answer = gets.chomp.downcase
     if answer == "y" || answer == "n"
       return answer
-      break
     else
       error_msg
     end
@@ -255,7 +254,7 @@ loop do
 
   grand_winner?(score)
 
-  break unless play_again?.start_with?('y')
+  break unless play_again?.start_with?("y")
   system "clear"
 end
 
