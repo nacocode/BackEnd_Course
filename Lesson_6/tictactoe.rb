@@ -64,12 +64,13 @@ def joinor(arr, delimiter = ', ', word = 'or')
 end
 
 def greeting
-  prompt "——————————————————————————————————————————————————————\n
+  prompt "——————————————————————————————————————————————————————
   Welcome to the TIC TAC TOE!\n
   First player who wins 5 times become the Grand winner!\n
-  Let's get started!\n
-  ———————————————————————————————————————————————————————"
-  prompt "Hit the Enter key to begin the game!"
+  Are you ready??
+  ———————————————————————————————————————————————————————\n
+  Hit the Enter key to begin the game!"
+
   gets
 end
 
@@ -178,9 +179,9 @@ end
 def detect_winner(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(*line).count(PLAYER_MARKER) == 3
-      return "player"
+      return "Player"
     elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
-      return "computer"
+      return "Computer"
     end
   end
   nil
