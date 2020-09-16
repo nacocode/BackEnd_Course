@@ -75,6 +75,7 @@ def greeting
 end
 
 def choose_first_player
+  system "clear"
   prompt "Who goes first?"
   prompt "Enter 'p' for player or 'c' for computer."
   loop do
@@ -248,7 +249,6 @@ loop do
   grand_winner?(score)
 
   break unless prompt_next_game("Play again").start_with?("y")
-  system "clear"
 end
 
 prompt "Thanks for playing Tic Tac Toe! Good bye!"
