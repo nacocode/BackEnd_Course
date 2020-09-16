@@ -180,9 +180,9 @@ end
 def detect_winner(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(*line).count(PLAYER_MARKER) == 3
-      return "Player"
+      return "player"
     elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
-      return "Computer"
+      return "computer"
     end
   end
   nil
@@ -236,7 +236,7 @@ loop do
     winner = detect_winner(board)
 
     if someone_won?(board)
-      prompt "#{winner} won this round!"
+      prompt "#{winner.capitalize} won this round!"
     else
       prompt "It's a tie!"
     end
