@@ -17,6 +17,12 @@ def error_msg
   prompt "That's not a valid input."
 end
 
+def extra_line(number = 1)
+  number.times do
+    puts
+  end
+end
+
 def display_score(score)
   puts "    ★ SCORE★
 PLAYER(X) | #{score['player']} - #{score['computer']} | COMPUTER(O)"
@@ -225,7 +231,9 @@ loop do
 
     loop do
       display_board(board)
+      extra_line
       display_score(score)
+      extra_line(2)
       place_piece!(board, current_player)
       current_player = alternate_player(current_player)
       break if someone_won?(board) || board_full?(board)
@@ -242,7 +250,9 @@ loop do
     end
 
     keep_score(score, winner)
+    extra_line
     display_score(score)
+    extra_line(2)
     break if score.value?(5) || prompt_next_game("Next round").start_with?("n")
   end
 
