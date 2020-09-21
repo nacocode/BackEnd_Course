@@ -23,10 +23,11 @@ def extra_line(number = 1)
   end
 end
 
+# rubocop:disable LineLength
 def display_score(score)
-  puts "    ★ SCORE★
-PLAYER(X) | #{score['player']} - #{score['computer']} | COMPUTER(O)"
+  puts "«SCORE» PLAYER(X) | #{score['player']} - #{score['computer']} | COMPUTER(O)"
 end
+# rubocop:enable LineLength
 
 # rubocop: disable Metrics/AbcSize
 def display_board(brd)
