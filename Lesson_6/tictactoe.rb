@@ -72,11 +72,12 @@ end
 
 def greeting
   prompt "——————————————————————————————————————————————————————
-  Welcome to the TIC TAC TOE!\n
-  First player who wins 5 times become the Grand winner!\n
-  Are you ready??
-  ———————————————————————————————————————————————————————\n
-  Hit the Enter key to begin the game!"
+   Welcome to the TIC TAC TOE!\n
+   First player who wins 5 times become the Grand winner!\n
+   Are you ready??
+   ———————————————————————————————————————————————————————"
+  extra_line
+  prompt "Hit the Enter key to begin the game!"
 
   gets
 end
