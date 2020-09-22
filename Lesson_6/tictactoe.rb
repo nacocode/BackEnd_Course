@@ -252,7 +252,7 @@ loop do
     end
 
     keep_score(score, winner)
-    extra_line
+    extra_line(2)
     display_score(score)
     extra_line(2)
     break if score.value?(5) || prompt_next_game("Next round").start_with?("n")
