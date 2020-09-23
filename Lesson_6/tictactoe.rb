@@ -7,6 +7,10 @@ PLAYER_MARKER = "X"
 COMPUTER_MARKER = "O"
 WHO_GOES_FIRST = "choose" # Valid options:"player", "computer", or "choose".
 
+def clear_screen
+  system "clear"
+end
+
 def prompt(msg)
   puts "=> #{msg}"
 end
@@ -29,7 +33,7 @@ end
 
 # rubocop: disable Metrics/AbcSize
 def display_board(brd)
-  system "clear"
+  clear_screen
   prompt "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
@@ -81,7 +85,7 @@ def greeting
 end
 
 def choose_first_player
-  system "clear"
+  clear_screen
   prompt "Who goes first?"
   prompt "Enter 'p' for player or 'c' for computer."
   loop do
@@ -220,6 +224,7 @@ def grand_winner?(score)
 end
 
 # Starting a game
+clear_screen
 greeting
 
 loop do
