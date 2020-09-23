@@ -26,8 +26,8 @@ def extra_line(number = 1)
 end
 
 def display_score(score)
-  puts "«SCORE» PLAYER(X) | #{score['player']}\
- - #{score['computer']} | COMPUTER(O)"
+  puts "«SCORE» PLAYER(X) | #{score['player']} - " \
+       "#{score['computer']} | COMPUTER(O)"
 end
 
 # rubocop: disable Metrics/AbcSize
