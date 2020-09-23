@@ -86,18 +86,15 @@ end
 def choose_first_player
   clear_screen
   prompt "Who goes first?"
-  prompt "Enter 'p' for player or 'c' for computer."
+  letter = ""
   loop do
-    letter = gets.chomp.downcase
-    if letter == "p"
-      return "player"
-    elsif letter == "c"
-      return "computer"
-    end
-    break if letter == "p" || letter == "c"
-    error_msg
     prompt "Enter 'p' for player or 'c' for computer."
+    letter = gets.chomp.downcase
+    break if ["p", "c"].include?(letter)
+    error_msg
   end
+  return "player" if letter == "p"
+  return "computer" if letter == "c"
 end
 
 def first_player
