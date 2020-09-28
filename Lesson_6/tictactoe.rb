@@ -194,6 +194,10 @@ def detect_winner(brd)
   nil
 end
 
+def display_winner(winner)
+  prompt "#{winner.capitalize} won this round!"
+end
+
 def keep_score(score, winner)
   if winner == "player"
     score["player"] += 1
@@ -241,14 +245,9 @@ loop do
     end
 
     display_board(board)
-
     winner = detect_winner(board)
-
-    if someone_won?(board)
-      prompt "#{winner.capitalize} won this round!"
-    else
-      prompt "It's a tie!"
-    end
+    display_winner(winner) if someone_won?(board)
+    prompt "It's a tie!" if board_full?(board)
 
     keep_score(score, winner)
     extra_line(2)
