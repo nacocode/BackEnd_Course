@@ -223,6 +223,10 @@ def grand_winner?(score)
   end
 end
 
+def display_goodbye
+  prompt "Thanks for playing Tic Tac Toe! Good bye!"
+end
+
 # Starting a game
 clear_screen
 greeting
@@ -261,4 +265,4 @@ loop do
   break unless prompt_next_game("Play again").start_with?("y")
 end
 
-prompt "Thanks for playing Tic Tac Toe! Good bye!"
+display_goodbye
