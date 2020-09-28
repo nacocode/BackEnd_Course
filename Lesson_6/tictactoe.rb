@@ -26,15 +26,17 @@ def extra_line(number = 1)
 end
 
 def display_score(score)
+  extra_line(2)
   puts "«SCORE» PLAYER(X) | #{score['player']} - " \
        "#{score['computer']} | COMPUTER(O)"
+  extra_line
 end
 
 # rubocop: disable Metrics/AbcSize
 def display_board(brd)
   clear_screen
   prompt "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
-  puts ""
+  extra_line(2)
   puts "     |     |"
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}"
   puts "     |     |"
@@ -46,7 +48,7 @@ def display_board(brd)
   puts "     |     |"
   puts "  #{brd[7]}  |  #{brd[8]}  |  #{brd[9]}"
   puts "     |     |"
-  puts ""
+  extra_line
 end
 # rubocop: enable Metrics/AbcSize
 
@@ -122,6 +124,7 @@ end
 def player_places_piece!(brd)
   square = ""
   loop do
+    extra_line
     prompt "Choose a position to place a piece:
     (#{joinor(empty_squares(brd))})"
     square = gets.chomp
@@ -195,6 +198,7 @@ def detect_winner(brd)
 end
 
 def display_winner(winner)
+  extra_line
   prompt "#{winner.capitalize} won this round!"
 end
 
@@ -208,6 +212,7 @@ end
 
 def prompt_next_game(msg)
   loop do
+    extra_line
     prompt "#{msg}? Enter 'y' for yes or 'n' for no."
     answer = gets.chomp.downcase
     break answer if %w(yes y no n).include?(answer)
@@ -224,6 +229,7 @@ def grand_winner?(score)
 end
 
 def display_goodbye
+  extra_line
   prompt "Thanks for playing Tic Tac Toe! Good bye!"
 end
 
@@ -240,9 +246,7 @@ loop do
 
     loop do
       display_board(board)
-      extra_line
       display_score(score)
-      extra_line(2)
       place_piece!(board, current_player)
       current_player = alternate_player(current_player)
       break if someone_won?(board) || board_full?(board)
@@ -254,9 +258,7 @@ loop do
     prompt "It's a tie!" if board_full?(board)
 
     keep_score(score, winner)
-    extra_line(2)
     display_score(score)
-    extra_line(2)
     break if score.value?(5) || prompt_next_game("Next round").start_with?("n")
   end
 
