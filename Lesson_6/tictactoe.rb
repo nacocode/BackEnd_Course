@@ -6,6 +6,7 @@ INITIAL_MARKER = " "
 PLAYER_MARKER = "X"
 COMPUTER_MARKER = "O"
 WHO_GOES_FIRST = "choose" # Valid options:"player", "computer", or "choose".
+WIN_AMOUNT = 5
 
 def clear_screen
   system "clear"
@@ -76,7 +77,7 @@ end
 def greeting
   prompt "——————————————————————————————————————————————————————
    Welcome to TIC TAC TOE!\n
-   First player who wins 5 times becomes the Grand winner!\n
+   First player who wins #{WIN_AMOUNT} times becomes the Grand winner!\n
    Are you ready??
    ———————————————————————————————————————————————————————"
   extra_line
@@ -221,10 +222,11 @@ def prompt_next_game(msg)
 end
 
 def grand_winner?(score)
-  if score.key(5) == "player"
-    prompt "You won 5 times! Congratulations! You are the Grand Winner!!!"
-  elsif score.key(5) == "computer"
-    prompt "Computer won 5 times. Game over."
+  if score.key(WIN_AMOUNT) == "player"
+    prompt "You won #{WIN_AMOUNT} times! Congratulations! " \
+    "You are the Grand Winner!!!"
+  elsif score.key(WIN_AMOUNT) == "computer"
+    prompt "Computer won #{WIN_AMOUNT} times. Game over."
   end
 end
 
@@ -259,7 +261,7 @@ loop do
 
     keep_score(score, winner)
     display_score(score)
-    break if score.value?(5) || prompt_next_game("Next round").start_with?("n")
+    break if score.value?(WIN_AMOUNT) || prompt_next_game("Next round").start_with?("n")
   end
 
   grand_winner?(score)
