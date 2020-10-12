@@ -211,14 +211,17 @@ def keep_score(score, winner)
   end
 end
 
-def prompt_next_game(msg)
+def next_game?(msg)
+  answer = nil
   loop do
     extra_line
     prompt "#{msg}? Enter 'y' for yes or 'n' for no."
     answer = gets.chomp.downcase
-    break answer if %w(yes y no n).include?(answer)
+    break if %w(yes y no n).include?(answer)
     error_msg
   end
+
+  answer.start_with?("y")
 end
 
 def grand_winner?(score)
@@ -261,12 +264,12 @@ loop do
 
     keep_score(score, winner)
     display_score(score)
-    break if score.value?(WIN_AMOUNT) || prompt_next_game("Next round").start_with?("n")
+    break if score.value?(WIN_AMOUNT) || !next_game?("Next round")
   end
 
   grand_winner?(score)
 
-  break unless prompt_next_game("Play again").start_with?("y")
+  break unless next_game?("Do you want to play a new match")
 end
 
 display_goodbye
