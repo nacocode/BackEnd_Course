@@ -224,7 +224,7 @@ def next_game?(msg)
   answer.start_with?("y")
 end
 
-def grand_winner?(score)
+def display_grand_winner?(score)
   if score.key(WIN_AMOUNT) == "player"
     prompt "You won #{WIN_AMOUNT} times! Congratulations! " \
     "You are the Grand Winner!!!"
@@ -267,7 +267,7 @@ loop do
     break if score.value?(WIN_AMOUNT) || !next_game?("Next round")
   end
 
-  grand_winner?(score)
+  display_grand_winner?(score)
 
   break unless next_game?("Do you want to play a new match")
 end
