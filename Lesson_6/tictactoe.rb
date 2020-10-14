@@ -211,6 +211,10 @@ def keep_score(score, winner)
   end
 end
 
+def grand_winner?(score)
+  score.value?(WIN_AMOUNT)
+end
+
 def next_game?(msg)
   answer = nil
   loop do
@@ -264,7 +268,7 @@ loop do
 
     keep_score(score, winner)
     display_score(score)
-    break if score.value?(WIN_AMOUNT) || !next_game?("Next round")
+    break if grand_winner?(score) || !next_game?("Next round")
   end
 
   display_grand_winner?(score)
