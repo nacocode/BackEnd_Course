@@ -53,3 +53,20 @@ def detect_result(player_cards, dealer_cards)
     :tie
   end
 end
+
+def display_result(player_cards, dealer_cards)
+  result = detect_result(player_cards, dealer_cards)
+
+  case result
+  when :player_busted
+    prompt "You busted! Dealer wins!"
+  when :dealer_busted
+    prompt "Dealer busted! You win!"
+  when :player
+    prompt "You win!"
+  when :dealer
+    prompt "Dealer wins!"
+  when :tie
+    prompt "It's a tie!"
+  end
+end
