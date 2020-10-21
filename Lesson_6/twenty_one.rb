@@ -70,3 +70,10 @@ def display_result(player_cards, dealer_cards)
     prompt "It's a tie!"
   end
 end
+
+def play_again?
+  puts "----------------------------"
+  prompt "Do you want to play again? (y or n)"
+  answer = gets.chomp
+  answer.downcase.start_with?("y")
+end
