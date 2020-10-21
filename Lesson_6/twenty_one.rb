@@ -31,3 +31,7 @@ def total(cards)
 
   sum
 end
+
+def busted?(cards)
+  total(cards) > 21
+end
