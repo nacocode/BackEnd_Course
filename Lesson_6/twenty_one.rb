@@ -77,3 +77,52 @@ def play_again?
   answer = gets.chomp
   answer.downcase.start_with?("y")
 end
+
+loop do
+  prompt "Welcome to Twenty-One!"
+
+  # initialize variables
+  deck = initialize_deck
+  player_cards = []
+  dealer_cards = []
+
+  # initial deal
+  2.times do
+    player_cards << deck.pop
+    dealer_cards << deck.pop
+  end
+
+  prompt "Dealer has #{dealer_cards[0]} and ?"
+  prompt "You have #{player_cards[0]} and "\
+  "#{player_cards[1]}, for a total of #{total(player_cards)}."
+
+  # player turn.
+  loop do
+    player_turn = nil
+    loop do
+      prompt "Would you like to hit or stay? "\
+      "(Enter h or s)"
+      player_turn = gets.chomp.downcase
+      break if ["h", "s"].include?(player_turn)
+      prompt "Sorry, must enter 'h' or 's'."
+    end
+
+    if player_turn == "h"
+      player_cards << deck.pop
+      prompt "You chose to hit!"
+      prompt "Your cards are now: #{player_cards}."
+      prompt "Your total is now: #{total(player_cards)}."
+    end
+
+    break if player_turn == "s" || busted?(player_cards)
+  end
+
+  if busted?(player_cards)
+    display_result(player_cards, dealer_cards)
+    play_again? ? next : break
+  else
+    prompt "You stayed at #{total(player_cards)}"
+  end
+
+  break
+end
