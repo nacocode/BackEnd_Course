@@ -124,5 +124,22 @@ loop do
     prompt "You stayed at #{total(player_cards)}"
   end
 
+  # dealer turn
+  prompt "Dealer turn..."
+
+  loop do
+    break if total(dealer_cards) >= 17
+    dealer_cards << deck.pop
+    prompt "Dealer's cards are now: #{dealer_cards}"
+  end
+
+  if busted?(dealer_cards)
+    prompt "Dealer's total is now: #{total(dealer_cards)}"
+    display_result(player_cards, dealer_cards)
+    play_again? ? next : break
+  else
+    prompt "Dealer stayed at #{total(dealer_cards)}"
+  end
+
   break
 end
