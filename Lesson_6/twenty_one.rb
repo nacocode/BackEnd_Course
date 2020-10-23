@@ -72,7 +72,7 @@ def display_result(player_cards, dealer_cards)
 end
 
 def play_again?
-  puts "----------------------------"
+  puts "----------------------------------------"
   prompt "Do you want to play again? (y or n)"
   answer = gets.chomp
   answer.downcase.start_with?("y")
@@ -141,5 +141,15 @@ loop do
     prompt "Dealer stayed at #{total(dealer_cards)}"
   end
 
-  break
+  # When both player and dealer stays - compare cards!
+  puts "----------------------------------------"
+  prompt "Player has #{dealer_cards},
+   for a total of: #{total(player_cards)}"
+  prompt "Dealer has #{dealer_cards},
+   for a total of: #{total(dealer_cards)}"
+  puts "----------------------------------------"
+
+  display_result(player_cards, dealer_cards)
+
+  break unless play_again?
 end
