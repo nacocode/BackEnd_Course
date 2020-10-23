@@ -153,3 +153,5 @@ loop do
 
   break unless play_again?
 end
+
+prompt "Thank you for playing Twenty-One! Good bye!"
