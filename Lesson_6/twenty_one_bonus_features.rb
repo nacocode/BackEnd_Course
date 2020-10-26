@@ -5,6 +5,10 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
+def clear_screen
+  system "clear"
+end
+
 def initialize_deck
   SUITS.product(VALUES).shuffle
 end
@@ -79,6 +83,7 @@ def play_again?
 end
 
 loop do
+  clear_screen
   prompt "Welcome to Twenty-One!"
 
   # initialize variables
