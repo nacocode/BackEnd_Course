@@ -1,5 +1,8 @@
 SUITS = ["H", "D", "C", "S"]
 VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+GAME_NAME = 21
+DEALER_HIT_MIN = GAME_NAME - 4
+WIN_SCORE = 3
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -26,14 +29,14 @@ def total(cards)
 
   # correct for Aces
   values.select { |value| value == "A" }.count.times do
-    sum -= 10 if sum > 21
+    sum -= 10 if sum > GAME_NAME
   end
 
   sum
 end
 
 def busted?(cards)
-  total(cards) > 21
+  total(cards) > GAME_NAME
 end
 
 # :tie, :player, :dealer, :player_busted, :dealer_busted, :
@@ -41,9 +44,9 @@ def detect_result(player_cards, dealer_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
 
-  if player_total > 21
+  if player_total > GAME_NAME
     :player_busted
-  elsif dealer_total > 21
+  elsif dealer_total > GAME_NAME
     :dealer_busted
   elsif player_total > dealer_total
     :player
@@ -79,7 +82,7 @@ def play_again?
 end
 
 loop do
-  prompt "Welcome to Twenty-One!"
+  prompt "Welcome to #{GAME_NAME}!"
 
   # initialize variables
   deck = initialize_deck
@@ -128,7 +131,7 @@ loop do
   prompt "Dealer turn..."
 
   loop do
-    break if total(dealer_cards) >= 17
+    break if total(dealer_cards) >= DEALER_HIT_MIN
     dealer_cards << deck.pop
     prompt "Dealer's cards are now: #{dealer_cards}"
   end
@@ -154,4 +157,4 @@ loop do
   break unless play_again?
 end
 
-prompt "Thank you for playing Twenty-One! Good bye!"
+prompt "Thank you for playing #{GAME_NAME}. Good bye!"
