@@ -6,16 +6,11 @@ WIN_SCORE = 3
 
 def prompt(msg)
   puts "=> #{msg}"
+  puts
 end
 
 def clear_screen
   system "clear"
-end
-
-def blank_line(num = 1)
-  num.times do
-    puts ""
-  end
 end
 
 def initialize_deck
@@ -70,8 +65,6 @@ end
 def display_result(player_cards, dealer_cards)
   result = detect_result(player_cards, dealer_cards)
 
-  blank_line
-
   case result
   when :player_busted
     prompt "You busted! Dealer wins!"
@@ -87,7 +80,6 @@ def display_result(player_cards, dealer_cards)
 end
 
 def play_again?
-  blank_line
   prompt "Do you want to play again? (y or n)"
   answer = gets.chomp
   answer.downcase.start_with?("y")
@@ -96,7 +88,6 @@ end
 loop do
   clear_screen
   prompt "Welcome to #{GAME_NAME}!"
-  blank_line(2)
 
   # initialize variables
   deck = initialize_deck
@@ -117,7 +108,6 @@ loop do
   loop do
     player_turn = nil
     loop do
-      blank_line
       prompt "Would you like to hit or stay? "\
       "(Enter h or s)"
       player_turn = gets.chomp.downcase
@@ -160,17 +150,14 @@ loop do
   end
 
   # When both player and dealer stays - compare cards!
-  blank_line(2)
   prompt "Player has #{dealer_cards},
    for a total of: #{total(player_cards)}"
   prompt "Dealer has #{dealer_cards},
    for a total of: #{total(dealer_cards)}"
-  blank_line
 
   display_result(player_cards, dealer_cards)
 
   break unless play_again?
 end
 
-blank_line
 prompt "Thank you for playing #{GAME_NAME}. Good bye!"
