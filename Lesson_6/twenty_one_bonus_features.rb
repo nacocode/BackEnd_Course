@@ -13,6 +13,10 @@ def clear_screen
   system "clear"
 end
 
+def display_welcome_msg
+  prompt "Welcome to #{GAME_NAME}!"
+end
+
 def initialize_deck
   SUITS.product(VALUES).shuffle
 end
@@ -85,9 +89,13 @@ def play_again?
   answer.downcase.start_with?("y")
 end
 
+def display_goodbye_msg
+  prompt "Thank you for playing #{GAME_NAME}. Good bye!"
+end
+
 loop do
   clear_screen
-  prompt "Welcome to #{GAME_NAME}!"
+  display_welcome_msg
 
   # initialize variables
   deck = initialize_deck
@@ -160,4 +168,4 @@ loop do
   break unless play_again?
 end
 
-prompt "Thank you for playing #{GAME_NAME}. Good bye!"
+display_goodbye_msg
