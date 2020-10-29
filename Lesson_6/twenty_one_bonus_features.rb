@@ -5,8 +5,7 @@ DEALER_HIT_MIN = GAME_NAME - 4
 WIN_SCORE = 3
 
 def prompt(msg)
-  puts "=> #{msg}"
-  puts
+  puts "=> #{msg}\n"
 end
 
 def clear_screen
@@ -14,7 +13,7 @@ def clear_screen
 end
 
 def display_welcome_msg
-  prompt "Welcome to #{GAME_NAME}!"
+  prompt "Welcome to #{GAME_NAME}!\n"
 end
 
 def initialize_deck
@@ -71,15 +70,15 @@ def display_result(player_cards, dealer_cards)
 
   case result
   when :player_busted
-    prompt "You busted! Dealer wins!"
+    prompt "You busted! Dealer wins!\n"
   when :dealer_busted
-    prompt "Dealer busted! You win!"
+    prompt "Dealer busted! You win!\n"
   when :player
-    prompt "You win!"
+    prompt "You win!\n"
   when :dealer
-    prompt "Dealer wins!"
+    prompt "Dealer wins!\n"
   when :tie
-    prompt "It's a tie!"
+    prompt "It's a tie!\n"
   end
 end
 
@@ -100,12 +99,12 @@ end
 
 def display_score(score)
   puts "«SCORE» Player | #{score['player']} - " \
-  "#{score['dealer']} | Dealer"
+  "#{score['dealer']} | Dealer\n"
   puts
 end
 
 def play_again?
-  prompt "Do you want to play again? (y or n)"
+  prompt "Do you want to play again? (y or n)\n"
   answer = gets.chomp
   answer.downcase.start_with?("y")
 end
@@ -118,7 +117,7 @@ display_welcome_msg
 score = { "player" => 0, "dealer" => 0 }
 
 loop do
-  clear_screen
+  #clear_screen
   # initialize variables
   deck = initialize_deck
   player_cards = []
@@ -130,26 +129,26 @@ loop do
     dealer_cards << deck.pop
   end
 
-  prompt "Dealer has #{dealer_cards[0]} and ?"
+  prompt "Dealer has #{dealer_cards[0]} and ?\n"
   prompt "You have #{player_cards[0]} and "\
-  "#{player_cards[1]}, for a total of #{total(player_cards)}."
+  "#{player_cards[1]}, for a total of #{total(player_cards)}.\n"
 
   # player turn.
   loop do
     player_turn = nil
     loop do
       prompt "Would you like to hit or stay? "\
-      "(Enter h or s)"
+      "(Enter h or s)\n"
       player_turn = gets.chomp.downcase
       break if ["h", "s"].include?(player_turn)
-      prompt "Sorry, must enter 'h' or 's'."
+      prompt "Sorry, must enter 'h' or 's'.\n"
     end
 
     if player_turn == "h"
       player_cards << deck.pop
-      prompt "You chose to hit!"
-      prompt "Your cards are now: #{player_cards}."
-      prompt "Your total is now: #{total(player_cards)}."
+      prompt "You chose to hit!\n"
+      prompt "Your cards are now: #{player_cards}.\n"
+      prompt "Your total is now: #{total(player_cards)}.\n"
     end
 
     break if player_turn == "s" || busted?(player_cards)
@@ -161,33 +160,33 @@ loop do
     display_score(score)
     play_again? ? next : break
   else
-    prompt "You stayed at #{total(player_cards)}"
+    prompt "You stayed at #{total(player_cards)}\n"
   end
 
   # dealer turn
-  prompt "Dealer turn..."
+  prompt "Dealer turn...\n"
 
   loop do
     break if total(dealer_cards) >= DEALER_HIT_MIN
     dealer_cards << deck.pop
-    prompt "Dealer's cards are now: #{dealer_cards}"
+    prompt "Dealer's cards are now: #{dealer_cards}\n"
   end
 
   if busted?(dealer_cards)
-    prompt "Dealer's total is now: #{total(dealer_cards)}"
+    prompt "Dealer's total is now: #{total(dealer_cards)}\n"
     display_result(player_cards, dealer_cards)
     keep_score(score, player_cards, dealer_cards)
     display_score(score)
     play_again? ? next : break
   else
-    prompt "Dealer stayed at #{total(dealer_cards)}"
+    prompt "Dealer stayed at #{total(dealer_cards)}\n"
   end
 
   # When both player and dealer stays - compare cards!
-  prompt "Player has #{dealer_cards},
-   for a total of: #{total(player_cards)}"
-  prompt "Dealer has #{dealer_cards},
-   for a total of: #{total(dealer_cards)}"
+  prompt "Player has #{dealer_cards}, "\
+  "for a total of: #{total(player_cards)}\n"
+  prompt "Dealer has #{dealer_cards}, "\
+  "for a total of: #{total(dealer_cards)}\n"
 
   display_result(player_cards, dealer_cards)
   keep_score(score, player_cards, dealer_cards)
