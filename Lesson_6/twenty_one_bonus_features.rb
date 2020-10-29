@@ -98,7 +98,7 @@ def keep_score(score, player_cards, dealer_cards)
 end
 
 def display_score(score)
-  puts "«SCORE» Player | #{score['player']} - " \
+  puts "«SCORE» You | #{score['player']} - " \
   "#{score['dealer']} | Dealer\n"
   puts
 end
@@ -199,7 +199,7 @@ loop do
     end
 
     # When both player and dealer stays - compare cards!
-    prompt "Player has #{dealer_cards}, "\
+    prompt "You have #{dealer_cards}, "\
     "for a total of: #{total(player_cards)}\n"
     prompt "Dealer has #{dealer_cards}, "\
     "for a total of: #{total(dealer_cards)}\n"
