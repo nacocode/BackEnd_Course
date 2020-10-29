@@ -103,6 +103,19 @@ def display_score(score)
   puts
 end
 
+def grand_winner?(score)
+  score.value?(WIN_SCORE)
+end
+
+def display_grand_winner(score)
+  if score.key(WIN_SCORE) == "player"
+    prompt "You won #{WIN_SCORE} times! Congratulations! "\
+    "You are the grand winner!\n"
+  elsif score.key(WIN_SCORE) == "dealer"
+    prompt "Dealer won #{WIN_SCORE} times. Game over.\n"
+  end
+end
+
 def play_again?
   prompt "Do you want to play again? (y or n)\n"
   answer = gets.chomp
@@ -117,7 +130,7 @@ display_welcome_msg
 score = { "player" => 0, "dealer" => 0 }
 
 loop do
-  #clear_screen
+  # clear_screen
   # initialize variables
   deck = initialize_deck
   player_cards = []
@@ -191,6 +204,8 @@ loop do
   display_result(player_cards, dealer_cards)
   keep_score(score, player_cards, dealer_cards)
   display_score(score)
+  display_grand_winner(score) if grand_winner?(score)
+
   break unless play_again?
 end
 
