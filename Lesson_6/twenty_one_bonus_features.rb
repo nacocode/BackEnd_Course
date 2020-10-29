@@ -83,6 +83,27 @@ def display_result(player_cards, dealer_cards)
   end
 end
 
+def keep_score(score, player_cards, dealer_cards)
+  result = detect_result(player_cards, dealer_cards)
+
+  case result
+  when :player_busted
+    score["dealer"] += 1
+  when :dealer_busted
+    score["player"] += 1
+  when :player
+    score["player"] += 1
+  when :dealer
+    score["dealer"] += 1
+  end
+end
+
+def display_score(score)
+  puts "«SCORE» Player | #{score['player']} - " \
+  "#{score['dealer']} | Dealer"
+  puts
+end
+
 def play_again?
   prompt "Do you want to play again? (y or n)"
   answer = gets.chomp
@@ -93,10 +114,11 @@ def display_goodbye_msg
   prompt "Thank you for playing #{GAME_NAME}. Good bye!"
 end
 
+display_welcome_msg
+score = { "player" => 0, "dealer" => 0 }
+
 loop do
   clear_screen
-  display_welcome_msg
-
   # initialize variables
   deck = initialize_deck
   player_cards = []
@@ -135,6 +157,8 @@ loop do
 
   if busted?(player_cards)
     display_result(player_cards, dealer_cards)
+    keep_score(score, player_cards, dealer_cards)
+    display_score(score)
     play_again? ? next : break
   else
     prompt "You stayed at #{total(player_cards)}"
@@ -152,6 +176,8 @@ loop do
   if busted?(dealer_cards)
     prompt "Dealer's total is now: #{total(dealer_cards)}"
     display_result(player_cards, dealer_cards)
+    keep_score(score, player_cards, dealer_cards)
+    display_score(score)
     play_again? ? next : break
   else
     prompt "Dealer stayed at #{total(dealer_cards)}"
@@ -164,7 +190,8 @@ loop do
    for a total of: #{total(dealer_cards)}"
 
   display_result(player_cards, dealer_cards)
-
+  keep_score(score, player_cards, dealer_cards)
+  display_score(score)
   break unless play_again?
 end
 
