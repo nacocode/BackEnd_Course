@@ -5,7 +5,8 @@ DEALER_HIT_MIN = GAME_NAME - 4
 WIN_SCORE = 3
 
 def prompt(msg)
-  puts "=> #{msg}\n"
+  puts "=> #{msg}"
+  puts
 end
 
 def clear_screen
@@ -13,7 +14,7 @@ def clear_screen
 end
 
 def display_welcome_msg
-  prompt "Welcome to #{GAME_NAME}!\n"
+  prompt "Welcome to #{GAME_NAME}!"
 end
 
 def initialize_deck
@@ -70,15 +71,15 @@ def display_result(player_cards, dealer_cards)
 
   case result
   when :player_busted
-    prompt "You busted! Dealer wins!\n"
+    prompt "You busted! Dealer wins!"
   when :dealer_busted
-    prompt "Dealer busted! You win!\n"
+    prompt "Dealer busted! You win!"
   when :player
-    prompt "You win!\n"
+    prompt "You win!"
   when :dealer
-    prompt "Dealer wins!\n"
+    prompt "Dealer wins!"
   when :tie
-    prompt "It's a tie!\n"
+    prompt "It's a tie!"
   end
 end
 
@@ -99,7 +100,7 @@ end
 
 def display_score(score)
   puts "«SCORE» You | #{score['player']} - " \
-  "#{score['dealer']} | Dealer\n"
+  "#{score['dealer']} | Dealer"
   puts
 end
 
@@ -110,14 +111,14 @@ end
 def display_grand_winner(score)
   if score.key(WIN_SCORE) == "player"
     prompt "You won #{WIN_SCORE} times! Congratulations! "\
-    "You are the grand winner!\n"
+    "You are the grand winner!"
   elsif score.key(WIN_SCORE) == "dealer"
-    prompt "Dealer won #{WIN_SCORE} times. Game over.\n"
+    prompt "Dealer won #{WIN_SCORE} times. Game over."
   end
 end
 
 def play_again?
-  prompt "Do you want to play again? (y or n)\n"
+  prompt "Do you want to play again? (y or n)"
   answer = gets.chomp
   answer.downcase.start_with?("y")
 end
@@ -145,26 +146,26 @@ loop do
       dealer_cards << deck.pop
     end
 
-    prompt "Dealer has #{dealer_cards[0]} and ?\n"
+    prompt "Dealer has #{dealer_cards[0]} and ?"
     prompt "You have #{player_cards[0]} and "\
-    "#{player_cards[1]}, for a total of #{total(player_cards)}.\n"
+    "#{player_cards[1]}, for a total of #{total(player_cards)}."
 
     # player turn.
     loop do
       player_turn = nil
       loop do
         prompt "Would you like to hit or stay? "\
-        "(Enter h or s)\n"
+        "(Enter h or s)"
         player_turn = gets.chomp.downcase
         break if ["h", "s"].include?(player_turn)
-        prompt "Sorry, must enter 'h' or 's'.\n"
+        prompt "Sorry, must enter 'h' or 's'."
       end
 
       if player_turn == "h"
         player_cards << deck.pop
-        prompt "You chose to hit!\n"
-        prompt "Your cards are now: #{player_cards}.\n"
-        prompt "Your total is now: #{total(player_cards)}.\n"
+        prompt "You chose to hit!"
+        prompt "Your cards are now: #{player_cards}."
+        prompt "Your total is now: #{total(player_cards)}."
       end
 
       break if player_turn == "s" || busted?(player_cards)
@@ -176,33 +177,33 @@ loop do
       display_score(score)
       play_again? ? next : break
     else
-      prompt "You stayed at #{total(player_cards)}\n"
+      prompt "You stayed at #{total(player_cards)}"
     end
 
     # dealer turn
-    prompt "Dealer turn...\n"
+    prompt "Dealer turn..."
 
     loop do
       break if total(dealer_cards) >= DEALER_HIT_MIN
       dealer_cards << deck.pop
-      prompt "Dealer's cards are now: #{dealer_cards}\n"
+      prompt "Dealer's cards are now: #{dealer_cards}"
     end
 
     if busted?(dealer_cards)
-      prompt "Dealer's total is now: #{total(dealer_cards)}\n"
+      prompt "Dealer's total is now: #{total(dealer_cards)}"
       display_result(player_cards, dealer_cards)
       keep_score(score, player_cards, dealer_cards)
       display_score(score)
       play_again? ? next : break
     else
-      prompt "Dealer stayed at #{total(dealer_cards)}\n"
+      prompt "Dealer stayed at #{total(dealer_cards)}"
     end
 
     # When both player and dealer stays - compare cards!
     prompt "You have #{dealer_cards}, "\
-    "for a total of: #{total(player_cards)}\n"
+    "for a total of: #{total(player_cards)}"
     prompt "Dealer has #{dealer_cards}, "\
-    "for a total of: #{total(dealer_cards)}\n"
+    "for a total of: #{total(dealer_cards)}"
 
     display_result(player_cards, dealer_cards)
     keep_score(score, player_cards, dealer_cards)
