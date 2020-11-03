@@ -3,6 +3,8 @@ VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 GAME_NAME = 21
 DEALER_HIT_MIN = GAME_NAME - 4
 WIN_SCORE = 3
+VALID_YES_NO = %w(yes y no n)
+VALID_YES = %w(yes y)
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -118,9 +120,16 @@ def display_grand_winner(score)
 end
 
 def play_again?
-  prompt "Do you want to play again? (y or n)"
-  answer = gets.chomp
-  answer.downcase.start_with?("y")
+  answer = nil
+  loop do
+    prompt "Do you want to play again? "\
+    "Enter 'y' for yes or 'n' for no."
+    answer = gets.chomp.downcase
+    break if VALID_YES_NO.include?(answer)
+    prompt "Not a valid input."
+  end
+
+  VALID_YES.include?(answer)
 end
 
 def display_goodbye_msg
