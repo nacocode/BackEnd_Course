@@ -184,6 +184,7 @@ loop do
       display_result(player_cards, dealer_cards)
       keep_score(score, player_cards, dealer_cards)
       display_score(score)
+      break if grand_winner?(score)
       play_again? ? next : break
     else
       prompt "You stayed at #{total(player_cards)}"
@@ -203,6 +204,7 @@ loop do
       display_result(player_cards, dealer_cards)
       keep_score(score, player_cards, dealer_cards)
       display_score(score)
+      break if grand_winner?(score)
       play_again? ? next : break
     else
       prompt "Dealer stayed at #{total(dealer_cards)}"
