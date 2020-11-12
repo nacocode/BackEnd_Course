@@ -16,7 +16,12 @@ def clear_screen
 end
 
 def display_welcome_msg
+  clear_screen
   prompt "Welcome to #{GAME_NAME}!"
+  prompt "First player who wins the game #{WIN_SCORE} times "\
+  "becomes the grand winner!!!"
+  prompt "Hit any key to let the games begin!"
+  gets
 end
 
 def initialize_deck
@@ -136,7 +141,8 @@ def display_goodbye_msg
   prompt "Thank you for playing #{GAME_NAME}. Good bye!"
 end
 
-clear_screen
+# Main game
+
 display_welcome_msg
 
 loop do
