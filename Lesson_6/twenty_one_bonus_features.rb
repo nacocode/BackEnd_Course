@@ -131,6 +131,10 @@ def grand_winner?(score)
 end
 
 def display_grand_winner(score)
+  puts "«FINAL SCORE» You | #{score['player']} - " \
+  "#{score['dealer']} | Dealer"
+  puts
+
   if score.key(WIN_SCORE) == "player"
     prompt "You won #{WIN_SCORE} times! Congratulations! "\
     "You are the grand winner!"
@@ -249,8 +253,8 @@ loop do
 
     winner = detect_winner(player_cards, dealer_cards)
     keep_score(score, player_cards, dealer_cards) if winner
-    display_score(score)
     break if grand_winner?(score)
+    display_score(score)
   end
 
   display_grand_winner(score)
