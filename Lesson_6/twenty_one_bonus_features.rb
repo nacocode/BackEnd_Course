@@ -17,10 +17,26 @@ end
 
 def display_welcome_msg
   clear_screen
-  prompt "Welcome to #{GAME_NAME}!"
-  prompt "First player who wins the game #{WIN_SCORE} times "\
-  "becomes the grand winner!!!"
-  prompt "Hit any key to let the games begin!"
+  prompt "WELCOME TO #{GAME_NAME}!"
+  prompt "#{GAME_NAME} Rules:"
+  puts "・ The goal of #{GAME_NAME} is to try to get as close to "\
+  "#{GAME_NAME} as possible, without going over. "\
+  "If you go over #{GAME_NAME}, it's a 'BUST', means you lose."
+  puts "・ Each player starts with two cards, "\
+  "You can see their 2 cards, but can only see one of the dealer's cards."
+  puts "・ The numbers 2 through 10 are worth their face value. "\
+  "The jack, queen, and king are each worth 10."
+  puts "・ Aces are worth 1 or 11, whichever makes a better hand."
+  puts "・ To 'Hit' is to ask for another card. "\
+  "To 'Stay' is to hold your total and end your turn."
+  puts "・ Dealer must hit until the total is at least "\
+  "#{DEALER_HIT_MIN} or higher."
+  puts "・ If the dealer busts, means you win."
+  puts "When both the player and the dealer stay, it's time to compare "\
+  "the total value of the cards and see who has the highest value."
+  puts
+  puts
+  prompt "Are you ready? Hit the Enter key to let the games begin!"
   gets
 end
 
