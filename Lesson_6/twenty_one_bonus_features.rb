@@ -22,13 +22,14 @@ def display_welcome_msg
   "#{GAME_NAME} as possible, without going over. "
   prompt "First player who wins the game #{WIN_SCORE} times "\
   "becomes the grand winner!"
+  prompt "Are you ready?"
 end
 
 def show_rules?
   answer = ""
   loop do
-    prompt "Enter 'r' if you want to read the rules or "\
-    "'c' to continue."
+    prompt "Enter 'c' to continue or 'r' "\
+    "if you want to read the rules."
     answer = gets.chomp.downcase
     break if %w(rule r continue c).include?(answer)
     prompt "Not a valid input."
