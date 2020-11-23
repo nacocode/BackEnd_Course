@@ -18,8 +18,10 @@ end
 def display_welcome_msg
   clear_screen
   prompt "WELCOME TO #{GAME_NAME}!"
+  prompt "The goal of #{GAME_NAME} is to try to get as close to "\
+  "#{GAME_NAME} as possible, without going over. "
   prompt "First player who wins the game #{WIN_SCORE} times "\
-  "becomes the grand winner!!!"
+  "becomes the grand winner!"
 end
 
 def show_rules?
@@ -38,9 +40,6 @@ end
 def display_rules
   clear_screen
   prompt "#{GAME_NAME} Rules:"
-  puts "・ The goal of #{GAME_NAME} is to try to get as close to "\
-  "#{GAME_NAME} as possible, without going over. "\
-  "If you go over #{GAME_NAME}, it's a 'BUST', means you lose."
   puts "・ Each player starts with two cards, "\
   "You can see their 2 cards, but can only see one of the dealer's cards."
   puts "・ The numbers 2 through 10 are worth their face value. "\
@@ -48,11 +47,12 @@ def display_rules
   puts "・ Aces are worth 1 or 11, whichever makes a better hand."
   puts "・ To 'Hit' is to ask for another card. "\
   "To 'Stay' is to hold your total and end your turn."
-  puts "・ Dealer must hit until the total is at least #{DEALER_HIT_MIN} or higher."
-  puts "・ If the dealer busts, means you win."
+  puts " You can continue to hit as many times as you want but "\
+  "if you go over #{GAME_NAME}, it's a 'BUST', means you lose."
+  puts "・ Dealer must hit until the total is at least "\
+  "#{DEALER_HIT_MIN} or higher. If the dealer busts, means you win."
   puts "When both the player and the dealer stay, it's time to compare "\
   "the total value of the cards and see who has the highest value."
-  puts
 end
 
 def initialize_deck
