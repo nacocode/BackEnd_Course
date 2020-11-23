@@ -18,6 +18,25 @@ end
 def display_welcome_msg
   clear_screen
   prompt "WELCOME TO #{GAME_NAME}!"
+  prompt "First player who wins the game #{WIN_SCORE} times "\
+  "becomes the grand winner!!!"
+end
+
+def show_rules?
+  answer = ""
+  loop do
+    prompt "Enter 'r' if you want to read the rules or "\
+    "'c' to continue."
+    answer = gets.chomp.downcase
+    break if %w(rule r continue c).include?(answer)
+    prompt "Not a valid input."
+  end
+
+  answer.start_with?("r")
+end
+
+def display_rules
+  clear_screen
   prompt "#{GAME_NAME} Rules:"
   puts "・ The goal of #{GAME_NAME} is to try to get as close to "\
   "#{GAME_NAME} as possible, without going over. "\
@@ -29,15 +48,11 @@ def display_welcome_msg
   puts "・ Aces are worth 1 or 11, whichever makes a better hand."
   puts "・ To 'Hit' is to ask for another card. "\
   "To 'Stay' is to hold your total and end your turn."
-  puts "・ Dealer must hit until the total is at least "\
-  "#{DEALER_HIT_MIN} or higher."
+  puts "・ Dealer must hit until the total is at least #{DEALER_HIT_MIN} or higher."
   puts "・ If the dealer busts, means you win."
   puts "When both the player and the dealer stay, it's time to compare "\
   "the total value of the cards and see who has the highest value."
   puts
-  puts
-  prompt "Are you ready? Hit the Enter key to let the games begin!"
-  gets
 end
 
 def initialize_deck
@@ -179,6 +194,7 @@ end
 # Main game
 
 display_welcome_msg
+display_rules if show_rules?
 
 loop do
   score = { "player" => 0, "dealer" => 0 }
