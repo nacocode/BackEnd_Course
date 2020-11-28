@@ -22,38 +22,44 @@ def display_welcome_msg
   "#{GAME_NAME} as possible, without going over. "
   prompt "First player who wins the game #{WIN_SCORE} times "\
   "becomes the grand winner!"
-  prompt "Are you ready?"
+  display_rules if show_rules?
 end
 
 def show_rules?
-  answer = ""
-  loop do
-    prompt "Enter 'c' to continue or 'r' "\
-    "if you want to read the rules."
-    answer = gets.chomp.downcase
-    break if %w(rule r continue c).include?(answer)
-    prompt "Not a valid input."
-  end
-
+  prompt "To find out more about the rules, type 'r'.\n
+   To start the game, press any other key."
+  answer = gets.chomp.downcase
   answer.start_with?("r")
 end
 
 def display_rules
   clear_screen
   prompt "#{GAME_NAME} Rules:"
-  puts "・ Each player starts with two cards, "\
+  puts "<Card values>"
+  puts "  ・ 2-10 : face value. "
+  puts "  ・ Jack, Queen or King : 10."
+  puts "  ・ Aces: 1 or 11 (whichever makes a better hand)."
+  puts
+  puts "<How To Play>"
+  puts "  ・ Each player starts with two cards, "\
   "You can see their 2 cards, but can only see one of the dealer's cards."
-  puts "・ The numbers 2 through 10 are worth their face value. "\
-  "The jack, queen, and king are each worth 10."
-  puts "・ Aces are worth 1 or 11, whichever makes a better hand."
-  puts "・ To 'Hit' is to ask for another card. "\
-  "To 'Stay' is to hold your total and end your turn."
-  puts " You can continue to hit as many times as you want but "\
+  puts "  ・ You go first, and can decide to either 'hit' or 'stay'."
+  display_rules_2
+end
+
+def display_rules_2
+  puts "  ・ To 'hit' is to ask for another card. "\
+  "To 'stay' is to hold your total and end your turn."
+  puts "  ・ You can continue to hit as many times as you want but "\
   "if you go over #{GAME_NAME}, it's a 'BUST', means you lose."
-  puts "・ Dealer must hit until the total is at least "\
+  puts "  ・ Dealer must hit until the total is at least "\
   "#{DEALER_HIT_MIN} or higher. If the dealer busts, means you win."
-  puts "When both the player and the dealer stay, it's time to compare "\
+  puts "  ・ When both the player and the dealer stay, it's time to compare "\
   "the total value of the cards and see who has the highest value."
+  puts
+  puts
+  prompt "Press any key to start the game."
+  gets
 end
 
 def initialize_deck
@@ -195,7 +201,6 @@ end
 # Main game
 
 display_welcome_msg
-display_rules if show_rules?
 
 loop do
   score = { "player" => 0, "dealer" => 0 }
