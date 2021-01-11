@@ -19,7 +19,8 @@ def display_welcome_msg
   clear_screen
   prompt "WELCOME TO #{GAME_NAME}!"
   prompt "The goal of #{GAME_NAME} is to try to get as close to "\
-  "#{GAME_NAME} as possible, without going over. "
+  "#{GAME_NAME} as possible,\n
+   without going over."
   prompt "First player who wins the game #{WIN_SCORE} times "\
   "becomes the grand winner!"
   display_rules if show_rules?
@@ -29,12 +30,15 @@ def show_rules?
   prompt "To find out more about the rules, type 'r'.\n
    To start the game, press any other key."
   answer = gets.chomp.downcase
-  answer.start_with?("r")
+  answer == "r"
 end
 
-def display_rules
+def rule_title
   clear_screen
   prompt "#{GAME_NAME} Rules:"
+end
+
+def rules_one
   puts "<Card values>"
   puts "  ・ 2-10 : face value. "
   puts "  ・ Jack, Queen or King : 10."
@@ -44,10 +48,9 @@ def display_rules
   puts "  ・ Each player starts with two cards, "\
   "You can see their 2 cards, but can only see one of the dealer's cards."
   puts "  ・ You go first, and can decide to either 'hit' or 'stay'."
-  display_rules_2
 end
 
-def display_rules_2
+def rules_two
   puts "  ・ To 'hit' is to ask for another card. "\
   "To 'stay' is to hold your total and end your turn."
   puts "  ・ You can continue to hit as many times as you want but "\
@@ -58,8 +61,18 @@ def display_rules_2
   "the total value of the cards and see who has the highest value."
   puts
   puts
+end
+
+def start_game
   prompt "Press any key to start the game."
   gets
+end
+
+def display_rules
+  rule_title
+  rules_one
+  rules_two
+  start_game
 end
 
 def initialize_deck
