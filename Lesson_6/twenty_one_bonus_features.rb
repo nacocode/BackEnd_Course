@@ -85,13 +85,13 @@ def total(cards)
 
   sum = 0
   values.each do |value|
-    if value == "A"
-      sum += 11
-    elsif value.to_i == 0 # J, Q, K
-      sum += 10
-    else
-      sum += value.to_i
-    end
+    sum += if value == "A"
+             11
+           elsif value.to_i == 0 # J, Q, K
+             10
+           else
+             value.to_i
+           end
   end
 
   # correct for Aces
@@ -186,10 +186,11 @@ def display_grand_winner(score)
   "#{score['dealer']} | Dealer"
   puts
 
-  if score.key(WIN_SCORE) == "player"
+  case score.key(WIN_SCORE)
+  when "player"
     prompt "You won #{WIN_SCORE} times! Congratulations! "\
     "You are the grand winner!"
-  elsif score.key(WIN_SCORE) == "dealer"
+  when "dealer"
     prompt "Dealer won #{WIN_SCORE} times. Game over."
   end
 end
@@ -201,6 +202,7 @@ def play_again?
     "Enter 'y' for yes or 'n' for no."
     answer = gets.chomp.downcase
     break if VALID_YES_NO.include?(answer)
+
     prompt "Not a valid input."
   end
 
@@ -245,6 +247,7 @@ loop do
           "(Enter h or s)"
           player_turn = gets.chomp.downcase
           break if ["h", "s"].include?(player_turn)
+
           prompt "Sorry, must enter 'h' or 's'."
         end
 
@@ -274,6 +277,7 @@ loop do
 
       loop do
         break if total(dealer_cards) >= DEALER_HIT_MIN
+
         dealer_cards << deck.pop
         prompt "Dealer's cards are now: #{dealer_cards}"
       end
@@ -305,6 +309,7 @@ loop do
     winner = detect_winner(player_cards, dealer_cards)
     keep_score(score, player_cards, dealer_cards) if winner
     break if grand_winner?(score)
+
     display_score(score)
   end
 

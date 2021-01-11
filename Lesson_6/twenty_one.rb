@@ -15,13 +15,13 @@ def total(cards)
 
   sum = 0
   values.each do |value|
-    if value == "A"
-      sum += 11
-    elsif value.to_i == 0 # J, Q, K
-      sum += 10
-    else
-      sum += value.to_i
-    end
+    sum += if value == "A"
+             11
+           elsif value.to_i == 0 # J, Q, K
+             10
+           else
+             value.to_i
+           end
   end
 
   # correct for Aces
@@ -104,6 +104,7 @@ loop do
       "(Enter h or s)"
       player_turn = gets.chomp.downcase
       break if ["h", "s"].include?(player_turn)
+
       prompt "Sorry, must enter 'h' or 's'."
     end
 
@@ -129,6 +130,7 @@ loop do
 
   loop do
     break if total(dealer_cards) >= 17
+
     dealer_cards << deck.pop
     prompt "Dealer's cards are now: #{dealer_cards}"
   end
