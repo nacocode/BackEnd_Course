@@ -128,13 +128,9 @@ def detect_winner(player_cards, dealer_cards)
   winner = detect_result(player_cards, dealer_cards)
 
   case winner
-  when :player
+  when :player, :dealer_busted
     "player"
-  when :dealer_busted
-    "player"
-  when :dealer
-    "dealer"
-  when :player_busted
+  when :dealer, :player_busted
     "dealer"
   end
 end
@@ -160,14 +156,10 @@ def keep_score(score, player_cards, dealer_cards)
   result = detect_result(player_cards, dealer_cards)
 
   case result
-  when :player_busted
+  when :dealer, :player_busted
     score["dealer"] += 1
-  when :dealer_busted
+  when :player, :dealer_busted
     score["player"] += 1
-  when :player
-    score["player"] += 1
-  when :dealer
-    score["dealer"] += 1
   end
 end
 
