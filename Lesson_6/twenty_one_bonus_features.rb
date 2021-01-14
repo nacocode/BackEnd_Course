@@ -24,6 +24,7 @@ def display_welcome_msg
   prompt "First player who wins the game #{WIN_SCORE} times "\
   "becomes the grand winner!"
   display_rules if show_rules?
+  clear_screen
 end
 
 def show_rules?
@@ -217,7 +218,6 @@ loop do
     dealer_cards = []
 
     loop do
-      clear_screen
       # initialize variables
       deck = initialize_deck
 
