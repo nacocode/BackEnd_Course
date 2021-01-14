@@ -301,12 +301,12 @@ loop do
     winner = detect_winner(player_cards, dealer_cards)
     keep_score(score, player_cards, dealer_cards) if winner
     break if grand_winner?(score)
-
     display_score(score)
   end
 
   display_grand_winner(score)
   break unless play_again?
+  clear_screen
 end
 
 display_goodbye_msg
