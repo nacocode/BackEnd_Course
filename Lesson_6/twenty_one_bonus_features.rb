@@ -76,6 +76,10 @@ def display_rules
   start_game
 end
 
+def initialize_score
+  { "player" => 0, "dealer" => 0 }
+end
+
 def initialize_deck
   SUITS.product(VALUES).shuffle
 end
@@ -207,7 +211,7 @@ end
 display_welcome_msg
 
 loop do
-  score = { "player" => 0, "dealer" => 0 }
+  score = initialize_score
 
   loop do
     player_cards = []
