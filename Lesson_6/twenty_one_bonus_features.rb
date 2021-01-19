@@ -5,6 +5,7 @@ DEALER_HIT_MIN = GAME_NAME - 4
 WIN_SCORE = 3
 VALID_YES_NO = %w(yes y no n)
 VALID_YES = %w(yes y)
+VALID_HIT_STAY = %w(hit h stay s)
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -82,6 +83,26 @@ end
 
 def initialize_deck
   SUITS.product(VALUES).shuffle
+end
+
+def hit_or_stay
+  answer = nil
+  loop do
+    prompt "Would you like to hit or stay? "\
+    "(Enter h or s)"
+    answer = gets.chomp.downcase
+    break if VALID_HIT_STAY.include?(answer)
+
+    prompt "Sorry, must enter 'h' or 's'."
+  end
+
+  if answer.start_with?("h")
+    prompt "You chose to hit!"
+  else
+    prompt "You chose to stay."
+  end
+
+  answer
 end
 
 def total(cards)
@@ -230,22 +251,13 @@ loop do
 
     # player turn.
     loop do
-      player_turn = nil
-      loop do
-        prompt "Would you like to hit or stay? "\
-        "(Enter h or s)"
-        player_turn = gets.chomp.downcase
-        break if ["h", "s"].include?(player_turn)
-
-        prompt "Sorry, must enter 'h' or 's'."
-      end
-      if player_turn == "h"
+      player_move = hit_or_stay
+      if player_move.start_with?("h")
         player_cards << deck.pop
-        prompt "You chose to hit!"
         prompt "Your cards are now: #{player_cards}."
         prompt "Your total is now: #{total(player_cards)}."
       end
-      break if player_turn == "s" || busted?(player_cards)
+      break if player_move.start_with?("s") || busted?(player_cards)
     end
 
     if busted?(player_cards)
