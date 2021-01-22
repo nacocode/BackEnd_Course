@@ -277,10 +277,10 @@ loop do
 
       dealer_cards << deck.pop
       prompt "Dealer's cards are now: #{dealer_cards}"
+      prompt "Dealer's total is now: #{total(dealer_cards)}."
     end
 
     if busted?(dealer_cards)
-      prompt "Dealer's total is now: #{total(dealer_cards)}"
       display_result(player_cards, dealer_cards)
       keep_score(score, player_cards, dealer_cards)
       display_score(score)
