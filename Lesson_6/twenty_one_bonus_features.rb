@@ -138,6 +138,12 @@ def busted?(cards)
   total(cards) > GAME_NAME
 end
 
+def dealer_hit(dealer_cards, deck)
+  dealer_cards << deck.pop
+  prompt "Dealer's cards are now: #{dealer_cards}"
+  prompt "Dealer's total is now: #{total(dealer_cards)}."
+end
+
 # :tie, :player, :dealer, :player_busted, :dealer_busted
 def detect_result(player_cards, dealer_cards)
   player_total = total(player_cards)
@@ -279,9 +285,7 @@ loop do
     loop do
       break if total(dealer_cards) >= DEALER_HIT_MIN
 
-      dealer_cards << deck.pop
-      prompt "Dealer's cards are now: #{dealer_cards}"
-      prompt "Dealer's total is now: #{total(dealer_cards)}."
+      dealer_hit(dealer_cards, deck)
     end
 
     if busted?(dealer_cards)
