@@ -94,6 +94,11 @@ def display_dealer_initial_cards(dealer_cards)
   prompt "Dealer has #{dealer_cards[0]} and ?"
 end
 
+def display_dealer_cards(dealer_cards)
+  prompt "Dealer has #{dealer_cards}, "\
+  "for a total of: #{total(dealer_cards)}."
+end
+
 def hit_or_stay
   answer = nil
   loop do
@@ -308,8 +313,7 @@ loop do
     end
     # When both player and dealer stays - compare cards!
     display_player_cards(player_cards)
-    prompt "Dealer has #{dealer_cards}, "\
-    "for a total of: #{total(dealer_cards)}"
+    display_dealer_cards(dealer_cards)
     display_result(player_cards, dealer_cards)
     keep_score(score, player_cards, dealer_cards)
     display_score(score)
