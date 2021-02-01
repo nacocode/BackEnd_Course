@@ -264,7 +264,6 @@ loop do
     player_cards = []
     dealer_cards = []
 
-    # initialize variables
     deck = initialize_deck
     # initial deal
     2.times do
@@ -275,7 +274,6 @@ loop do
     display_dealer_initial_cards(dealer_cards)
     display_player_cards(player_cards)
 
-    # player turn.
     loop do
       player_move = hit_or_stay
       if player_move.start_with?("h")
@@ -294,7 +292,6 @@ loop do
       prompt "You stayed at #{total(player_cards)}"
     end
 
-    # dealer turn
     prompt "Dealer turn..."
     loop do
       break if total(dealer_cards) >= DEALER_HIT_MIN
