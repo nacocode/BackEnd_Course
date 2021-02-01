@@ -90,6 +90,10 @@ def display_player_cards(player_cards)
   "for a total of: #{total(player_cards)}."
 end
 
+def display_dealer_initial_cards(dealer_cards)
+  prompt "Dealer has #{dealer_cards[0]} and ?"
+end
+
 def hit_or_stay
   answer = nil
   loop do
@@ -262,7 +266,8 @@ loop do
       player_cards << deck.pop
       dealer_cards << deck.pop
     end
-    prompt "Dealer has #{dealer_cards[0]} and ?"
+
+    display_dealer_initial_cards(dealer_cards)
     display_player_cards(player_cards)
 
     # player turn.
