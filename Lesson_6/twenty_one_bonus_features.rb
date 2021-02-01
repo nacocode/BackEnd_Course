@@ -85,6 +85,11 @@ def initialize_deck
   SUITS.product(VALUES).shuffle
 end
 
+def display_player_cards(player_cards)
+  prompt "You have #{player_cards}, "\
+  "for a total of: #{total(player_cards)}."
+end
+
 def hit_or_stay
   answer = nil
   loop do
@@ -258,8 +263,7 @@ loop do
       dealer_cards << deck.pop
     end
     prompt "Dealer has #{dealer_cards[0]} and ?"
-    prompt "You have #{player_cards[0]} and "\
-    "#{player_cards[1]}, for a total of #{total(player_cards)}."
+    display_player_cards(player_cards)
 
     # player turn.
     loop do
@@ -298,8 +302,7 @@ loop do
       prompt "Dealer stayed at #{total(dealer_cards)}"
     end
     # When both player and dealer stays - compare cards!
-    prompt "You have #{dealer_cards}, "\
-    "for a total of: #{total(player_cards)}"
+    display_player_cards(player_cards)
     prompt "Dealer has #{dealer_cards}, "\
     "for a total of: #{total(dealer_cards)}"
     display_result(player_cards, dealer_cards)
