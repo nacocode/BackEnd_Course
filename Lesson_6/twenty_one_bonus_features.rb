@@ -105,6 +105,12 @@ def hit_or_stay
   answer
 end
 
+def player_hit(player_cards, deck)
+  player_cards << deck.pop
+  prompt "Your cards are now: #{player_cards}."
+  prompt "Your total is now: #{total(player_cards)}."
+end
+
 def total(cards)
   # cards = [['H', '3'], ['S', 'Q'], ... ]
   values = cards.map { |card| card[1] }
@@ -253,9 +259,7 @@ loop do
     loop do
       player_move = hit_or_stay
       if player_move.start_with?("h")
-        player_cards << deck.pop
-        prompt "Your cards are now: #{player_cards}."
-        prompt "Your total is now: #{total(player_cards)}."
+        player_hit(player_cards, deck)
       end
       break if player_move.start_with?("s") || busted?(player_cards)
     end
