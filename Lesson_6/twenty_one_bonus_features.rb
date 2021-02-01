@@ -85,6 +85,13 @@ def initialize_deck
   SUITS.product(VALUES).shuffle
 end
 
+def initial_deal(player_cards, dealer_cards, deck)
+  2.times do
+    player_cards << deck.pop
+    dealer_cards << deck.pop
+  end
+end
+
 def display_player_cards(player_cards)
   prompt "You have #{player_cards}, "\
   "for a total of: #{total(player_cards)}."
@@ -263,14 +270,9 @@ loop do
   loop do
     player_cards = []
     dealer_cards = []
-
     deck = initialize_deck
-    # initial deal
-    2.times do
-      player_cards << deck.pop
-      dealer_cards << deck.pop
-    end
 
+    initial_deal(player_cards, dealer_cards, deck)
     display_dealer_initial_cards(dealer_cards)
     display_player_cards(player_cards)
 
