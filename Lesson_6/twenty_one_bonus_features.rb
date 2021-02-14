@@ -179,6 +179,17 @@ def dealer_hit(dealer_cards, deck)
   prompt "Dealer's total is now: #{total(dealer_cards)}."
 end
 
+def dealer_turn(dealer_cards, deck)
+  prompt "Dealer's turn..."
+  sleep(1)
+
+  loop do
+    break if total(dealer_cards) >= DEALER_HIT_MIN
+
+    dealer_hit(dealer_cards, deck)
+  end
+end
+
 # :tie, :player, :dealer, :player_busted, :dealer_busted
 def detect_result(player_cards, dealer_cards)
   player_total = total(player_cards)
@@ -305,13 +316,7 @@ loop do
     sleep(2)
     clear_screen
 
-    prompt "Dealer's turn..."
-    sleep(1)
-    loop do
-      break if total(dealer_cards) >= DEALER_HIT_MIN
-
-      dealer_hit(dealer_cards, deck)
-    end
+    dealer_turn(dealer_cards, deck)
 
     if busted?(dealer_cards)
       display_result(player_cards, dealer_cards)
