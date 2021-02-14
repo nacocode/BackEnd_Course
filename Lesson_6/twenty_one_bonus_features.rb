@@ -159,6 +159,20 @@ def busted?(cards)
   total(cards) > GAME_NAME
 end
 
+def player_turn(player_cards, deck)
+  puts ""
+  prompt "Player's turn..."
+  sleep(1)
+
+  loop do
+    player_move = hit_or_stay
+    if player_move.start_with?("h")
+      player_hit(player_cards, deck)
+    end
+    break if player_move.start_with?("s") || busted?(player_cards)
+  end
+end
+
 def dealer_hit(dealer_cards, deck)
   dealer_cards << deck.pop
   prompt "Dealer's cards are now: #{dealer_cards}"
@@ -276,15 +290,7 @@ loop do
     display_dealer_initial_cards(dealer_cards)
     display_player_cards(player_cards)
 
-    prompt "Player's turn..."
-    sleep(1)
-    loop do
-      player_move = hit_or_stay
-      if player_move.start_with?("h")
-        player_hit(player_cards, deck)
-      end
-      break if player_move.start_with?("s") || busted?(player_cards)
-    end
+    player_turn(player_cards, deck)
 
     if busted?(player_cards)
       display_result(player_cards, dealer_cards)
