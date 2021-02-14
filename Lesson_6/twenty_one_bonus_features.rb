@@ -276,6 +276,8 @@ loop do
     display_dealer_initial_cards(dealer_cards)
     display_player_cards(player_cards)
 
+    prompt "Player's turn..."
+    sleep(1)
     loop do
       player_move = hit_or_stay
       if player_move.start_with?("h")
@@ -294,7 +296,11 @@ loop do
       prompt "You stayed at #{total(player_cards)}"
     end
 
-    prompt "Dealer turn..."
+    sleep(2)
+    clear_screen
+
+    prompt "Dealer's turn..."
+    sleep(1)
     loop do
       break if total(dealer_cards) >= DEALER_HIT_MIN
 
@@ -310,6 +316,9 @@ loop do
     else
       prompt "Dealer stayed at #{total(dealer_cards)}"
     end
+    sleep(2)
+    clear_screen
+
     # When both player and dealer stays - compare cards!
     display_player_cards(player_cards)
     display_dealer_cards(dealer_cards)
