@@ -345,6 +345,7 @@ loop do
     else
       prompt "Dealer stayed at #{total(dealer_cards)}"
     end
+
     sleep(2)
     clear_screen
 
