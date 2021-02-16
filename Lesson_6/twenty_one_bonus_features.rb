@@ -261,6 +261,17 @@ def grand_winner?(score)
   score.value?(WIN_SCORE)
 end
 
+def reveal_hands(player_cards, dealer_cards)
+  prompt "Both you and dealer stayed. " \
+  "Let's reveal hands!"
+  sleep(1)
+  display_player_cards(player_cards)
+  sleep(1)
+  display_dealer_cards(dealer_cards)
+  sleep(1)
+  display_new_line
+end
+
 def display_grand_winner(score)
   case score.key(WIN_SCORE)
   when "player"
@@ -349,10 +360,7 @@ loop do
     sleep(2)
     clear_screen
 
-    # When both player and dealer stays - compare cards!
-    display_player_cards(player_cards)
-    display_dealer_cards(dealer_cards)
-    display_new_line
+    reveal_hands(player_cards, dealer_cards)
     display_result(player_cards, dealer_cards)
     keep_score(score, player_cards, dealer_cards)
     display_score(score)
