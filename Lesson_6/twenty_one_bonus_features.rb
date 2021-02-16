@@ -261,7 +261,7 @@ def grand_winner?(score)
   score.value?(WIN_SCORE)
 end
 
-def reveal_hands(player_cards, dealer_cards)
+def reveal_hand(player_cards, dealer_cards)
   prompt "Both you and dealer stayed. " \
   "Let's reveal hands!"
   sleep(1)
