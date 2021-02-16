@@ -268,8 +268,8 @@ def reveal_hand(player_cards, dealer_cards)
   display_player_cards(player_cards)
   sleep(1)
   display_dealer_cards(dealer_cards)
-  sleep(1)
   display_new_line
+  sleep(1)
 end
 
 def display_grand_winner(score)
@@ -280,6 +280,8 @@ def display_grand_winner(score)
   when "dealer"
     prompt "Dealer won #{WIN_SCORE} times. Game over."
   end
+
+  sleep(2.5)
 end
 
 def play_again?
