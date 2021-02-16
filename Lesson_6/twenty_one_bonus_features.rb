@@ -360,7 +360,7 @@ loop do
     sleep(2)
     clear_screen
 
-    reveal_hands(player_cards, dealer_cards)
+    reveal_hand(player_cards, dealer_cards)
     display_result(player_cards, dealer_cards)
     keep_score(score, player_cards, dealer_cards)
     display_score(score)
