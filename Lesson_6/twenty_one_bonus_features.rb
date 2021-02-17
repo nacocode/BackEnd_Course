@@ -95,13 +95,15 @@ def initial_deal(player_hand, dealer_hand, deck)
   end
 end
 
-def display_player_hand(player_hand)
+def display_initial_hand(player_hand, dealer_hand)
+  prompt "Dealer has #{dealer_hand[0]} and unknown."
   prompt "You have #{player_hand}, "\
   "for a total of: #{total(player_hand)}."
 end
 
-def display_dealer_initial_hand(dealer_hand)
-  prompt "Dealer has #{dealer_hand[0]} and ?"
+def display_player_hand(player_hand)
+  prompt "You have #{player_hand}, "\
+  "for a total of: #{total(player_hand)}."
 end
 
 def display_dealer_hand(dealer_hand)
@@ -131,8 +133,7 @@ end
 
 def player_hit(player_hand, deck)
   player_hand << deck.pop
-  prompt "Your hand are now: #{player_hand}."
-  prompt "Your total is now: #{total(player_hand)}."
+  display_player_hand(player_hand)
 end
 
 def total(hand)
@@ -178,8 +179,7 @@ end
 
 def dealer_hit(dealer_hand, deck)
   dealer_hand << deck.pop
-  prompt "Dealer's hand are now: #{dealer_hand}"
-  prompt "Dealer's total is now: #{total(dealer_hand)}."
+  display_dealer_hand(dealer_hand)
 end
 
 def dealer_turn(dealer_hand, deck)
@@ -315,8 +315,7 @@ loop do
     deck = initialize_deck
 
     initial_deal(player_hand, dealer_hand, deck)
-    display_dealer_initial_hand(dealer_hand)
-    display_player_hand(player_hand)
+    display_initial_hand(player_hand, dealer_hand)
 
     player_turn(player_hand, deck)
 
