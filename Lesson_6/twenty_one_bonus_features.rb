@@ -88,25 +88,25 @@ def initialize_deck
   SUITS.product(VALUES).shuffle
 end
 
-def initial_deal(player_cards, dealer_cards, deck)
+def initial_deal(player_hand, dealer_hand, deck)
   2.times do
-    player_cards << deck.pop
-    dealer_cards << deck.pop
+    player_hand << deck.pop
+    dealer_hand << deck.pop
   end
 end
 
-def display_player_cards(player_cards)
-  prompt "You have #{player_cards}, "\
-  "for a total of: #{total(player_cards)}."
+def display_player_hand(player_hand)
+  prompt "You have #{player_hand}, "\
+  "for a total of: #{total(player_hand)}."
 end
 
-def display_dealer_initial_cards(dealer_cards)
-  prompt "Dealer has #{dealer_cards[0]} and ?"
+def display_dealer_initial_hand(dealer_hand)
+  prompt "Dealer has #{dealer_hand[0]} and ?"
 end
 
-def display_dealer_cards(dealer_cards)
-  prompt "Dealer has #{dealer_cards}, "\
-  "for a total of: #{total(dealer_cards)}."
+def display_dealer_hand(dealer_hand)
+  prompt "Dealer has #{dealer_hand}, "\
+  "for a total of: #{total(dealer_hand)}."
 end
 
 def hit_or_stay
@@ -129,15 +129,15 @@ def hit_or_stay
   answer
 end
 
-def player_hit(player_cards, deck)
-  player_cards << deck.pop
-  prompt "Your cards are now: #{player_cards}."
-  prompt "Your total is now: #{total(player_cards)}."
+def player_hit(player_hand, deck)
+  player_hand << deck.pop
+  prompt "Your hand are now: #{player_hand}."
+  prompt "Your total is now: #{total(player_hand)}."
 end
 
-def total(cards)
-  # cards = [['H', '3'], ['S', 'Q'], ... ]
-  values = cards.map { |card| card[1] }
+def total(hand)
+  # hand = [['H', '3'], ['S', 'Q'], ... ]
+  values = hand.map { |card| card[1] }
 
   sum = 0
   values.each do |value|
@@ -158,11 +158,11 @@ def total(cards)
   sum
 end
 
-def busted?(cards)
-  total(cards) > GAME_NAME
+def busted?(hand)
+  total(hand) > GAME_NAME
 end
 
-def player_turn(player_cards, deck)
+def player_turn(player_hand, deck)
   display_new_line(2)
   prompt "Player's turn..."
   sleep(1)
@@ -170,33 +170,33 @@ def player_turn(player_cards, deck)
   loop do
     player_move = hit_or_stay
     if player_move.start_with?("h")
-      player_hit(player_cards, deck)
+      player_hit(player_hand, deck)
     end
-    break if player_move.start_with?("s") || busted?(player_cards)
+    break if player_move.start_with?("s") || busted?(player_hand)
   end
 end
 
-def dealer_hit(dealer_cards, deck)
-  dealer_cards << deck.pop
-  prompt "Dealer's cards are now: #{dealer_cards}"
-  prompt "Dealer's total is now: #{total(dealer_cards)}."
+def dealer_hit(dealer_hand, deck)
+  dealer_hand << deck.pop
+  prompt "Dealer's hand are now: #{dealer_hand}"
+  prompt "Dealer's total is now: #{total(dealer_hand)}."
 end
 
-def dealer_turn(dealer_cards, deck)
+def dealer_turn(dealer_hand, deck)
   prompt "Dealer's turn..."
   sleep(1)
 
   loop do
-    break if total(dealer_cards) >= DEALER_HIT_MIN
+    break if total(dealer_hand) >= DEALER_HIT_MIN
 
-    dealer_hit(dealer_cards, deck)
+    dealer_hit(dealer_hand, deck)
   end
 end
 
 # :tie, :player, :dealer, :player_busted, :dealer_busted
-def detect_result(player_cards, dealer_cards)
-  player_total = total(player_cards)
-  dealer_total = total(dealer_cards)
+def detect_result(player_hand, dealer_hand)
+  player_total = total(player_hand)
+  dealer_total = total(dealer_hand)
 
   if player_total > GAME_NAME
     :player_busted
@@ -211,8 +211,8 @@ def detect_result(player_cards, dealer_cards)
   end
 end
 
-def detect_winner(player_cards, dealer_cards)
-  winner = detect_result(player_cards, dealer_cards)
+def detect_winner(player_hand, dealer_hand)
+  winner = detect_result(player_hand, dealer_hand)
 
   case winner
   when :player, :dealer_busted
@@ -222,8 +222,8 @@ def detect_winner(player_cards, dealer_cards)
   end
 end
 
-def display_result(player_cards, dealer_cards)
-  result = detect_result(player_cards, dealer_cards)
+def display_result(player_hand, dealer_hand)
+  result = detect_result(player_hand, dealer_hand)
 
   case result
   when :player_busted
@@ -239,8 +239,8 @@ def display_result(player_cards, dealer_cards)
   end
 end
 
-def keep_score(score, player_cards, dealer_cards)
-  result = detect_result(player_cards, dealer_cards)
+def keep_score(score, player_hand, dealer_hand)
+  result = detect_result(player_hand, dealer_hand)
 
   case result
   when :dealer, :player_busted
@@ -261,13 +261,13 @@ def grand_winner?(score)
   score.value?(WIN_SCORE)
 end
 
-def reveal_hand(player_cards, dealer_cards)
+def reveal_hand(player_hand, dealer_hand)
   prompt "Both you and dealer stayed. " \
   "Let's reveal hands!"
   sleep(1)
-  display_player_cards(player_cards)
+  display_player_hand(player_hand)
   sleep(1)
-  display_dealer_cards(dealer_cards)
+  display_dealer_hand(dealer_hand)
   display_new_line
   sleep(1)
 end
@@ -310,20 +310,20 @@ loop do
   score = initialize_score
 
   loop do
-    player_cards = []
-    dealer_cards = []
+    player_hand = []
+    dealer_hand = []
     deck = initialize_deck
 
-    initial_deal(player_cards, dealer_cards, deck)
-    display_dealer_initial_cards(dealer_cards)
-    display_player_cards(player_cards)
+    initial_deal(player_hand, dealer_hand, deck)
+    display_dealer_initial_hand(dealer_hand)
+    display_player_hand(player_hand)
 
-    player_turn(player_cards, deck)
+    player_turn(player_hand, deck)
 
-    if busted?(player_cards)
+    if busted?(player_hand)
       display_new_line
-      display_result(player_cards, dealer_cards)
-      keep_score(score, player_cards, dealer_cards)
+      display_result(player_hand, dealer_hand)
+      keep_score(score, player_hand, dealer_hand)
       display_score(score)
       break if grand_winner?(score)
 
@@ -334,18 +334,18 @@ loop do
         break
       end
     else
-      prompt "You stayed at #{total(player_cards)}"
+      prompt "You stayed at #{total(player_hand)}"
     end
 
     sleep(2)
     clear_screen
 
-    dealer_turn(dealer_cards, deck)
+    dealer_turn(dealer_hand, deck)
 
-    if busted?(dealer_cards)
+    if busted?(dealer_hand)
       display_new_line
-      display_result(player_cards, dealer_cards)
-      keep_score(score, player_cards, dealer_cards)
+      display_result(player_hand, dealer_hand)
+      keep_score(score, player_hand, dealer_hand)
       display_score(score)
       break if grand_winner?(score)
 
@@ -356,15 +356,15 @@ loop do
         break
       end
     else
-      prompt "Dealer stayed at #{total(dealer_cards)}"
+      prompt "Dealer stayed at #{total(dealer_hand)}"
     end
 
     sleep(2)
     clear_screen
 
-    reveal_hand(player_cards, dealer_cards)
-    display_result(player_cards, dealer_cards)
-    keep_score(score, player_cards, dealer_cards)
+    reveal_hand(player_hand, dealer_hand)
+    display_result(player_hand, dealer_hand)
+    keep_score(score, player_hand, dealer_hand)
     display_score(score)
     break if grand_winner?(score) || !play_again?
 
