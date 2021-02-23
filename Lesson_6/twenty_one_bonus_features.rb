@@ -16,7 +16,7 @@ def clear_screen
   system "clear"
 end
 
-def display_new_line(num = 1)
+def display_newline(num = 1)
   num.times { puts "" }
 end
 
@@ -65,7 +65,7 @@ def rules_two
   "#{DEALER_HIT_MIN} or higher. If the dealer busts, means you win."
   puts "  ・ When both the player and the dealer stay, it's time to compare "\
   "the total value of the cards and see who has the highest value."
-  display_new_line(2)
+  display_newline(2)
 end
 
 def start_game
@@ -166,7 +166,7 @@ end
 def player_turn(player_hand, deck)
   player_move = ""
 
-  display_new_line(2)
+  display_newline(2)
   prompt "Player's turn..."
   sleep(1)
 
@@ -256,10 +256,10 @@ def keep_score(score, player_hand, dealer_hand)
 end
 
 def display_score(score)
-  display_new_line
+  display_newline
   puts "«SCORE» You | #{score['player']} - " \
   "#{score['dealer']} | Dealer"
-  display_new_line(2)
+  display_newline(2)
 end
 
 def grand_winner?(score)
@@ -273,7 +273,7 @@ def reveal_hand(player_hand, dealer_hand)
   display_player_hand(player_hand)
   sleep(1)
   display_dealer_hand(dealer_hand)
-  display_new_line
+  display_newline
   sleep(1)
 end
 
@@ -325,7 +325,7 @@ loop do
     player_turn(player_hand, deck)
 
     if busted?(player_hand)
-      display_new_line
+      display_newline
       display_result(player_hand, dealer_hand)
       keep_score(score, player_hand, dealer_hand)
       display_score(score)
@@ -345,7 +345,7 @@ loop do
     dealer_turn(dealer_hand, deck)
 
     if busted?(dealer_hand)
-      display_new_line
+      display_newline
       display_result(player_hand, dealer_hand)
       keep_score(score, player_hand, dealer_hand)
       display_score(score)
