@@ -193,17 +193,22 @@ def dealer_hit(dealer_hand, deck)
   sleep(1)
 end
 
+def display_dealer_stay(dealer_hand)
+  prompt "Dealer chose to stay."
+  sleep(1)
+  prompt "Dealer chose to stayed at #{total(dealer_hand)}."
+end
+
 def dealer_turn(dealer_hand, deck)
   prompt "Dealer's turn..."
   sleep(1)
 
   loop do
     if total(dealer_hand) >= DEALER_HIT_MIN
-      prompt "Dealer chose to stay."
-      sleep(1)
-      prompt "Dealer chose to stayed at #{total(dealer_hand)}."
+      display_dealer_stay(dealer_hand)
       break
     end
+
     dealer_hit(dealer_hand, deck)
     break if busted?(dealer_hand)
   end
