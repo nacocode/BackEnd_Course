@@ -164,6 +164,8 @@ def busted?(hand)
 end
 
 def player_turn(player_hand, deck)
+  player_move = ""
+
   display_new_line(2)
   prompt "Player's turn..."
   sleep(1)
@@ -172,8 +174,11 @@ def player_turn(player_hand, deck)
     player_move = hit_or_stay
     if player_move.start_with?("h")
       player_hit(player_hand, deck)
+      break if busted?(player_hand)
+    else
+      prompt "You stayed at #{total(player_hand)}."
+      break
     end
-    break if player_move.start_with?("s") || busted?(player_hand)
   end
 end
 
@@ -332,8 +337,6 @@ loop do
       else
         break
       end
-    else
-      prompt "You stayed at #{total(player_hand)}"
     end
 
     sleep(2)
@@ -355,7 +358,7 @@ loop do
         break
       end
     else
-      prompt "Dealer stayed at #{total(dealer_hand)}"
+      prompt "Dealer chose to stayed at #{total(dealer_hand)}"
     end
 
     sleep(2)
