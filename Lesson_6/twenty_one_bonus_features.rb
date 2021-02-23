@@ -128,12 +128,14 @@ def hit_or_stay
     prompt "You chose to stay."
   end
 
+  sleep(1)
   answer
 end
 
 def player_hit(player_hand, deck)
   player_hand << deck.pop
   display_player_hand(player_hand)
+  sleep(1)
 end
 
 def total(hand)
@@ -188,6 +190,7 @@ def dealer_hit(dealer_hand, deck)
   sleep(1)
   dealer_hand << deck.pop
   display_dealer_hand(dealer_hand)
+  sleep(1)
 end
 
 def dealer_turn(dealer_hand, deck)
@@ -197,8 +200,8 @@ def dealer_turn(dealer_hand, deck)
   loop do
     if total(dealer_hand) >= DEALER_HIT_MIN
       prompt "Dealer chose to stay."
+      sleep(1)
       prompt "Dealer chose to stayed at #{total(dealer_hand)}."
-      sleep(2)
       break
     end
     dealer_hit(dealer_hand, deck)
@@ -264,6 +267,7 @@ def keep_score(score, player_hand, dealer_hand)
 end
 
 def display_score(score)
+  sleep(1)
   display_newline
   puts "«SCORE» You | #{score['player']} - " \
   "#{score['dealer']} | Dealer"
@@ -293,8 +297,6 @@ def display_grand_winner(score)
   when "dealer"
     prompt "Dealer won #{WIN_SCORE} times. Game over."
   end
-
-  sleep(2.5)
 end
 
 def play_again?
@@ -347,7 +349,6 @@ loop do
       end
     end
 
-    sleep(2)
     clear_screen
 
     dealer_turn(dealer_hand, deck)
@@ -380,6 +381,7 @@ loop do
   end
 
   display_grand_winner(score)
+  sleep(2.5) if grand_winner?(score)
   break unless play_again?
 
   clear_screen
