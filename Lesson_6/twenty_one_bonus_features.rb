@@ -177,12 +177,15 @@ def player_turn(player_hand, deck)
       break if busted?(player_hand)
     else
       prompt "You stayed at #{total(player_hand)}."
+      sleep(2)
       break
     end
   end
 end
 
 def dealer_hit(dealer_hand, deck)
+  prompt "Dealer chose to hit!"
+  sleep(1)
   dealer_hand << deck.pop
   display_dealer_hand(dealer_hand)
 end
@@ -192,9 +195,14 @@ def dealer_turn(dealer_hand, deck)
   sleep(1)
 
   loop do
-    break if total(dealer_hand) >= DEALER_HIT_MIN
-
+    if total(dealer_hand) >= DEALER_HIT_MIN
+      prompt "Dealer chose to stay."
+      prompt "Dealer chose to stayed at #{total(dealer_hand)}."
+      sleep(2)
+      break
+    end
     dealer_hit(dealer_hand, deck)
+    break if busted?(dealer_hand)
   end
 end
 
@@ -357,8 +365,6 @@ loop do
       else
         break
       end
-    else
-      prompt "Dealer chose to stayed at #{total(dealer_hand)}"
     end
 
     sleep(2)
