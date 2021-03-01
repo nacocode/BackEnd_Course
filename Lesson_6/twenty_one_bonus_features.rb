@@ -258,6 +258,8 @@ def display_result(player_hand, dealer_hand)
   when :tie
     prompt "It's a tie!"
   end
+
+  sleep(1.5)
 end
 
 def keep_score(score, player_hand, dealer_hand)
