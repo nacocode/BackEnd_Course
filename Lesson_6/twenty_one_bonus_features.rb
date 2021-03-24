@@ -80,6 +80,11 @@ def display_rules
   start_game
 end
 
+def display_round_no(num)
+  puts "<< ROUND #{num} >>"
+  display_newline(2)
+end
+
 def initialize_score
   { "player" => 0, "dealer" => 0 }
 end
@@ -330,12 +335,15 @@ display_welcome_msg
 
 loop do
   score = initialize_score
+  round_no = 0
 
   loop do
+    round_no += 1
     player_hand = []
     dealer_hand = []
     deck = initialize_deck
 
+    display_round_no(round_no)
     initial_deal(player_hand, dealer_hand, deck)
     display_initial_hand(player_hand, dealer_hand)
 
