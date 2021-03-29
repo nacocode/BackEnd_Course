@@ -248,20 +248,20 @@ def detect_winner(player_hand, dealer_hand)
   end
 end
 
-def display_result(player_hand, dealer_hand)
+def display_round_winner(player_hand, dealer_hand)
   result = detect_result(player_hand, dealer_hand)
 
   case result
   when :player_busted
-    prompt "You busted! Dealer wins!"
+    prompt "You busted! Dealer won this round!"
   when :dealer_busted
-    prompt "Dealer busted! You win!"
+    prompt "Dealer busted! You won this round!"
   when :player
-    prompt "You win!"
+    prompt "You won this round!"
   when :dealer
-    prompt "Dealer wins!"
+    prompt "Dealer won this round!"
   when :tie
-    prompt "It's a tie!"
+    prompt "It's a tie."
   end
 
   sleep(1.5)
@@ -351,7 +351,7 @@ loop do
 
     if busted?(player_hand)
       display_newline
-      display_result(player_hand, dealer_hand)
+      display_round_winner(player_hand, dealer_hand)
       keep_score(score, player_hand, dealer_hand)
       display_score(score)
       break if grand_winner?(score)
@@ -370,7 +370,7 @@ loop do
 
     if busted?(dealer_hand)
       display_newline
-      display_result(player_hand, dealer_hand)
+      display_round_winner(player_hand, dealer_hand)
       keep_score(score, player_hand, dealer_hand)
       display_score(score)
       break if grand_winner?(score)
@@ -387,7 +387,7 @@ loop do
     clear_screen
 
     reveal_hand(player_hand, dealer_hand)
-    display_result(player_hand, dealer_hand)
+    display_round_winner(player_hand, dealer_hand)
     keep_score(score, player_hand, dealer_hand)
     display_score(score)
     break if grand_winner?(score) || !play_again?
