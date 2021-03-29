@@ -6,6 +6,7 @@ WIN_SCORE = 3
 VALID_YES_NO = %w(yes y no n)
 VALID_YES = %w(yes y)
 VALID_HIT_STAY = %w(hit h stay s)
+VALID_QUIT = %w(q quit)
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -311,6 +312,14 @@ def display_grand_winner(score)
   end
 end
 
+def next_round?
+  display_newline
+  prompt "Next round? Press enter key to continue\n
+  or hit 'q' if you wish to quit the game."
+  answer = gets.chomp.downcase
+  VALID_QUIT.none?(answer)
+end
+
 def play_again?
   answer = nil
   loop do
@@ -356,7 +365,7 @@ loop do
       display_score(score)
       break if grand_winner?(score)
 
-      if play_again?
+      if next_round?
         clear_screen
         next
       else
@@ -375,7 +384,7 @@ loop do
       display_score(score)
       break if grand_winner?(score)
 
-      if play_again?
+      if next_round?
         clear_screen
         next
       else
@@ -390,7 +399,7 @@ loop do
     display_round_winner(player_hand, dealer_hand)
     keep_score(score, player_hand, dealer_hand)
     display_score(score)
-    break if grand_winner?(score) || !play_again?
+    break if grand_winner?(score) || !next_round?
 
     clear_screen
   end
