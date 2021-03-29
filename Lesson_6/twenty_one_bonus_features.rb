@@ -238,7 +238,7 @@ def detect_result(player_hand, dealer_hand)
   end
 end
 
-def detect_winner(player_hand, dealer_hand)
+def determine_winner(player_hand, dealer_hand)
   winner = detect_result(player_hand, dealer_hand)
 
   case winner
@@ -269,13 +269,13 @@ def display_round_winner(player_hand, dealer_hand)
 end
 
 def keep_score(score, player_hand, dealer_hand)
-  result = detect_result(player_hand, dealer_hand)
+  winner = determine_winner(player_hand, dealer_hand)
 
-  case result
-  when :dealer, :player_busted
-    score["dealer"] += 1
-  when :player, :dealer_busted
+  case winner
+  when "player"
     score["player"] += 1
+  when "dealer"
+    score["dealer"] += 1
   end
 end
 
