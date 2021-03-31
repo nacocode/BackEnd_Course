@@ -404,6 +404,8 @@ loop do
     clear_screen
   end
 
+  break if !grand_winner?(score)
+
   display_grand_winner(score)
   sleep(2.5) if grand_winner?(score)
   break unless play_again?
