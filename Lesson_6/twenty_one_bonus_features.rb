@@ -335,6 +335,7 @@ def play_again?
 end
 
 def display_goodbye_msg
+  display_newline(2)
   prompt "Thank you for playing #{GAME_NAME}. Good bye!"
 end
 
