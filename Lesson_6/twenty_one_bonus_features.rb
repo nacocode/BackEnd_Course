@@ -104,17 +104,17 @@ end
 def display_initial_hand(player_hand, dealer_hand)
   prompt "Dealer has #{dealer_hand[0]} and unknown."
   prompt "You have #{player_hand}, "\
-  "for a total of: #{total(player_hand)}."
+  "for a total of: #{calculate_hand_total(player_hand)}."
 end
 
 def display_player_hand(player_hand)
   prompt "You have #{player_hand}, "\
-  "for a total of: #{total(player_hand)}."
+  "for a total of: #{calculate_hand_total(player_hand)}."
 end
 
 def display_dealer_hand(dealer_hand)
   prompt "Dealer has #{dealer_hand}, "\
-  "for a total of: #{total(dealer_hand)}."
+  "for a total of: #{calculate_hand_total(dealer_hand)}."
 end
 
 def hit_or_stay
@@ -144,7 +144,7 @@ def player_hit(player_hand, deck)
   sleep(1)
 end
 
-def total(hand)
+def calculate_hand_total(hand)
   # hand = [['H', '3'], ['S', 'Q'], ... ]
   values = hand.map { |card| card[1] }
 
@@ -168,7 +168,7 @@ def total(hand)
 end
 
 def busted?(hand)
-  total(hand) > GAME_NAME
+  calculate_hand_total(hand) > GAME_NAME
 end
 
 def player_turn(player_hand, deck)
@@ -184,7 +184,7 @@ def player_turn(player_hand, deck)
       player_hit(player_hand, deck)
       break if busted?(player_hand)
     else
-      prompt "You stayed at #{total(player_hand)}."
+      prompt "You stayed at #{calculate_hand_total(player_hand)}."
       sleep(2)
       break
     end
@@ -202,7 +202,7 @@ end
 def display_dealer_stay(dealer_hand)
   prompt "Dealer chose to stay."
   sleep(1)
-  prompt "Dealer chose to stayed at #{total(dealer_hand)}."
+  prompt "Dealer chose to stayed at #{calculate_hand_total(dealer_hand)}."
 end
 
 def dealer_turn(dealer_hand, deck)
@@ -210,7 +210,7 @@ def dealer_turn(dealer_hand, deck)
   sleep(1)
 
   loop do
-    if total(dealer_hand) >= DEALER_HIT_MIN
+    if calculate_hand_total(dealer_hand) >= DEALER_HIT_MIN
       display_dealer_stay(dealer_hand)
       break
     end
@@ -222,8 +222,8 @@ end
 
 # :tie, :player, :dealer, :player_busted, :dealer_busted
 def detect_result(player_hand, dealer_hand)
-  player_total = total(player_hand)
-  dealer_total = total(dealer_hand)
+  player_total = calculate_hand_total(player_hand)
+  dealer_total = calculate_hand_total(dealer_hand)
 
   if player_total > GAME_NAME
     :player_busted
