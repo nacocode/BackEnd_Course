@@ -302,6 +302,13 @@ def reveal_hand(player_hand, dealer_hand)
   sleep(1)
 end
 
+def end_of_round(player_hand, dealer_hand, score)
+  display_newline
+  display_round_winner(player_hand, dealer_hand)
+  keep_score(score, player_hand, dealer_hand)
+  display_score(score)
+end
+
 def display_grand_winner(score)
   case score.key(WIN_SCORE)
   when "player"
@@ -360,10 +367,7 @@ loop do
     player_turn(player_hand, deck)
 
     if busted?(player_hand)
-      display_newline
-      display_round_winner(player_hand, dealer_hand)
-      keep_score(score, player_hand, dealer_hand)
-      display_score(score)
+      end_of_round(player_hand, dealer_hand, score)
       break if grand_winner?(score)
 
       if next_round?
@@ -379,10 +383,7 @@ loop do
     dealer_turn(dealer_hand, deck)
 
     if busted?(dealer_hand)
-      display_newline
-      display_round_winner(player_hand, dealer_hand)
-      keep_score(score, player_hand, dealer_hand)
-      display_score(score)
+      end_of_round(player_hand, dealer_hand, score)
       break if grand_winner?(score)
 
       if next_round?
@@ -397,9 +398,7 @@ loop do
     clear_screen
 
     reveal_hand(player_hand, dealer_hand)
-    display_round_winner(player_hand, dealer_hand)
-    keep_score(score, player_hand, dealer_hand)
-    display_score(score)
+    end_of_round(player_hand, dealer_hand, score)
     break if grand_winner?(score) || !next_round?
 
     clear_screen
