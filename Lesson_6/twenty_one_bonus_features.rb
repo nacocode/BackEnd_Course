@@ -30,7 +30,6 @@ def display_welcome_msg
   prompt "First player who wins the game #{WIN_SCORE} times "\
   "becomes the grand winner!"
   display_rules if show_rules?
-  clear_screen
 end
 
 def show_rules?
@@ -355,6 +354,7 @@ loop do
   round_no = 0
 
   loop do
+    clear_screen
     round_no += 1
     player_hand = []
     dealer_hand = []
@@ -370,12 +370,7 @@ loop do
       end_of_round(player_hand, dealer_hand, score)
       break if grand_winner?(score)
 
-      if next_round?
-        clear_screen
-        next
-      else
-        break
-      end
+      next_round? ? next : break
     end
 
     clear_screen
@@ -386,12 +381,7 @@ loop do
       end_of_round(player_hand, dealer_hand, score)
       break if grand_winner?(score)
 
-      if next_round?
-        clear_screen
-        next
-      else
-        break
-      end
+      next_round? ? next : break
     end
 
     sleep(2)
@@ -400,8 +390,6 @@ loop do
     reveal_hand(player_hand, dealer_hand)
     end_of_round(player_hand, dealer_hand, score)
     break if grand_winner?(score) || !next_round?
-
-    clear_screen
   end
 
   break if !grand_winner?(score)
