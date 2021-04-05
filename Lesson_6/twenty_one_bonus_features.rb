@@ -36,7 +36,7 @@ def show_rules?
   prompt "To find out more about the rules, type 'r'.\n
    To start the game, press any other key."
   answer = gets.chomp.downcase
-  answer == "r"
+  %w(r rule).include?(answer)
 end
 
 def rule_title
