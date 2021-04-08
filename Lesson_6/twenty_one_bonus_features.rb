@@ -328,6 +328,8 @@ def next_round?
 end
 
 def play_again?
+  display_newline(2)
+
   answer = nil
   loop do
     prompt "Do you want to play again? "\
