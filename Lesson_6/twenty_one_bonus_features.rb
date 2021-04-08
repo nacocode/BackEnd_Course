@@ -264,8 +264,6 @@ def display_round_winner(player_hand, dealer_hand)
   when :tie
     prompt "It's a tie."
   end
-
-  sleep(1.5)
 end
 
 def keep_score(score, player_hand, dealer_hand)
@@ -280,8 +278,7 @@ def keep_score(score, player_hand, dealer_hand)
 end
 
 def display_score(score)
-  sleep(1)
-  display_newline
+  clear_screen
   puts "«SCORE» You | #{score['player']} - " \
   "#{score['dealer']} | Dealer"
   display_newline(2)
@@ -307,6 +304,7 @@ end
 def end_of_round(player_hand, dealer_hand, score)
   display_newline(2)
   display_round_winner(player_hand, dealer_hand)
+  sleep(2)
   keep_score(score, player_hand, dealer_hand)
   display_score(score)
 end
