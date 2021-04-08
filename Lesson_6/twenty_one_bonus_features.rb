@@ -205,6 +205,7 @@ def display_dealer_stay(dealer_hand)
 end
 
 def dealer_turn(dealer_hand, deck)
+  clear_screen
   prompt "Dealer's turn..."
   sleep(1)
 
@@ -291,18 +292,20 @@ def grand_winner?(score)
 end
 
 def reveal_hand(player_hand, dealer_hand)
+  sleep(2)
+  clear_screen
   prompt "Both you and dealer stayed. " \
   "Let's reveal hands!"
   sleep(1)
+  display_newline(2)
   display_player_hand(player_hand)
-  sleep(1)
   display_dealer_hand(dealer_hand)
   display_newline
-  sleep(1)
+  sleep(2)
 end
 
 def end_of_round(player_hand, dealer_hand, score)
-  display_newline
+  display_newline(2)
   display_round_winner(player_hand, dealer_hand)
   keep_score(score, player_hand, dealer_hand)
   display_score(score)
@@ -366,30 +369,15 @@ loop do
 
     player_turn(player_hand, deck)
 
-    if busted?(player_hand)
-      end_of_round(player_hand, dealer_hand, score)
-      break if grand_winner?(score)
+    dealer_turn(dealer_hand, deck) unless busted?(player_hand)
 
-      next_round? ? next : break
+    unless busted?(player_hand) || busted?(dealer_hand)
+      reveal_hand(player_hand, dealer_hand)
     end
 
-    clear_screen
-
-    dealer_turn(dealer_hand, deck)
-
-    if busted?(dealer_hand)
-      end_of_round(player_hand, dealer_hand, score)
-      break if grand_winner?(score)
-
-      next_round? ? next : break
-    end
-
-    sleep(2)
-    clear_screen
-
-    reveal_hand(player_hand, dealer_hand)
     end_of_round(player_hand, dealer_hand, score)
-    break if grand_winner?(score) || !next_round?
+    break if grand_winner?(score)
+    next_round? ? next : break
   end
 
   break if !grand_winner?(score)
