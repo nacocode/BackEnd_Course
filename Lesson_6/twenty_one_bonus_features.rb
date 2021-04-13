@@ -300,7 +300,7 @@ def reveal_hand(player_hand, dealer_hand)
   display_newline(2)
   display_player_hand(player_hand)
   display_dealer_hand(dealer_hand)
-  sleep(2.5)
+  sleep(2)
 end
 
 def display_round_winner(player_hand, dealer_hand)
@@ -310,7 +310,7 @@ def display_round_winner(player_hand, dealer_hand)
 
   display_newline(2)
   display_round_win_msg(player_hand, dealer_hand)
-  sleep(2.5)
+  sleep(2)
 end
 
 def display_grand_winner(score)
@@ -379,6 +379,7 @@ loop do
     display_score(score, player_hand, dealer_hand)
 
     break if grand_winner?(score)
+    sleep(2)
     next_round? ? next : break
   end
 
