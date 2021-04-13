@@ -298,7 +298,7 @@ def reveal_hand(player_hand, dealer_hand)
   display_player_hand(player_hand)
   display_dealer_hand(dealer_hand)
   display_newline
-  sleep(2)
+  sleep(2.5)
 end
 
 def end_of_round(player_hand, dealer_hand, score)
