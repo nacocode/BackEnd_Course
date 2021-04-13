@@ -202,6 +202,7 @@ def display_dealer_stay(dealer_hand)
   prompt "Dealer chose to stay."
   sleep(1)
   prompt "Dealer chose to stayed at #{calculate_hand_total(dealer_hand)}."
+  sleep(2)
 end
 
 def dealer_turn(dealer_hand, deck)
@@ -289,15 +290,13 @@ def grand_winner?(score)
 end
 
 def reveal_hand(player_hand, dealer_hand)
-  sleep(2)
   clear_screen
   prompt "Both you and dealer stayed. " \
   "Let's reveal hands!"
-  sleep(1)
+  sleep(1.5)
   display_newline(2)
   display_player_hand(player_hand)
   display_dealer_hand(dealer_hand)
-  display_newline
   sleep(2.5)
 end
 
@@ -306,15 +305,9 @@ def display_round_winner(player_hand, dealer_hand)
     reveal_hand(player_hand, dealer_hand)
   end
 
+  display_newline(2)
   display_round_win_msg(player_hand, dealer_hand)
-end
-
-def end_of_round(player_hand, dealer_hand, score)
-  # display_newline(2)
-  # display_round_winner(player_hand, dealer_hand)
-  sleep(2)
-  keep_score(score, player_hand, dealer_hand)
-  display_score(score)
+  sleep(2.5)
 end
 
 def display_grand_winner(score)
@@ -381,7 +374,9 @@ loop do
 
     display_round_winner(player_hand, dealer_hand)
 
-    end_of_round(player_hand, dealer_hand, score)
+    keep_score(score, player_hand, dealer_hand)
+    display_score(score)
+
     break if grand_winner?(score)
     next_round? ? next : break
   end
