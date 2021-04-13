@@ -278,11 +278,14 @@ def keep_score(score, player_hand, dealer_hand)
   end
 end
 
-def display_score(score)
+def display_score(score, player_hand, dealer_hand)
   clear_screen
+  keep_score(score, player_hand, dealer_hand)
+
   puts "«SCORE» You | #{score['player']} - " \
   "#{score['dealer']} | Dealer"
-  display_newline(2)
+
+  display_newline(3)
 end
 
 def grand_winner?(score)
@@ -321,7 +324,6 @@ def display_grand_winner(score)
 end
 
 def next_round?
-  display_newline
   prompt "Next round? Press enter key to continue\n
   or hit 'q' if you wish to quit the game."
   answer = gets.chomp.downcase
@@ -374,8 +376,7 @@ loop do
 
     display_round_winner(player_hand, dealer_hand)
 
-    keep_score(score, player_hand, dealer_hand)
-    display_score(score)
+    display_score(score, player_hand, dealer_hand)
 
     break if grand_winner?(score)
     next_round? ? next : break
