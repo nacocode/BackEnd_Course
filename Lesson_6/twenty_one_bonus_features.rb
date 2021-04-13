@@ -249,7 +249,7 @@ def determine_winner(player_hand, dealer_hand)
   end
 end
 
-def display_round_winner(player_hand, dealer_hand)
+def display_round_win_msg(player_hand, dealer_hand)
   result = detect_result(player_hand, dealer_hand)
 
   case result
@@ -301,9 +301,17 @@ def reveal_hand(player_hand, dealer_hand)
   sleep(2.5)
 end
 
+def display_round_winner(player_hand, dealer_hand)
+  unless busted?(player_hand) || busted?(dealer_hand)
+    reveal_hand(player_hand, dealer_hand)
+  end
+
+  display_round_win_msg(player_hand, dealer_hand)
+end
+
 def end_of_round(player_hand, dealer_hand, score)
-  display_newline(2)
-  display_round_winner(player_hand, dealer_hand)
+  # display_newline(2)
+  # display_round_winner(player_hand, dealer_hand)
   sleep(2)
   keep_score(score, player_hand, dealer_hand)
   display_score(score)
@@ -371,9 +379,7 @@ loop do
 
     dealer_turn(dealer_hand, deck) unless busted?(player_hand)
 
-    unless busted?(player_hand) || busted?(dealer_hand)
-      reveal_hand(player_hand, dealer_hand)
-    end
+    display_round_winner(player_hand, dealer_hand)
 
     end_of_round(player_hand, dealer_hand, score)
     break if grand_winner?(score)
