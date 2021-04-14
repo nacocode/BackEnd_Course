@@ -336,7 +336,7 @@ def play_again?
 
   answer = nil
   loop do
-    prompt "Do you want to play again? "\
+    prompt "Would you like to play again? "\
     "Enter 'y' for yes or 'n' for no."
     answer = gets.chomp.downcase
     break if VALID_YES_NO.include?(answer)
