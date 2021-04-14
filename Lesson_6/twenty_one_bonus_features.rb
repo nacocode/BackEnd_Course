@@ -127,20 +127,21 @@ def hit_or_stay
     prompt "Sorry, must enter 'h' or 's'."
   end
 
-  if answer.start_with?("h")
-    prompt "You chose to hit!"
-  else
-    prompt "You chose to stay."
-  end
-
-  sleep(1)
   answer
 end
 
 def player_hit(player_hand, deck)
+  prompt "You chose to hit!"
   player_hand << deck.pop
   display_player_hand(player_hand)
   sleep(1)
+end
+
+def player_stay(player_hand)
+  prompt "You chose to stay."
+  sleep(1)
+  prompt "You stayed at #{calculate_hand_total(player_hand)}."
+  sleep(2)
 end
 
 def calculate_hand_total(hand)
@@ -183,8 +184,7 @@ def player_turn(player_hand, deck)
       player_hit(player_hand, deck)
       break if busted?(player_hand)
     else
-      prompt "You stayed at #{calculate_hand_total(player_hand)}."
-      sleep(2)
+      player_stay(player_hand)
       break
     end
   end
