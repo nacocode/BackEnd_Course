@@ -21,17 +21,6 @@ def display_newline(num = 1)
   num.times { puts "" }
 end
 
-def display_welcome_msg
-  clear_screen
-  prompt "WELCOME TO #{GAME_NAME}!"
-  prompt "The goal of #{GAME_NAME} is to try to get as close to "\
-  "#{GAME_NAME} as possible,\n
-   without going over."
-  prompt "First player who wins the game #{WIN_SCORE} times "\
-  "becomes the grand winner!"
-  display_rules if show_rules?
-end
-
 def show_rules?
   prompt "To find out more about the rules, type 'r'.\n
    To start the game, press any other key."
@@ -78,6 +67,17 @@ def display_rules
   rules_one
   rules_two
   start_game
+end
+
+def display_welcome_msg
+  clear_screen
+  prompt "WELCOME TO #{GAME_NAME}!"
+  prompt "The goal of #{GAME_NAME} is to try to get as close to "\
+  "#{GAME_NAME} as possible,\n
+   without going over."
+  prompt "First player who wins the game #{WIN_SCORE} times "\
+  "becomes the grand winner!"
+  display_rules if show_rules?
 end
 
 def display_round_no(num)
@@ -379,6 +379,7 @@ loop do
     display_score(score, player_hand, dealer_hand)
 
     break if grand_winner?(score)
+
     sleep(2)
     next_round? ? next : break
   end
