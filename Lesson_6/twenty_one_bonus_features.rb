@@ -41,17 +41,17 @@ def rules_one
   puts
   puts "<How To Play>"
   puts "  ・ Each player starts with two cards, "\
-  "You can see their 2 cards, but can only see one of the dealer's cards."
-  puts "  ・ You go first, and can decide to either 'hit' or 'stay'."
+  "Player can see their 2 cards, but can only see one of the dealer's cards."
+  puts "  ・ Player goes first, and can decide to either 'hit' or 'stay'."
 end
 
 def rules_two
   puts "  ・ To 'hit' is to ask for another card. "\
-  "To 'stay' is to hold your total and end your turn."
-  puts "  ・ You can continue to hit as many times as you want but "\
-  "if you go over #{GAME_NAME}, it's a 'BUST', means you lose."
+  "To 'stay' is to hold player's total and end player's turn."
+  puts "  ・ Player can continue to hit as many times as player wants but "\
+  "if player goes over #{GAME_NAME}, it's a 'BUST', means player loses."
   puts "  ・ Dealer must hit until the total is at least "\
-  "#{DEALER_HIT_MIN} or higher. If the dealer busts, means you win."
+  "#{DEALER_HIT_MIN} or higher. If the dealer busts, means player wins."
   puts "  ・ When both the player and the dealer stay, it's time to compare "\
   "the total value of the cards and see who has the highest value."
   display_newline(2)
@@ -102,12 +102,12 @@ end
 
 def display_initial_hand(player_hand, dealer_hand)
   prompt "Dealer has #{dealer_hand[0]} and unknown."
-  prompt "You have #{player_hand}, "\
+  prompt "Player has #{player_hand}, "\
   "for a total of: #{calculate_hand_total(player_hand)}."
 end
 
 def display_player_hand(player_hand)
-  prompt "You have #{player_hand}, "\
+  prompt "Player has #{player_hand}, "\
   "for a total of: #{calculate_hand_total(player_hand)}."
 end
 
@@ -131,7 +131,7 @@ def hit_or_stay
 end
 
 def player_hit(player_hand, deck)
-  prompt "You chose to hit!"
+  prompt "Player chose to hit!"
   sleep(1)
   player_hand << deck.pop
   display_player_hand(player_hand)
@@ -139,9 +139,9 @@ def player_hit(player_hand, deck)
 end
 
 def player_stay(player_hand)
-  prompt "You chose to stay."
+  prompt "Player chose to stay."
   sleep(1)
-  prompt "You stayed at #{calculate_hand_total(player_hand)}."
+  prompt "Player stayed at #{calculate_hand_total(player_hand)}."
   sleep(2)
 end
 
@@ -256,11 +256,11 @@ def display_round_win_msg(player_hand, dealer_hand)
 
   case result
   when :player_busted
-    prompt "You busted! Dealer won this round!"
+    prompt "Player busted! Dealer won this round!"
   when :dealer_busted
-    prompt "Dealer busted! You won this round!"
+    prompt "Dealer busted! Player won this round!"
   when :player
-    prompt "You won this round!"
+    prompt "Player won this round!"
   when :dealer
     prompt "Dealer won this round!"
   when :tie
@@ -283,7 +283,7 @@ def display_score(score, player_hand, dealer_hand)
   clear_screen
   keep_score(score, player_hand, dealer_hand)
 
-  puts "«SCORE» You | #{score['player']} - " \
+  puts "«SCORE» Player | #{score['player']} - " \
   "#{score['dealer']} | Dealer"
 
   display_newline(3)
@@ -295,7 +295,7 @@ end
 
 def reveal_hand(player_hand, dealer_hand)
   clear_screen
-  prompt "Both you and dealer stayed. " \
+  prompt "Both player and dealer stayed. " \
   "Let's reveal hands!"
   sleep(1.5)
   display_newline(2)
@@ -317,8 +317,8 @@ end
 def display_grand_winner(score)
   case score.key(WIN_SCORE)
   when "player"
-    prompt "You won #{WIN_SCORE} times! Congratulations! "\
-    "You are the grand winner!"
+    prompt "Player won #{WIN_SCORE} times! Congratulations! "\
+    "Player is the grand winner!"
   when "dealer"
     prompt "Dealer won #{WIN_SCORE} times. Game over."
   end
