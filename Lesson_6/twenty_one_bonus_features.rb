@@ -132,6 +132,7 @@ end
 
 def player_hit(player_hand, deck)
   prompt "You chose to hit!"
+  sleep(1)
   player_hand << deck.pop
   display_player_hand(player_hand)
   sleep(1)
