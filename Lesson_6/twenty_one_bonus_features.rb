@@ -318,9 +318,9 @@ def display_grand_winner(score)
   case score.key(WIN_SCORE)
   when "player"
     prompt "Player won #{WIN_SCORE} times! Congratulations! "\
-    "Player is the grand winner!"
+    "You are the grand winner!"
   when "dealer"
-    prompt "Dealer won #{WIN_SCORE} times. Game over."
+    prompt "Dealer won #{WIN_SCORE} times. Game over..."
   end
 end
 
