@@ -135,7 +135,7 @@ def player_hit(player_hand, deck)
   sleep(1)
   player_hand << deck.pop
   display_player_hand(player_hand)
-  sleep(1)
+  sleep(2)
 end
 
 def player_stay(player_hand)
@@ -209,7 +209,7 @@ def dealer_turn(dealer_hand, deck)
 
   loop do
     if calculate_hand_total(dealer_hand) >= DEALER_HIT_MIN
-      display_dealer_stay(dealer_hand)
+      display_dealer_stay
       break
     end
 
