@@ -195,14 +195,10 @@ def dealer_hit(dealer_hand, deck)
   prompt "Dealer chose to hit!"
   sleep(1)
   dealer_hand << deck.pop
-  display_dealer_hand(dealer_hand)
-  sleep(1)
 end
 
-def display_dealer_stay(dealer_hand)
+def display_dealer_stay
   prompt "Dealer chose to stay."
-  sleep(1)
-  prompt "Dealer chose to stayed at #{calculate_hand_total(dealer_hand)}."
   sleep(2)
 end
 
@@ -218,7 +214,11 @@ def dealer_turn(dealer_hand, deck)
     end
 
     dealer_hit(dealer_hand, deck)
-    break if busted?(dealer_hand)
+    if busted?(dealer_hand)
+      display_dealer_hand(dealer_hand)
+      sleep(2)
+      break
+    end
   end
 end
 
