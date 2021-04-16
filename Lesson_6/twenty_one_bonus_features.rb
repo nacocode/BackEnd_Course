@@ -282,7 +282,8 @@ def display_score(score, player_hand, dealer_hand)
   keep_score(score, player_hand, dealer_hand)
 
   puts "  -------- SCORE --------"
-  puts "  PLAYER : #{score['player']} - #{score['dealer']} : DEALER"
+  puts "  PLAYER : #{score['player']} - "\
+  "#{score['dealer']} : DEALER"
   puts "  -----------------------"
 
   display_newline(3)
