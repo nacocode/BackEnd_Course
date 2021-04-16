@@ -146,7 +146,6 @@ def player_stay(player_hand)
 end
 
 def calculate_hand_total(hand)
-  # hand = [['H', '3'], ['S', 'Q'], ... ]
   values = hand.map { |card| card[1] }
 
   sum = 0
@@ -222,7 +221,6 @@ def dealer_turn(dealer_hand, deck)
   end
 end
 
-# :tie, :player, :dealer, :player_busted, :dealer_busted
 def detect_result(player_hand, dealer_hand)
   player_total = calculate_hand_total(player_hand)
   dealer_total = calculate_hand_total(dealer_hand)
