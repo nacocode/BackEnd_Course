@@ -287,6 +287,7 @@ def display_score(score, player_hand, dealer_hand)
   puts "  -----------------------"
 
   display_newline(3)
+  sleep(1)
 end
 
 def grand_winner?(score)
@@ -322,6 +323,8 @@ def display_grand_winner(score)
   when "dealer"
     prompt "Dealer won #{WIN_SCORE} times. Game over..."
   end
+
+  sleep(2)
 end
 
 def next_round?
@@ -381,14 +384,13 @@ loop do
 
     break if grand_winner?(score)
 
-    sleep(2)
     next_round? ? next : break
   end
 
   break if !grand_winner?(score)
 
   display_grand_winner(score)
-  sleep(2) if grand_winner?(score)
+
   break unless play_again?
 
   clear_screen
