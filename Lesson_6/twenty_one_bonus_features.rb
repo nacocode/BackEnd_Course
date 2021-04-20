@@ -294,12 +294,23 @@ def grand_winner?(score)
   score.value?(WIN_SCORE)
 end
 
+def count_down_from_three
+  print "3..."
+  sleep(1)
+  print "2..."
+  sleep(1)
+  print "1..."
+  sleep(1)
+end
+
 def reveal_hand(player_hand, dealer_hand)
   clear_screen
   prompt "Both player and dealer stayed. " \
   "Let's reveal hands!"
-  sleep(1.5)
-  display_newline(2)
+  prompt "Are you ready?"
+  sleep(2)
+  count_down_from_three
+  display_newline(3)
   display_player_hand(player_hand)
   display_dealer_hand(dealer_hand)
   sleep(2)
