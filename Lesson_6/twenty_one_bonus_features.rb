@@ -308,7 +308,7 @@ def reveal_hand(player_hand, dealer_hand)
   prompt "Both player and dealer stayed. " \
   "Let's reveal hands!"
   prompt "Are you ready?"
-  sleep(2)
+  sleep(1)
   count_down_from_three
   display_newline(3)
   display_player_hand(player_hand)
