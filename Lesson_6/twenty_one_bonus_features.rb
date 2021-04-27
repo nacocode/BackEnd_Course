@@ -57,8 +57,8 @@ def rules_two
   display_newline(2)
 end
 
-def start_game
-  prompt "Press any key to start the game."
+def press_enter_to_continue(msg)
+  prompt msg
   gets
 end
 
@@ -66,7 +66,7 @@ def display_rules
   rule_title
   rules_one
   rules_two
-  start_game
+  press_enter_to_continue("Press any key to start the game.")
 end
 
 def display_welcome_msg
@@ -323,7 +323,8 @@ def display_round_winner(player_hand, dealer_hand)
 
   display_newline(2)
   display_round_win_msg(player_hand, dealer_hand)
-  sleep(2)
+  display_newline(3)
+  press_enter_to_continue("Press enter key to continue.")
 end
 
 def display_grand_winner(score)
