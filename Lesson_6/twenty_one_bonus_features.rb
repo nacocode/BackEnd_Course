@@ -145,6 +145,11 @@ def player_stay(player_hand)
   sleep(2)
 end
 
+def correct_for_aces(hand)
+  values = hand.map { |card| card[1] }
+  values.select { |value| value == "A" }.count
+end
+
 def calculate_hand_total(hand)
   values = hand.map { |card| card[1] }
 
@@ -159,8 +164,7 @@ def calculate_hand_total(hand)
            end
   end
 
-  # correct for Aces
-  values.select { |value| value == "A" }.count.times do
+  correct_for_aces(hand).times do
     sum -= 10 if sum > GAME_NAME
   end
 
